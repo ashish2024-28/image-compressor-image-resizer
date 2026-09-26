@@ -1,0 +1,7 @@
+# Google AdSense authorized digital sellers file
+# ==============================================================
+# IMPORTANT: Replace pub-0000000000000000 with your actual 16-digit
+# Google AdSense Publisher ID (found in AdSense Console > Account > Settings)
+# Example: google.com, pub-1234567890123456, DIRECT, f08c47fec0942fa0
+# ==============================================================
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --color-surface-bg: #f8fafc;
+  --color-surface-card: #ffffff;
+  --color-surface-card-inset: #f1f5f9;
+  --color-surface-border: #e2e8f0;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #334155;
+  --color-text-muted: #64748b;
+}
+
+.dark {
+  --color-surface-bg: #0b0f19;
+  --color-surface-card: #111827;
+  --color-surface-card-inset: #0f172a;
+  --color-surface-border: #1f2937;
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #cbd5e1;
+  --color-text-muted: #94a3b8;
+}
+
+/* Smooth transitions for theme switching and interactive elements */
+html {
+  scroll-behavior: smooth;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  background-color: var(--color-surface-bg);
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--color-surface-bg);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Professional Card Surfaces */
+.pro-card {
+  background-color: var(--color-surface-card);
+  border: 1px solid var(--color-surface-border);
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05);
+}
+
+.dark .pro-card {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.25), 0 2px 4px -2px rgb(0 0 0 / 0.2);
+}
+
+/* Ambient Top Glow */
+.ambient-glow {
+  background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(59, 130, 246, 0.08), transparent 70%);
+}
+
+.dark .ambient-glow {
+  background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(37, 99, 235, 0.15), transparent 70%);
+}
+
+/* Subtle engineering grid accent */
+.bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+}
+
+.dark .bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+}
+
+/* Checkerboard for PNG Alpha Transparency */
+.bg-transparency-pattern {
+  background-color: #f1f5f9;
+  background-image: 
+    linear-gradient(45deg, #e2e8f0 25%, transparent 25%), 
+    linear-gradient(-45deg, #e2e8f0 25%, transparent 25%), 
+    linear-gradient(45deg, transparent 75%, #e2e8f0 75%), 
+    linear-gradient(-45deg, transparent 75%, #e2e8f0 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+}
+
+.dark .bg-transparency-pattern {
+  background-color: #0f172a;
+  background-image: 
+    linear-gradient(45deg, #1e293b 25%, transparent 25%), 
+    linear-gradient(-45deg, #1e293b 25%, transparent 25%), 
+    linear-gradient(45deg, transparent 75%, #1e293b 75%), 
+    linear-gradient(-45deg, transparent 75%, #1e293b 75%);
+}
+
+/* Custom Range Slider */
+input[type="range"] {
+  accent-color: #2563eb;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 9999px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.6);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(75, 85, 99, 0.5);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 114, 128, 0.7);
+}
+
+

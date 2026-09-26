@@ -1,0 +1,88 @@
+import React, { useEffect } from 'react';
+import { X } from 'lucide-react';
+
+export interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title?: React.ReactNode;
+  children: React.ReactNode;
+  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '4xl' | '6xl';
+  showCloseButton?: boolean;
+}
+
+export const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  title,
+  children,
+  maxWidth = 'lg',
+  showCloseButton = true,
+}) => {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
+  const maxWidthStyles = {
+    sm: 'max-w-sm',
+    md: 'max-w-md',
+    lg: 'max-w-lg',
+    xl: 'max-w-xl',
+    '2xl': 'max-w-2xl',
+    '4xl': 'max-w-4xl',
+    '6xl': 'max-w-6xl',
+  }[maxWidth];
+
+  return (
+    <div className="fixed inset-0 z-50 overflow-y-auto">
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
+        onClick={onClose}
+        aria-hidden="true"
+      />
+
+      <div className="flex min-h-full items-center justify-center p-2.5 sm:p-6 text-center">
+        <div
+          className={`relative transform overflow-hidden rounded-2xl bg-white dark:bg-[#111827] border border-slate-200/90 dark:border-slate-800 text-left shadow-2xl transition-all w-full ${maxWidthStyles}`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Header */}
+          {(title || showCloseButton) && (
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 px-4 sm:px-6 py-3.5 sm:py-4">
+              <div className="text-base sm:text-lg font-semibold text-slate-900 dark:text-white truncate pr-2">
+                {title}
+              </div>
+              {showCloseButton && (
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-400 cursor-pointer shrink-0"
+                  aria-label="Close"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              )}
+            </div>
+          )}
+
+          {/* Body */}
+          <div className="px-4 sm:px-6 py-4 sm:py-5">{children}</div>
+        </div>
+      </div>
+    </div>
+  );
+};

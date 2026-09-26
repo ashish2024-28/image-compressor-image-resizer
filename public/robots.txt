@@ -1,0 +1,8 @@
+# Image Optimizer robots.txt
+# Directs search engine crawlers to crawlable assets and sitemap
+
+User-agent: *
+Allow: /
+
+# Sitemap Location
+Sitemap: https://image-optimizer.dev/sitemap.xml
