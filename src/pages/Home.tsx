@@ -18,7 +18,7 @@ import { ImageDropzone } from '../components/upload/ImageDropzone';
 import { ImageList } from '../components/upload/ImageList';
 import { CompressionTool } from '../features/compression/CompressionTool';
 import { ImagePreviewModal } from '../components/image/ImagePreviewModal';
-import { AdBanner } from '../components/ads/AdBanner';
+import { AdBanner, MultiplexAd } from '../components/ads';
 import { useImageProcessor } from '../hooks/useImageProcessor';
 import { useImageSettings } from '../hooks/useImageSettings';
 import { createSampleImage } from '../utils/sampleImages';
@@ -429,6 +429,9 @@ export const Home: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* AdSense Multiplex / Autorelaxed Recommendations */}
+      <MultiplexAd slotLabel="Sponsored & Recommended" />
 
       {/* Frequently Asked Questions */}
       <section className="py-12 border-t border-slate-200 dark:border-slate-800 max-w-4xl mx-auto space-y-6">

@@ -5,7 +5,7 @@ import { ImageDropzone } from '../components/upload/ImageDropzone';
 import { ImageList } from '../components/upload/ImageList';
 import { CompressionTool } from '../features/compression/CompressionTool';
 import { ImagePreviewModal } from '../components/image/ImagePreviewModal';
-import { AdBanner } from '../components/ads/AdBanner';
+import { AdBanner, MultiplexAd } from '../components/ads';
 import { useImageProcessor } from '../hooks/useImageProcessor';
 import { useImageSettings } from '../hooks/useImageSettings';
 import type { ImageItem } from '../types';
@@ -249,6 +249,9 @@ export const CompressImage: React.FC = () => {
             ))}
           </div>
         </section>
+
+        {/* AdSense Multiplex / Recommendations Slot */}
+        <MultiplexAd slotLabel="Sponsored & Recommended" />
 
         {/* Related Tools Internal Linking */}
         <section className="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">

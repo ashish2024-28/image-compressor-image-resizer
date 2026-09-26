@@ -19,10 +19,22 @@ export const ADSENSE_CONFIG = {
   
   // Dedicated Ad Slot IDs (created in Google AdSense Console > Ads > By ad unit)
   slots: {
-    homeHorizontal: import.meta.env.VITE_ADSENSE_SLOT_HOME || '',
-    toolBottomHorizontal: import.meta.env.VITE_ADSENSE_SLOT_TOOL || '',
-    sidebarRectangle: import.meta.env.VITE_ADSENSE_SLOT_SIDEBAR || '',
-    guidesInArticle: import.meta.env.VITE_ADSENSE_SLOT_GUIDES || '',
+    // 1. Responsive Display Ad (Homepage, Tool pages, Header, Footer)
+    displayResponsive: import.meta.env.VITE_ADSENSE_SLOT_DISPLAY || '2097335205',
+    homeHorizontal: import.meta.env.VITE_ADSENSE_SLOT_HOME || '2097335205',
+    toolBottomHorizontal: import.meta.env.VITE_ADSENSE_SLOT_TOOL || '2097335205',
+    sidebarRectangle: import.meta.env.VITE_ADSENSE_SLOT_SIDEBAR || '2097335205',
+
+    // 2. In-Article / Fluid Content Ad
+    inArticleFluid: import.meta.env.VITE_ADSENSE_SLOT_IN_ARTICLE || '7892587364',
+    guidesInArticle: import.meta.env.VITE_ADSENSE_SLOT_GUIDES || '7892587364',
+
+    // 3. In-Feed Fluid Ad (Within card feeds, tool lists, and article directories)
+    inFeedFluid: import.meta.env.VITE_ADSENSE_SLOT_IN_FEED || '4847796632',
+    inFeedLayoutKey: '-fb+5w+4e-db+86',
+
+    // 4. Multiplex / Autorelaxed Ad (End of articles, bottom recommendations)
+    multiplexAutorelaxed: import.meta.env.VITE_ADSENSE_SLOT_MULTIPLEX || '1327179013',
   },
 
   // Test mode flag: if client ID is placeholder or local dev, show styled ad preview

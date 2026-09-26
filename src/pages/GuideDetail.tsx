@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { PageContainer } from '../components/layout/PageContainer';
 import { GUIDES } from '../data/guidesData';
+import { InArticleAd, MultiplexAd } from '../components/ads';
 import {
   Clock,
   Calendar,
@@ -145,40 +146,45 @@ export const GuideDetail: React.FC = () => {
 
         {/* Main Article Content */}
         <article className="prose dark:prose-invert max-w-none space-y-10 my-8">
-          {guide.sections.map((section) => (
-            <section key={section.id} id={section.id} className="scroll-mt-24 space-y-4">
-              <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight border-b border-slate-100 dark:border-slate-800/80 pb-2">
-                {section.title}
-              </h2>
+          {guide.sections.map((section, idx) => (
+            <React.Fragment key={section.id}>
+              <section id={section.id} className="scroll-mt-24 space-y-4">
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight border-b border-slate-100 dark:border-slate-800/80 pb-2">
+                  {section.title}
+                </h2>
 
-              <div className="space-y-3.5 text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
-                {section.content.map((paragraph, pIdx) => (
-                  <p key={pIdx}>{paragraph}</p>
-                ))}
-              </div>
-
-              {section.callout && (
-                <div
-                  className={`p-4 rounded-xl border text-xs sm:text-sm my-4 flex items-start gap-3 ${
-                    section.callout.type === 'tip'
-                      ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200'
-                      : section.callout.type === 'warning'
-                      ? 'bg-amber-50 dark:bg-amber-950/40 border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-200'
-                      : 'bg-blue-50 dark:bg-blue-950/40 border-blue-200 dark:border-blue-800 text-blue-900 dark:text-blue-200'
-                  }`}
-                >
-                  <div className="shrink-0 mt-0.5">
-                    {section.callout.type === 'tip' && <Lightbulb className="w-4 h-4 text-emerald-600" />}
-                    {section.callout.type === 'warning' && <AlertTriangle className="w-4 h-4 text-amber-600" />}
-                    {section.callout.type === 'info' && <Info className="w-4 h-4 text-blue-600" />}
-                  </div>
-                  <div>
-                    <h3 className="font-bold mb-1">{section.callout.title}</h3>
-                    <p>{section.callout.text}</p>
-                  </div>
+                <div className="space-y-3.5 text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
+                  {section.content.map((paragraph, pIdx) => (
+                    <p key={pIdx}>{paragraph}</p>
+                  ))}
                 </div>
-              )}
-            </section>
+
+                {section.callout && (
+                  <div
+                    className={`p-4 rounded-xl border text-xs sm:text-sm my-4 flex items-start gap-3 ${
+                      section.callout.type === 'tip'
+                        ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200'
+                        : section.callout.type === 'warning'
+                        ? 'bg-amber-50 dark:bg-amber-950/40 border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-200'
+                        : 'bg-blue-50 dark:bg-blue-950/40 border-blue-200 dark:border-blue-800 text-blue-900 dark:text-blue-200'
+                    }`}
+                  >
+                    <div className="shrink-0 mt-0.5">
+                      {section.callout.type === 'tip' && <Lightbulb className="w-4 h-4 text-emerald-600" />}
+                      {section.callout.type === 'warning' && <AlertTriangle className="w-4 h-4 text-amber-600" />}
+                      {section.callout.type === 'info' && <Info className="w-4 h-4 text-blue-600" />}
+                    </div>
+                    <div>
+                      <h3 className="font-bold mb-1">{section.callout.title}</h3>
+                      <p>{section.callout.text}</p>
+                    </div>
+                  </div>
+                )}
+              </section>
+
+              {/* In-Article Ad placed seamlessly after the 1st section */}
+              {idx === 0 && <InArticleAd />}
+            </React.Fragment>
           ))}
 
           {/* FAQs Section */}
@@ -226,6 +232,9 @@ export const GuideDetail: React.FC = () => {
             {guide.relatedTool.name}
           </Link>
         </div>
+
+        {/* Multiplex / Autorelaxed Content Recommendations Ad */}
+        <MultiplexAd slotLabel="Sponsored & Recommended" />
 
         {/* Related Articles */}
         {relatedGuides.length > 0 && (

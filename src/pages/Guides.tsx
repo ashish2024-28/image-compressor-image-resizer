@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageContainer } from '../components/layout/PageContainer';
 import { GUIDES } from '../data/guidesData';
+import { InFeedAd, MultiplexAd } from '../components/ads';
 import { BookOpen, Clock, Calendar, ArrowRight, Search, Sparkles } from 'lucide-react';
 
 export const Guides: React.FC = () => {
@@ -71,48 +72,56 @@ export const Guides: React.FC = () => {
 
       {/* Guides Grid */}
       <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-        {filteredGuides.map((guide) => (
-          <article
-            key={guide.slug}
-            className="flex flex-col justify-between p-6 rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-blue-400 dark:hover:border-blue-600 transition-all shadow-xs group"
-          >
-            <div className="space-y-3">
-              <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-                <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium">
-                  {guide.category}
-                </span>
-                <span className="flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5" />
-                  {guide.readingTime}
-                </span>
+        {filteredGuides.map((guide, idx) => (
+          <React.Fragment key={guide.slug}>
+            <article
+              className="flex flex-col justify-between p-6 rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-blue-400 dark:hover:border-blue-600 transition-all shadow-xs group"
+            >
+              <div className="space-y-3">
+                <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+                  <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium">
+                    {guide.category}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-3.5 h-3.5" />
+                    {guide.readingTime}
+                  </span>
+                </div>
+
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
+                  <Link to={`/guides/${guide.slug}`}>
+                    {guide.title}
+                  </Link>
+                </h2>
+
+                <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed">
+                  {guide.summary}
+                </p>
               </div>
 
-              <h2 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
-                <Link to={`/guides/${guide.slug}`}>
-                  {guide.title}
+              <div className="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                <div className="flex items-center gap-1 text-xs text-slate-400">
+                  <Calendar className="w-3.5 h-3.5" />
+                  <span>Updated {new Date(guide.modifiedDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
+                </div>
+
+                <Link
+                  to={`/guides/${guide.slug}`}
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 dark:text-blue-400 group-hover:translate-x-0.5 transition-transform"
+                >
+                  <span>Read Guide</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
-              </h2>
-
-              <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed">
-                {guide.summary}
-              </p>
-            </div>
-
-            <div className="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-              <div className="flex items-center gap-1 text-xs text-slate-400">
-                <Calendar className="w-3.5 h-3.5" />
-                <span>Updated {new Date(guide.modifiedDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
               </div>
+            </article>
 
-              <Link
-                to={`/guides/${guide.slug}`}
-                className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 dark:text-blue-400 group-hover:translate-x-0.5 transition-transform"
-              >
-                <span>Read Guide</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-          </article>
+            {/* In-Feed Google Ad seamlessly integrated after first row */}
+            {idx === 1 && (
+              <div className="col-span-1 md:col-span-2">
+                <InFeedAd slotLabel="Sponsored Recommendation" />
+              </div>
+            )}
+          </React.Fragment>
         ))}
       </div>
 
@@ -122,6 +131,11 @@ export const Guides: React.FC = () => {
           <p className="text-xs">Try clearing your search term or picking another category.</p>
         </div>
       )}
+
+      {/* AdSense Multiplex / Related Recommendations */}
+      <div className="max-w-4xl mx-auto">
+        <MultiplexAd slotLabel="Sponsored & Recommended" />
+      </div>
 
       {/* Bottom Tool Promo Banner */}
       <div className="max-w-4xl mx-auto mt-16 p-8 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6">
