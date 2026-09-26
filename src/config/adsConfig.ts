@@ -14,8 +14,8 @@ export interface AdSlotConfig {
 }
 
 export const ADSENSE_CONFIG = {
-  // Replace via VITE_GOOGLE_ADSENSE_CLIENT_ID or edit directly here
-  defaultClientId: 'ca-pub-0000000000000000',
+  // Configured with your Publisher ID (pub-6284694302866330)
+  defaultClientId: 'ca-pub-6284694302866330',
   
   // Dedicated Ad Slot IDs (created in Google AdSense Console > Ads > By ad unit)
   slots: {

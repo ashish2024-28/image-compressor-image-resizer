@@ -1,0 +1,2 @@
+# IAB Tech Lab - Google AdMob Authorized Digital Sellers (app-ads.txt)
+google.com, pub-6284694302866330, DIRECT, f08c47fec0942fa0
