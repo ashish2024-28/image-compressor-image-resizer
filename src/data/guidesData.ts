@@ -40,7 +40,7 @@ export const GUIDES: GuideArticle[] = [
     readingTime: '6 min read',
     publishedDate: '2026-02-10',
     modifiedDate: '2026-09-25',
-    author: 'Image Optimizer Engineering Team',
+    author: 'Ashish Systems Engineering Team',
     summary: 'Discover the exact balance between file weight reduction and human visual perception. Learn how chroma subsampling and quantization tables eliminate redundant data while preserving razor-sharp details.',
     relatedTool: {
       name: 'Launch Online Image Compressor',
@@ -117,7 +117,7 @@ export const GUIDES: GuideArticle[] = [
     readingTime: '7 min read',
     publishedDate: '2026-02-15',
     modifiedDate: '2026-09-25',
-    author: 'Image Optimizer Engineering Team',
+    author: 'Ashish Systems Engineering Team',
     summary: 'A direct head-to-head comparison of compression algorithms, browser compatibility, alpha channel transparency, and decoding performance across modern image standards.',
     relatedTool: {
       name: 'Launch Image Format Converter',
@@ -179,7 +179,7 @@ export const GUIDES: GuideArticle[] = [
     readingTime: '8 min read',
     publishedDate: '2026-03-01',
     modifiedDate: '2026-09-25',
-    author: 'Image Optimizer Engineering Team',
+    author: 'Ashish Systems Engineering Team',
     summary: 'Master Google Core Web Vitals. Discover how unoptimized images hurt your SEO rankings and learn practical techniques including responsive srcset, aspect ratio reservation, and browser-first caching.',
     relatedTool: {
       name: 'Compress for Website Preset',
@@ -238,7 +238,7 @@ export const GUIDES: GuideArticle[] = [
     readingTime: '5 min read',
     publishedDate: '2026-03-12',
     modifiedDate: '2026-09-25',
-    author: 'Image Optimizer Engineering Team',
+    author: 'Ashish Systems Engineering Team',
     summary: 'Avoid passport and visa application rejections. Exact dimensional, resolution, aspect ratio, background color, and file size limits for government portals.',
     relatedTool: {
       name: 'Launch Passport Photo Creator',

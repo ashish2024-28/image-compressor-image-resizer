@@ -46,27 +46,22 @@ export const Header: React.FC<HeaderProps> = ({ theme, onThemeChange }) => {
         <div className="flex items-center justify-between h-16 gap-2">
           {/* Logo & Brand */}
           <Link to="/" className="flex items-center gap-2 sm:gap-3 group focus:outline-none min-w-0">
-            <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-blue-600 via-indigo-600 to-blue-700 flex items-center justify-center text-white shadow-xs shadow-blue-500/30 group-hover:scale-105 transition-transform shrink-0">
-              <Layers className="w-4 h-4 sm:w-5 sm:h-5" />
+            <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-blue-600 via-indigo-600 to-blue-700 flex items-center justify-center text-white shadow-xs shadow-blue-500/25 group-hover:scale-105 transition-transform shrink-0">
+              <Layers className="w-5 h-5" />
               <span className="absolute -bottom-1 -right-1 text-[7px] sm:text-[8px] font-black tracking-tight bg-slate-900 text-blue-400 border border-blue-500/40 rounded px-1 leading-none py-0.5 shadow-xs">
-                SX
+                IC
               </span>
             </div>
             <div className="min-w-0">
-              <div className="flex items-center gap-1.5">
-                <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent dark:from-blue-400 dark:to-indigo-300 truncate">
-                  ASHISH SYSTEMSX
-                </span>
-                <span className="hidden sm:inline-flex items-center gap-1 text-[9px] font-semibold uppercase tracking-wider bg-emerald-50 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300 px-1.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
-                  <ShieldCheck className="w-2.5 h-2.5 text-emerald-600 dark:text-emerald-400" /> 100% Local
-                </span>
+              <span className="text-sm sm:text-base font-extrabold tracking-tight text-slate-900 dark:text-white block leading-tight truncate">
+                <span className="hidden sm:inline">Image Compressor &amp; Resizer</span>
+                <span className="sm:hidden">Image Compressor</span>
+              </span>
+              <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-medium leading-none mt-0.5 truncate">
+                <span>Ashish Systems</span>
+                <span aria-hidden="true">·</span>
+                <span className="text-emerald-600 dark:text-emerald-400 font-semibold">100% In-Browser</span>
               </div>
-              <span className="text-sm sm:text-base font-bold tracking-tight text-slate-900 dark:text-white block leading-tight truncate">
-                Image Optimizer
-              </span>
-              <span className="hidden lg:block text-[10px] text-slate-500 dark:text-slate-400">
-                Explore. Build. Experiment.
-              </span>
             </div>
           </Link>
 

@@ -74,7 +74,7 @@ export const ImageDropzone: React.FC<ImageDropzoneProps> = ({
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
       onClick={() => fileInputRef.current?.click()}
-      className={`relative border-2 border-dashed rounded-2xl p-8 sm:p-12 text-center transition-all cursor-pointer group select-none shadow-xs ${
+      className={`relative border-2 border-dashed rounded-2xl p-6 sm:p-10 md:p-12 text-center transition-all cursor-pointer group select-none shadow-xs ${
         isDragOver
           ? 'border-blue-500 bg-blue-50/80 dark:bg-blue-950/40 scale-[1.008]'
           : 'border-slate-300 dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-blue-500 dark:hover:border-blue-500 hover:bg-slate-50/70 dark:hover:bg-[#131b2e]'
@@ -89,30 +89,31 @@ export const ImageDropzone: React.FC<ImageDropzoneProps> = ({
         onChange={handleFileInput}
       />
 
-      <div className="flex flex-col items-center justify-center max-w-lg mx-auto">
+      <div className="flex flex-col items-center justify-center max-w-lg mx-auto w-full">
         <div
-          className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110 ${
+          className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110 ${
             isDragOver
               ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30'
               : 'bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800'
           }`}
         >
-          <UploadCloud className="w-8 h-8" />
+          <UploadCloud className="w-7 h-7 sm:w-8 sm:h-8" />
         </div>
 
         <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-2">
           {isDragOver ? 'Drop images right here' : 'Drop your images here'}
         </h3>
 
-        <p className="text-sm text-slate-600 dark:text-slate-400 mb-6">
+        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-6">
           or click anywhere to browse from your device. All processing stays local in your browser.
         </p>
 
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 mb-6 w-full max-w-xs sm:max-w-none">
           <Button
             type="button"
             variant="primary"
             size="md"
+            className="w-full sm:w-auto"
             isLoading={isLoading}
             leftIcon={<ImageIcon className="w-4 h-4" />}
             onClick={(e) => {
@@ -127,6 +128,7 @@ export const ImageDropzone: React.FC<ImageDropzoneProps> = ({
             type="button"
             variant="outline"
             size="md"
+            className="w-full sm:w-auto"
             isLoading={isGeneratingSample}
             leftIcon={<Sparkles className="w-4 h-4 text-amber-500" />}
             onClick={handleTrySample}

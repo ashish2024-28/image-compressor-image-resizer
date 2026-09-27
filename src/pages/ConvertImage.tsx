@@ -131,9 +131,9 @@ export const ConvertImage: React.FC = () => {
       schemaType="WebApplication"
     >
       <div className="text-center max-w-3xl mx-auto mb-8 space-y-3">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-semibold">
+        <div className="flex items-center justify-center gap-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-300">
           <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-          <span>Local Browser Conversion – Zero Server Uploads</span>
+          <span>Local Browser Conversion · Zero Server Uploads</span>
         </div>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
           Convert Image Formats
@@ -169,7 +169,7 @@ export const ConvertImage: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
             {/* Format Selection Column */}
             <div className="lg:col-span-1 lg:sticky lg:top-20 space-y-4">
-              <div className="p-5 rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-xs space-y-4">
+              <div className="pro-card rounded-2xl p-4 sm:p-5 space-y-4">
                 <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
                   <h2 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
                     <FileType className="w-4 h-4 text-blue-600" />
@@ -283,7 +283,7 @@ export const ConvertImage: React.FC = () => {
             {CONVERT_HOW_TO.map((step, idx) => (
               <div
                 key={idx}
-                className="p-5 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-xs space-y-1.5"
+                className="pro-card rounded-xl p-4 sm:p-5 space-y-1.5"
               >
                 <div className="flex items-center gap-2">
                   <span className="w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 font-bold text-xs flex items-center justify-center shrink-0">
@@ -311,7 +311,7 @@ export const ConvertImage: React.FC = () => {
             {CONVERT_FAQS.map((faq, idx) => (
               <div
                 key={idx}
-                className="p-5 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-xs space-y-1.5"
+                className="pro-card rounded-xl p-4 sm:p-5 space-y-1.5"
               >
                 <h3 className="font-semibold text-slate-900 dark:text-white text-sm flex items-start gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
@@ -336,7 +336,7 @@ export const ConvertImage: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Link
               to="/compress"
-              className="p-4 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-blue-400 dark:hover:border-blue-600 transition-colors shadow-xs group"
+              className="pro-card rounded-xl p-4 hover:border-blue-400 dark:hover:border-blue-600 transition-colors group"
             >
               <div className="flex items-center gap-2 mb-1">
                 <Sliders className="w-4 h-4 text-blue-600 dark:text-blue-400" />
@@ -351,7 +351,7 @@ export const ConvertImage: React.FC = () => {
 
             <Link
               to="/resize"
-              className="p-4 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-blue-400 dark:hover:border-blue-600 transition-colors shadow-xs group"
+              className="pro-card rounded-xl p-4 hover:border-blue-400 dark:hover:border-blue-600 transition-colors group"
             >
               <div className="flex items-center gap-2 mb-1">
                 <Maximize2 className="w-4 h-4 text-blue-600 dark:text-blue-400" />

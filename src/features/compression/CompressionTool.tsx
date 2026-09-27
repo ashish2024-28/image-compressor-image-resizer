@@ -53,7 +53,7 @@ export const CompressionTool: React.FC<CompressionToolProps> = ({
   };
 
   return (
-    <div className="bg-white dark:bg-[#111827] border border-slate-200/90 dark:border-slate-800 rounded-2xl p-4 sm:p-6 shadow-xs space-y-6">
+    <div className="pro-card rounded-2xl p-4 sm:p-6 space-y-6">
       <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800/80 pb-4">
         <div>
           <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">

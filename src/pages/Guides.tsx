@@ -75,11 +75,11 @@ export const Guides: React.FC = () => {
         {filteredGuides.map((guide, idx) => (
           <React.Fragment key={guide.slug}>
             <article
-              className="flex flex-col justify-between p-6 rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-blue-400 dark:hover:border-blue-600 transition-all shadow-xs group"
+              className="pro-card flex flex-col justify-between p-5 sm:p-6 rounded-2xl hover:border-blue-400 dark:hover:border-blue-600 transition-all group"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-                  <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium">
+                  <span className="font-semibold text-blue-600 dark:text-blue-400">
                     {guide.category}
                   </span>
                   <span className="flex items-center gap-1">

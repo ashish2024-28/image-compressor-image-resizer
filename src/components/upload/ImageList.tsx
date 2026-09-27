@@ -79,15 +79,15 @@ export const ImageList: React.FC<ImageListProps> = ({
       )}
 
       {/* Action Header Bar */}
-      <div className="bg-white dark:bg-[#111827] border border-slate-200/90 dark:border-slate-800 rounded-2xl p-4 sm:p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="pro-card rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
             <h3 className="text-base font-semibold text-slate-900 dark:text-white">
               Selected Images ({images.length})
             </h3>
             {completedCount > 0 && (
-              <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 font-medium">
-                {completedCount} optimized
+              <span className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
+                · {completedCount} optimized
               </span>
             )}
           </div>
@@ -96,17 +96,18 @@ export const ImageList: React.FC<ImageListProps> = ({
             {completedCount > 0 && totalSavedBytes > 0 && (
               <>
                 {' '}
-                • <span className="text-emerald-600 dark:text-emerald-400 font-medium">Saved: {formatFileSize(totalSavedBytes)}</span>
+                · <span className="text-emerald-600 dark:text-emerald-400 font-medium">Saved: {formatFileSize(totalSavedBytes)}</span>
               </>
             )}
           </p>
         </div>
 
         {/* Buttons */}
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full md:w-auto">
           <Button
             variant="outline"
             size="sm"
+            className="w-full sm:w-auto"
             onClick={handleClearClick}
             leftIcon={<Trash2 className="w-4 h-4 text-slate-400" />}
           >
@@ -116,6 +117,7 @@ export const ImageList: React.FC<ImageListProps> = ({
           <Button
             variant="primary"
             size="sm"
+            className="w-full sm:w-auto flex-1 sm:flex-initial"
             onClick={onProcessAll}
             isLoading={progress.isProcessing}
             leftIcon={<Play className="w-4 h-4" />}
@@ -129,6 +131,7 @@ export const ImageList: React.FC<ImageListProps> = ({
             <Button
               variant="success"
               size="sm"
+              className="w-full sm:w-auto flex-1 sm:flex-initial"
               onClick={handleDownloadAllZip}
               isLoading={isZipping}
               leftIcon={<Download className="w-4 h-4" />}

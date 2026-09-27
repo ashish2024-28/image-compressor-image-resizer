@@ -198,7 +198,7 @@ export const PresetPage: React.FC<PresetPageProps> = ({ presetKey }) => {
       schemaType="WebApplication"
     >
       <div className="text-center max-w-3xl mx-auto mb-8 space-y-3">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs font-semibold">
+        <div className="flex items-center justify-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
           <Sparkles className="w-3.5 h-3.5 text-blue-600" />
           <span>{config.badge}</span>
         </div>
@@ -276,7 +276,7 @@ export const PresetPage: React.FC<PresetPageProps> = ({ presetKey }) => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {config.tips.map((tip, i) => (
-            <div key={i} className="p-4 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] text-xs text-slate-600 dark:text-slate-400 shadow-xs">
+            <div key={i} className="pro-card rounded-xl p-4 sm:p-5 text-xs text-slate-600 dark:text-slate-400">
               <span className="font-bold text-blue-600 dark:text-blue-400 block mb-1">
                 Tip #{i + 1}
               </span>
