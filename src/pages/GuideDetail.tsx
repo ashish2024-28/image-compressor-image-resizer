@@ -61,15 +61,15 @@ export const GuideDetail: React.FC = () => {
         {/* Article Header */}
         <header className="space-y-4 pb-8 border-b border-slate-200 dark:border-slate-800">
           <div className="flex flex-wrap items-center gap-2 text-xs">
-            <span className="px-2.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800 font-semibold text-blue-700 dark:text-blue-300">
+            <span className="font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider text-[11px]">
               {guide.category}
             </span>
-            <span className="text-slate-400">•</span>
+            <span aria-hidden="true" className="text-slate-300 dark:text-slate-700">·</span>
             <span className="flex items-center gap-1 text-slate-500 dark:text-slate-400">
               <Clock className="w-3.5 h-3.5" />
               {guide.readingTime}
             </span>
-            <span className="text-slate-400">•</span>
+            <span aria-hidden="true" className="text-slate-300 dark:text-slate-700">·</span>
             <span className="flex items-center gap-1 text-slate-500 dark:text-slate-400">
               <Calendar className="w-3.5 h-3.5" />
               Published {new Date(guide.publishedDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
@@ -93,7 +93,7 @@ export const GuideDetail: React.FC = () => {
         </header>
 
         {/* Quick Action Interactive Tool Banner */}
-        <div className="my-8 p-5 rounded-2xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="my-8 p-5 rounded-2xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/80 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
           <div className="space-y-1 text-center sm:text-left">
             <div className="inline-flex items-center gap-1 text-xs font-bold text-blue-700 dark:text-blue-300 uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5 text-blue-600" />
@@ -108,7 +108,7 @@ export const GuideDetail: React.FC = () => {
           </div>
           <Link
             to={guide.relatedTool.path}
-            className="shrink-0 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition-colors flex items-center gap-1.5 shadow-xs"
+            className="shrink-0 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-1.5 shadow-xs w-full sm:w-auto"
           >
             <span>Launch Tool</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -116,7 +116,7 @@ export const GuideDetail: React.FC = () => {
         </div>
 
         {/* Table of Contents */}
-        <div className="my-8 p-5 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-xs">
+        <div className="pro-card my-8 p-5 rounded-xl">
           <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
             In this guide:
           </h2>

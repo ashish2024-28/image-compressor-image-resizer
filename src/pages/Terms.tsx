@@ -6,15 +6,15 @@ import { AdBanner } from '../components/ads/AdBanner';
 export const Terms: React.FC = () => {
   return (
     <PageContainer
-      title="Terms of Service – Image Optimizer"
-      description="Read the terms of service governing the usage of Image Optimizer and our free client-side optimization utilities."
+      title="Terms of Service – Image Compressor & Resizer"
+      description="Read the terms of service governing the usage of Image Compressor & Resizer and our free client-side image processing utilities by Ashish Systems."
       breadcrumbs={[{ name: 'Terms of Service', url: '/terms' }]}
     >
       <div className="max-w-3xl mx-auto space-y-8">
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 text-xs font-semibold">
+          <div className="flex items-center justify-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
             <FileCheck className="w-3.5 h-3.5" />
-            <span>Terms of Service</span>
+            <span>Ashish Systems · Terms of Service</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
             Terms of Service
@@ -30,7 +30,7 @@ export const Terms: React.FC = () => {
               1. Acceptance of Terms
             </h2>
             <p>
-              By accessing or using Image Optimizer by ASHISH SYSTEMSX (&quot;the Service&quot;), you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, please do not use the application.
+              By accessing or using Image Compressor &amp; Resizer by Ashish Systems (&quot;the Service&quot;), you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, please do not use the application.
             </p>
           </section>
 
@@ -39,7 +39,7 @@ export const Terms: React.FC = () => {
               2. Description of Service
             </h2>
             <p>
-              Image Optimizer is an experimental client-side software utility built by ASHISH SYSTEMSX (Explore. Build. Experiment.) providing in-browser tools to compress, resize, format convert, and inspect digital images. The service executes locally on client hardware through browser Web APIs. No warranty is made regarding exact file reduction percentages or lossless guarantees for inherently lossy formats.
+              Image Compressor &amp; Resizer is a client-side web utility developed by Ashish Systems providing in-browser tools to compress, resize, format convert, and inspect digital images. The service executes locally on client hardware through standardized browser Web APIs.
             </p>
           </section>
 

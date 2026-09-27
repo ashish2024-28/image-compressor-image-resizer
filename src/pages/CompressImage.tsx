@@ -100,9 +100,9 @@ export const CompressImage: React.FC = () => {
       schemaType="WebApplication"
     >
       <div className="text-center max-w-3xl mx-auto mb-8 space-y-3">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-semibold">
+        <div className="flex items-center justify-center gap-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-300">
           <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-          <span>Local Browser Compression – Zero Server Uploads</span>
+          <span>Local Browser Compression · Zero Server Uploads</span>
         </div>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
           Compress Images Online
@@ -183,7 +183,7 @@ export const CompressImage: React.FC = () => {
             {HOW_TO_STEPS.map((step, idx) => (
               <div
                 key={idx}
-                className="p-5 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-xs space-y-1.5"
+                className="pro-card rounded-xl p-4 sm:p-5 space-y-1.5"
               >
                 <div className="flex items-center gap-2">
                   <span className="w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 font-bold text-xs flex items-center justify-center shrink-0">
@@ -211,13 +211,13 @@ export const CompressImage: React.FC = () => {
             Image compression is the process of encoding digital graphics to take up substantially less storage space and bandwidth. When preparing media for websites, email attachments, digital resumes, or mobile messaging, uncompressed photos cause high bounce rates and trigger file size errors.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs pt-2">
-            <div className="p-4 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-xs space-y-2">
+            <div className="pro-card rounded-xl p-4 sm:p-5 space-y-2">
               <h3 className="font-bold text-slate-900 dark:text-white text-sm">Lossy Compression</h3>
               <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                 Lossy compression discards subtle pixel variations that human retinas cannot perceive at standard viewing distances (such as fine high-frequency color variations in gradients). This achieves substantial reductions (60%–85%) with virtually zero noticeable quality loss. Ideal for photographs and web graphics.
               </p>
             </div>
-            <div className="p-4 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-xs space-y-2">
+            <div className="pro-card rounded-xl p-4 sm:p-5 space-y-2">
               <h3 className="font-bold text-slate-900 dark:text-white text-sm">Lossless Compression</h3>
               <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                 Lossless compression reorganizes pixel data through mathematical entropy algorithms without discarding any visual data. Every single pixel matches the original perfectly. Format examples include PNG and lossless WebP. While pristine, the byte reduction is smaller.
@@ -236,7 +236,7 @@ export const CompressImage: React.FC = () => {
             {COMPRESS_FAQS.map((faq, idx) => (
               <div
                 key={idx}
-                className="p-5 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-xs space-y-1.5"
+                className="pro-card rounded-xl p-4 sm:p-5 space-y-1.5"
               >
                 <h3 className="font-semibold text-slate-900 dark:text-white text-sm flex items-start gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />

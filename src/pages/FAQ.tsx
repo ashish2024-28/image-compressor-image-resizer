@@ -48,23 +48,23 @@ export const FAQ: React.FC = () => {
 
   return (
     <PageContainer
-      title="Frequently Asked Questions (FAQ) – Image Optimizer"
-      description="Find answers to common questions about in-browser image compression, formats, privacy, and batch processing."
+      title="Frequently Asked Questions (FAQ) – Image Compressor & Resizer"
+      description="Find answers to common questions about in-browser image compression, resizing, WebP/PNG conversion, and biometric photo formats."
       breadcrumbs={[{ name: 'FAQ', url: '/faq' }]}
       faqs={formattedFaqs}
       schemaType="FAQPage"
     >
       <div className="max-w-3xl mx-auto space-y-8">
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 text-xs font-semibold">
+          <div className="flex items-center justify-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
             <HelpCircle className="w-3.5 h-3.5" />
-            <span>Help & FAQ</span>
+            <span>Ashish Systems · Frequently Asked Questions</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
             Frequently Asked Questions
           </h1>
           <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
-            Have questions about how Image Optimizer works or how to get the best results? Here is everything you need to know.
+            Have questions about how Image Compressor &amp; Resizer works, format conversion, or privacy? Here is everything you need to know.
           </p>
         </div>
 
@@ -74,10 +74,10 @@ export const FAQ: React.FC = () => {
             return (
               <div
                 key={index}
-                className={`border rounded-2xl bg-white dark:bg-[#111827] shadow-xs overflow-hidden transition-all ${
+                className={`pro-card rounded-2xl overflow-hidden transition-all ${
                   isOpen
                     ? 'border-blue-500/60 dark:border-blue-600/60 ring-1 ring-blue-500/20'
-                    : 'border-slate-200/90 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
+                    : 'hover:border-slate-300 dark:hover:border-slate-700'
                 }`}
               >
                 <button

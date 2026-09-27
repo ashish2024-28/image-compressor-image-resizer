@@ -114,33 +114,34 @@ export const Home: React.FC = () => {
       schemaType="WebApplication"
     >
       {/* Hero Section */}
-      <section className="text-center py-10 sm:py-16 max-w-4xl mx-auto space-y-6">
-        <div className="inline-flex flex-wrap items-center justify-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs font-semibold">
-          <span className="font-black uppercase tracking-wider text-blue-700 dark:text-blue-300">
-            ASHISH SYSTEMSX
+      <section className="text-center py-8 sm:py-16 max-w-4xl mx-auto space-y-5 px-2">
+        <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400">
+          <span className="font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider text-[11px]">
+            Ashish Systems
           </span>
-          <span className="text-slate-300 dark:text-slate-700">•</span>
-          <ShieldCheck className="w-4 h-4 text-emerald-500" />
-          <span>100% In-Browser Privacy</span>
-          <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
-          <span className="hidden sm:inline text-[11px] text-slate-500 dark:text-slate-400 font-normal">
-            Explore. Build. Experiment.
+          <span aria-hidden="true" className="text-slate-300 dark:text-slate-700">·</span>
+          <span className="inline-flex items-center gap-1 text-slate-700 dark:text-slate-300">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
+            100% In-Browser Privacy
           </span>
+          <span aria-hidden="true" className="text-slate-300 dark:text-slate-700">·</span>
+          <span>Zero Server Uploads</span>
         </div>
 
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.15]">
-          Compress Images Without Losing More Quality Than Necessary
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.12]">
+          Image Compressor &amp; Image Resizer
         </h1>
 
-        <p className="text-base sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          Reduce image file size, resize images, and convert formats directly in your browser with zero server uploads.
+        <p className="text-sm sm:text-lg lg:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          Compress, resize, and convert JPG, PNG, WebP, and AVIF images directly in your browser. Fast, 100% private, and losslessly optimized with zero server uploads.
         </p>
 
         {images.length === 0 && (
-          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 pt-2 w-full max-w-xs sm:max-w-none mx-auto">
             <Button
               variant="primary"
               size="lg"
+              className="w-full sm:w-auto"
               onClick={() => {
                 const el = document.getElementById('uploader-area');
                 el?.scrollIntoView({ behavior: 'smooth' });
@@ -152,6 +153,7 @@ export const Home: React.FC = () => {
             <Button
               variant="outline"
               size="lg"
+              className="w-full sm:w-auto"
               isLoading={isSampleLoading}
               onClick={handleTrySample}
               leftIcon={<Sparkles className="w-5 h-5 text-amber-500" />}
@@ -398,34 +400,42 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* ASHISH SYSTEMSX Brand Exploration Callout */}
-      <section className="py-8 max-w-4xl mx-auto">
-        <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-slate-900 via-blue-950 to-indigo-950 text-white border border-blue-900/40 shadow-md">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
+      {/* Client-Side Architecture & Privacy Highlight */}
+      <section className="py-8 max-w-4xl mx-auto px-2">
+        <div className="pro-card rounded-2xl p-6 sm:p-8 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
             <div>
-              <span className="text-[11px] font-black uppercase tracking-widest text-blue-400">
-                ASHISH SYSTEMSX
+              <span className="text-[11px] font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider block">
+                Local In-Browser Processing
               </span>
-              <h3 className="text-xl sm:text-2xl font-extrabold text-white mt-0.5">
-                Explore. Build. Experiment.
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-0.5">
+                Client-Side Privacy &amp; Performance
               </h3>
             </div>
             <Link
               to="/about"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold transition-colors self-start sm:self-auto"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold transition-colors self-start sm:self-auto shrink-0"
             >
-              <span>Learn Brand Philosophy</span>
+              <span>Learn About Privacy</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
-          <p className="text-xs sm:text-sm text-slate-300 mt-3 leading-relaxed">
-            &ldquo;A personal engineering space where Ashish explores, builds, and experiments with software systems.&rdquo;
-            Image Optimizer is built to deliver fast, deterministic, 100% private file transformations with zero server latency.
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            Image Compressor &amp; Resizer executes entirely inside your device browser using native HTML5 Canvas and ImageBitmap APIs. Photos and files are processed strictly in local RAM memory without any server uploads, guaranteeing complete confidentiality and zero data leakage.
           </p>
-          <div className="flex flex-wrap items-center gap-2 pt-3 text-[11px] text-slate-300 font-medium">
-            <span className="px-2.5 py-1 rounded bg-white/10 border border-white/15">Ashish (Identity)</span>
-            <span className="px-2.5 py-1 rounded bg-white/10 border border-white/15">Systems (Software)</span>
-            <span className="px-2.5 py-1 rounded bg-white/10 border border-white/15">X (eXplore & Experiment)</span>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs">
+            <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800">
+              <span className="font-bold text-slate-900 dark:text-white block mb-0.5">100% In-Browser</span>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 leading-normal">Canvas encoding executes locally in your device RAM.</span>
+            </div>
+            <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800">
+              <span className="font-bold text-slate-900 dark:text-white block mb-0.5">Memory-Safe Queue</span>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 leading-normal">Sequential batch processing protects mobile and desktop devices.</span>
+            </div>
+            <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800">
+              <span className="font-bold text-slate-900 dark:text-white block mb-0.5">Metadata Scrubbing</span>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 leading-normal">Camera EXIF GPS and device identifiers are stripped automatically.</span>
+            </div>
           </div>
         </div>
       </section>

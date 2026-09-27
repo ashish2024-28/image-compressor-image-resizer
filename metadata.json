@@ -2,5 +2,7 @@
   "name": "Image Optimizer",
   "description": "Compress, resize, convert and optimize images directly in your browser. Fast, private, client-side image processing.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

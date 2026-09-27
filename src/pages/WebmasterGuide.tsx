@@ -23,7 +23,7 @@ export const WebmasterGuide: React.FC = () => {
     >
       <div className="max-w-4xl mx-auto space-y-8">
         <header className="space-y-3 pb-6 border-b border-slate-200 dark:border-slate-800">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs font-semibold">
+          <div className="flex items-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
             <Search className="w-3.5 h-3.5" />
             <span>Search Engine Optimization Documentation</span>
           </div>
@@ -42,7 +42,7 @@ export const WebmasterGuide: React.FC = () => {
             <span>1. Verification & Indexing Assets Built-In</span>
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-5 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-xs space-y-2">
+            <div className="pro-card rounded-xl p-5 space-y-2">
               <span className="text-xs font-mono font-bold text-blue-600 dark:text-blue-400">
                 /robots.txt
               </span>
@@ -63,7 +63,7 @@ export const WebmasterGuide: React.FC = () => {
               </a>
             </div>
 
-            <div className="p-5 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-xs space-y-2">
+            <div className="pro-card rounded-xl p-5 space-y-2">
               <span className="text-xs font-mono font-bold text-blue-600 dark:text-blue-400">
                 /sitemap.xml
               </span>
@@ -92,7 +92,7 @@ export const WebmasterGuide: React.FC = () => {
             <Globe className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
             <span>2. Google Search Console Setup Steps</span>
           </h2>
-          <div className="p-6 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-xs space-y-4 text-sm text-slate-600 dark:text-slate-400">
+          <div className="pro-card rounded-xl p-5 sm:p-6 space-y-4 text-sm text-slate-600 dark:text-slate-400">
             <ol className="space-y-3 list-decimal list-inside">
               <li>
                 <strong className="text-slate-900 dark:text-white">Add Property:</strong> Sign in to{' '}
@@ -143,7 +143,7 @@ export const WebmasterGuide: React.FC = () => {
             <Layers className="w-5 h-5 text-blue-600 dark:text-blue-400" />
             <span>3. Bing Webmaster Tools & IndexNow</span>
           </h2>
-          <div className="p-6 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-xs space-y-3 text-sm text-slate-600 dark:text-slate-400">
+          <div className="pro-card rounded-xl p-5 sm:p-6 space-y-3 text-sm text-slate-600 dark:text-slate-400">
             <p>
               Bing powers Yahoo, DuckDuckGo, and several AI search engines. You can instantly import verified properties directly from Google Search Console into{' '}
               <a
@@ -170,7 +170,7 @@ export const WebmasterGuide: React.FC = () => {
             <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
             <span>4. Structured Data Validation</span>
           </h2>
-          <div className="p-6 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-xs space-y-3 text-sm text-slate-600 dark:text-slate-400">
+          <div className="pro-card rounded-xl p-5 sm:p-6 space-y-3 text-sm text-slate-600 dark:text-slate-400">
             <p>
               Every page automatically renders standard Schema.org JSON-LD structured data. You can validate the live markup with Google’s official test tools:
             </p>

@@ -380,7 +380,7 @@ export const PassportPhotoCreator: React.FC = () => {
     >
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-8 space-y-3">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs font-semibold">
+        <div className="flex items-center justify-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
           <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
           <span>Solves Government &quot;Overly Compressed&quot; Rejections</span>
         </div>
@@ -395,7 +395,7 @@ export const PassportPhotoCreator: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
         {/* Left Column: Standards & Settings */}
         <div className="lg:col-span-1 space-y-4">
-          <div className="bg-white dark:bg-[#111827] border border-slate-200/90 dark:border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xs space-y-4">
+          <div className="pro-card rounded-2xl p-4 sm:p-6 space-y-4">
             <div>
               <label className="text-sm font-bold text-slate-900 dark:text-white block mb-1">
                 Select Country Standard
@@ -416,11 +416,11 @@ export const PassportPhotoCreator: React.FC = () => {
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="flex items-center gap-1.5">
-                        <span className="text-base">{std.flag}</span>
-                        <span className="truncate max-w-[200px]">{std.name}</span>
+                      <span className="flex items-center gap-1.5 min-w-0">
+                        <span className="text-base shrink-0">{std.flag}</span>
+                        <span className="truncate max-w-[140px] sm:max-w-[200px]">{std.name}</span>
                       </span>
-                      <span className="font-mono text-[11px] text-blue-600 dark:text-blue-400">
+                      <span className="font-mono text-[11px] text-blue-600 dark:text-blue-400 shrink-0 ml-1">
                         {std.widthMm}×{std.heightMm}mm
                       </span>
                     </div>
@@ -461,7 +461,7 @@ export const PassportPhotoCreator: React.FC = () => {
           {!imageSrc ? (
             <div
               onClick={() => fileInputRef.current?.click()}
-              className="border-2 border-dashed border-slate-300 dark:border-slate-800 bg-white dark:bg-[#111827] rounded-2xl p-12 text-center hover:border-blue-500 cursor-pointer transition-colors shadow-xs"
+              className="border-2 border-dashed border-slate-300 dark:border-slate-800 bg-white dark:bg-[#111827] rounded-2xl p-8 sm:p-12 text-center hover:border-blue-500 cursor-pointer transition-colors shadow-xs"
             >
               <input
                 ref={fileInputRef}
@@ -483,7 +483,7 @@ export const PassportPhotoCreator: React.FC = () => {
               <p className="text-xs text-slate-600 dark:text-slate-400 max-w-sm mx-auto mb-5">
                 Take a selfie against a light plain wall or choose an existing portrait photo.
               </p>
-              <div className="flex justify-center gap-3">
+              <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
                 <Button variant="primary" size="sm" leftIcon={<UploadCloud className="w-4 h-4" />}>
                   Select Photo
                 </Button>
@@ -504,8 +504,8 @@ export const PassportPhotoCreator: React.FC = () => {
           ) : (
             <div className="space-y-4">
               {/* Interactive Biometric Cropper Box */}
-              <div className="bg-white dark:bg-[#111827] border border-slate-200/90 dark:border-slate-800 rounded-2xl p-5 flex flex-col items-center select-none shadow-xs">
-                <div className="flex items-center justify-between w-full max-w-md text-xs text-slate-600 dark:text-slate-400 mb-3">
+              <div className="pro-card rounded-2xl p-4 sm:p-5 flex flex-col items-center select-none">
+                <div className="flex flex-wrap items-center justify-between w-full max-w-md text-xs text-slate-600 dark:text-slate-400 mb-3 gap-2">
                   <span className="flex items-center gap-1 font-semibold text-slate-800 dark:text-slate-200">
                     <Move className="w-3.5 h-3.5" /> Drag image to align with guide
                   </span>
@@ -530,8 +530,8 @@ export const PassportPhotoCreator: React.FC = () => {
                   onTouchEnd={handleTouchEnd}
                   className="relative overflow-hidden rounded-lg bg-black border border-slate-700 cursor-grab active:cursor-grabbing touch-none flex items-center justify-center shadow-inner max-w-full"
                   style={{
-                    width: selectedStandard.widthMm >= selectedStandard.heightMm ? '300px' : `${(300 * selectedStandard.widthMm) / selectedStandard.heightMm}px`,
-                    height: selectedStandard.heightMm >= selectedStandard.widthMm ? '340px' : `${(340 * selectedStandard.heightMm) / selectedStandard.widthMm}px`,
+                    width: selectedStandard.widthMm >= selectedStandard.heightMm ? '280px' : `${(280 * selectedStandard.widthMm) / selectedStandard.heightMm}px`,
+                    height: selectedStandard.heightMm >= selectedStandard.widthMm ? '320px' : `${(320 * selectedStandard.heightMm) / selectedStandard.widthMm}px`,
                     maxWidth: '100%',
                   }}
                 >
@@ -565,10 +565,11 @@ export const PassportPhotoCreator: React.FC = () => {
                 </div>
 
                 {/* Control toolbar */}
-                <div className="flex flex-wrap items-center justify-center gap-2 mt-4 text-xs">
+                <div className="flex flex-wrap items-center justify-center gap-2 mt-4 text-xs w-full">
                   <Button
                     variant="outline"
                     size="sm"
+                    className="flex-1 sm:flex-initial"
                     onClick={() => handleZoomChange(-0.15)}
                     leftIcon={<ZoomOut className="w-3.5 h-3.5" />}
                   >
@@ -577,6 +578,7 @@ export const PassportPhotoCreator: React.FC = () => {
                   <Button
                     variant="outline"
                     size="sm"
+                    className="flex-1 sm:flex-initial"
                     onClick={() => handleZoomChange(0.15)}
                     leftIcon={<ZoomIn className="w-3.5 h-3.5" />}
                   >
@@ -585,6 +587,7 @@ export const PassportPhotoCreator: React.FC = () => {
                   <Button
                     variant="outline"
                     size="sm"
+                    className="flex-1 sm:flex-initial"
                     onClick={handleRotate}
                     leftIcon={<RotateCw className="w-3.5 h-3.5" />}
                   >
@@ -593,6 +596,7 @@ export const PassportPhotoCreator: React.FC = () => {
                   <Button
                     variant="secondary"
                     size="sm"
+                    className="w-full sm:w-auto"
                     onClick={() => fileInputRef.current?.click()}
                   >
                     Change Photo
@@ -602,7 +606,7 @@ export const PassportPhotoCreator: React.FC = () => {
 
               {/* Verified Result Card */}
               {processedBlob && (
-                <div className="bg-white dark:bg-[#111827] border border-slate-200/90 dark:border-slate-800 rounded-2xl p-5 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="pro-card rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
                   <div>
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-5 h-5 text-emerald-500" />
@@ -622,6 +626,7 @@ export const PassportPhotoCreator: React.FC = () => {
                   <Button
                     variant="success"
                     size="md"
+                    className="w-full sm:w-auto"
                     onClick={handleDownload}
                     leftIcon={<Download className="w-4 h-4" />}
                   >
@@ -647,7 +652,7 @@ export const PassportPhotoCreator: React.FC = () => {
             {PASSPORT_HOW_TO.map((step, idx) => (
               <div
                 key={idx}
-                className="p-5 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-xs space-y-1.5"
+                className="pro-card rounded-xl p-4 sm:p-5 space-y-1.5"
               >
                 <div className="flex items-center gap-2">
                   <span className="w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 font-bold text-xs flex items-center justify-center shrink-0">

@@ -109,7 +109,7 @@ export const BeforeAfterViewer: React.FC<BeforeAfterViewerProps> = ({
           onMouseMove={handleMouseMove}
           onTouchMove={handleTouchMove}
           onClick={handleContainerClick}
-          className="relative w-full h-[320px] sm:h-[460px] bg-transparency-pattern rounded-xl overflow-hidden cursor-ew-resize border border-slate-300 dark:border-slate-800 select-none touch-none shadow-xs"
+          className="relative w-full h-[260px] sm:h-[420px] bg-transparency-pattern rounded-xl overflow-hidden cursor-ew-resize border border-slate-300 dark:border-slate-800 select-none touch-none shadow-xs"
         >
           {/* Background: Optimized Image (Right side reveal) */}
           <div className="absolute inset-0 flex items-center justify-center overflow-auto">

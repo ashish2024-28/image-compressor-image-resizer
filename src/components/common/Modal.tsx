@@ -55,14 +55,14 @@ export const Modal: React.FC<ModalProps> = ({
         aria-hidden="true"
       />
 
-      <div className="flex min-h-full items-center justify-center p-2.5 sm:p-6 text-center">
+      <div className="flex min-h-full items-center justify-center p-2 sm:p-6 text-center">
         <div
-          className={`relative transform overflow-hidden rounded-2xl bg-white dark:bg-[#111827] border border-slate-200/90 dark:border-slate-800 text-left shadow-2xl transition-all w-full ${maxWidthStyles}`}
+          className={`relative transform overflow-hidden rounded-2xl bg-white dark:bg-[#111827] border border-slate-200/90 dark:border-slate-800 text-left shadow-2xl transition-all w-full max-h-[92vh] flex flex-col ${maxWidthStyles}`}
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
           {(title || showCloseButton) && (
-            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 px-4 sm:px-6 py-3.5 sm:py-4">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 px-4 sm:px-6 py-3.5 sm:py-4 shrink-0">
               <div className="text-base sm:text-lg font-semibold text-slate-900 dark:text-white truncate pr-2">
                 {title}
               </div>
@@ -80,7 +80,7 @@ export const Modal: React.FC<ModalProps> = ({
           )}
 
           {/* Body */}
-          <div className="px-4 sm:px-6 py-4 sm:py-5">{children}</div>
+          <div className="px-4 sm:px-6 py-4 sm:py-5 overflow-y-auto max-h-[calc(92vh-75px)]">{children}</div>
         </div>
       </div>
     </div>

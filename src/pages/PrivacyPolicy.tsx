@@ -6,15 +6,15 @@ import { AdBanner } from '../components/ads/AdBanner';
 export const PrivacyPolicy: React.FC = () => {
   return (
     <PageContainer
-      title="Privacy Policy – Image Optimizer"
-      description="Read how Image Optimizer preserves your absolute privacy with 100% client-side image processing and zero server uploads."
+      title="Privacy Policy – Image Compressor & Resizer"
+      description="Read how Image Compressor & Resizer by Ashish Systems preserves your absolute privacy with 100% client-side image processing and zero server uploads."
       breadcrumbs={[{ name: 'Privacy Policy', url: '/privacy' }]}
     >
       <div className="max-w-3xl mx-auto space-y-8">
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-xs font-semibold">
+          <div className="flex items-center justify-center gap-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-300">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Privacy First Architecture</span>
+            <span>Ashish Systems · Privacy Policy</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
             Privacy Policy
@@ -26,7 +26,7 @@ export const PrivacyPolicy: React.FC = () => {
 
         {/* Highlights */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="p-5 rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] text-center shadow-xs">
+          <div className="pro-card rounded-2xl p-5 text-center">
             <ServerOff className="w-6 h-6 text-emerald-600 mx-auto mb-2" />
             <h3 className="font-bold text-sm text-slate-900 dark:text-white">No Server Uploads</h3>
             <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
@@ -34,7 +34,7 @@ export const PrivacyPolicy: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-5 rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] text-center shadow-xs">
+          <div className="pro-card rounded-2xl p-5 text-center">
             <EyeOff className="w-6 h-6 text-blue-600 mx-auto mb-2" />
             <h3 className="font-bold text-sm text-slate-900 dark:text-white">No Content Tracking</h3>
             <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
@@ -42,7 +42,7 @@ export const PrivacyPolicy: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-5 rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] text-center shadow-xs">
+          <div className="pro-card rounded-2xl p-5 text-center">
             <Lock className="w-6 h-6 text-purple-600 mx-auto mb-2" />
             <h3 className="font-bold text-sm text-slate-900 dark:text-white">Local Sandboxing</h3>
             <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">

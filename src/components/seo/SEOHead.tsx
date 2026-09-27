@@ -48,9 +48,9 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
 }) => {
   useEffect(() => {
     // 1. Update Title
-    const formattedTitle = title.includes('Image Optimizer')
+    const formattedTitle = title.includes('Image Compressor') || title.includes('Image Optimizer')
       ? title
-      : `${title} | Image Optimizer`;
+      : `${title} | Image Compressor & Resizer`;
     document.title = formattedTitle;
 
     // Helper to set or create meta tag
@@ -92,7 +92,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
     setMetaTag('property', 'og:description', description);
     setMetaTag('property', 'og:type', ogType);
     setMetaTag('property', 'og:url', resolvedCanonical);
-    setMetaTag('property', 'og:site_name', 'Image Optimizer');
+    setMetaTag('property', 'og:site_name', 'Image Compressor & Resizer');
     setMetaTag('property', 'og:locale', 'en_US');
     if (ogImage) {
       const fullImage = ogImage.startsWith('http')
@@ -179,15 +179,15 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
         dateModified: articleData?.modifiedTime || '2026-09-25T00:00:00Z',
         author: {
           '@type': 'Organization',
-          name: 'Image Optimizer Engineering Team',
+          name: 'Ashish Systems',
           url: typeof window !== 'undefined' ? window.location.origin : '',
         },
         publisher: {
           '@type': 'Organization',
-          name: 'Image Optimizer',
+          name: 'Image Compressor & Resizer',
           logo: {
             '@type': 'ImageObject',
-            url: typeof window !== 'undefined' ? `${window.location.origin}/logo.png` : '',
+            url: typeof window !== 'undefined' ? `${window.location.origin}/icon.svg` : '',
           },
         },
         mainEntityOfPage: {

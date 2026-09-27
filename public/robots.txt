@@ -1,8 +1,8 @@
-# Image Optimizer robots.txt
+# Image Compressor & Resizer robots.txt
 # Directs search engine crawlers to crawlable assets and sitemap
 
 User-agent: *
 Allow: /
 
 # Sitemap Location
-Sitemap: https://image-optimizer.dev/sitemap.xml
+Sitemap: https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/sitemap.xml

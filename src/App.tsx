@@ -38,7 +38,8 @@ export default function App() {
 
         <Header theme={theme} onThemeChange={setTheme} />
         
-        <div className="flex-1 relative z-10">
+        {/* Main application container with flexible max-width wrapper and consistent responsive padding */}
+        <main className="flex-1 w-full max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 relative z-10 transition-all flex flex-col">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/compress" element={<CompressImage />} />
@@ -89,7 +90,7 @@ export default function App() {
             <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </div>
+        </main>
 
         <Footer />
         <OfflineIndicator />

@@ -4,7 +4,6 @@ import type { ImageItem, ImageSettings } from '../../types';
 import { formatFileSize } from '../../utils/formatFileSize';
 import { getOutputFilename, downloadBlob, getExtensionFromMime } from '../../utils/fileUtils';
 import { Button } from '../common/Button';
-import { Badge } from '../common/Badge';
 
 export interface ImageCardProps {
   item: ImageItem;
@@ -32,11 +31,11 @@ export const ImageCard: React.FC<ImageCardProps> = ({
   };
 
   return (
-    <div className="bg-white dark:bg-[#111827] border border-slate-200/90 dark:border-slate-800 rounded-2xl p-4 shadow-xs hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-md transition-all flex flex-col justify-between">
+    <div className="pro-card rounded-2xl p-3.5 sm:p-4 hover:border-slate-300 dark:hover:border-slate-700 transition-all flex flex-col justify-between">
       <div>
         {/* Top: Thumbnail & Status */}
-        <div className="flex gap-4 items-start">
-          <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-transparency-pattern border border-slate-200 dark:border-slate-700 shrink-0">
+        <div className="flex gap-3 sm:gap-4 items-start">
+          <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-xl overflow-hidden bg-transparency-pattern border border-slate-200 dark:border-slate-700 shrink-0">
             <img
               src={item.outputUrl || item.originalUrl}
               alt={item.name}
@@ -61,7 +60,7 @@ export const ImageCard: React.FC<ImageCardProps> = ({
               <button
                 type="button"
                 onClick={() => onRemove(item.id)}
-                className="text-slate-400 hover:text-red-500 p-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                className="text-slate-400 hover:text-red-500 p-1.5 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                 title="Remove image"
                 aria-label="Remove image"
               >
@@ -74,7 +73,7 @@ export const ImageCard: React.FC<ImageCardProps> = ({
               <span>
                 {item.originalWidth} × {item.originalHeight}
               </span>
-              <span>•</span>
+              <span>·</span>
               <span className="font-mono uppercase">{getExtensionFromMime(item.originalType)}</span>
               <span>→</span>
               <span className="font-mono uppercase text-blue-600 dark:text-blue-400 font-semibold">
@@ -108,23 +107,18 @@ export const ImageCard: React.FC<ImageCardProps> = ({
 
         {/* Results row if processed */}
         {item.status === 'done' && (
-          <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+          <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-              <span className="text-xs text-slate-600 dark:text-slate-400">Reduced:</span>
-              <Badge
-                variant={
-                  item.reductionPercentage && item.reductionPercentage > 0 ? 'emerald' : 'amber'
-                }
-                size="sm"
-              >
+              <span className="text-slate-600 dark:text-slate-400">Reduced:</span>
+              <span className="font-bold text-emerald-600 dark:text-emerald-400">
                 {item.reductionPercentage && item.reductionPercentage > 0
                   ? `-${item.reductionPercentage}%`
                   : '0% (Lossless)'}
-              </Badge>
+              </span>
             </div>
             {item.processingTimeMs !== undefined && (
-              <span className="text-[11px] text-slate-400 flex items-center gap-1">
+              <span className="text-[11px] text-slate-400 flex items-center gap-1 font-mono">
                 <Clock className="w-3 h-3" /> {item.processingTimeMs}ms
               </span>
             )}

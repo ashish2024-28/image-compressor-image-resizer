@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { PageContainer } from '../components/layout/PageContainer';
-import { InFeedAd, MultiplexAd } from '../components/ads';
+import { AdBanner, InFeedAd, MultiplexAd } from '../components/ads';
 import {
   Sliders,
   Maximize2,
@@ -96,9 +96,9 @@ export const Tools: React.FC = () => {
       schemaType="WebApplication"
     >
       <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-semibold">
+        <div className="flex items-center justify-center gap-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-300">
           <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-          <span>Zero Server Uploads • 100% Client-Side Processing</span>
+          <span>Zero Server Uploads · 100% In-Browser Processing</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
           Image Optimization Tools
@@ -111,19 +111,19 @@ export const Tools: React.FC = () => {
       {/* Core Tools Grid */}
       <section className="mb-12">
         <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Core Utilities</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {coreTools.map((t) => (
             <Link
               key={t.title}
               to={t.path}
-              className="bg-white dark:bg-[#111827] border border-slate-200/90 dark:border-slate-800 rounded-2xl p-6 shadow-xs hover:border-blue-500 dark:hover:border-blue-500 hover:shadow-md transition-all group flex flex-col justify-between"
+              className="pro-card rounded-2xl p-5 sm:p-6 hover:border-blue-500 dark:hover:border-blue-500 hover:shadow-md transition-all group flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <div className="p-2.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200/60 dark:border-slate-700 rounded-xl group-hover:scale-105 transition-transform">
                     {t.icon}
                   </div>
-                  <span className="text-[11px] font-semibold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/80 px-2 py-0.5 rounded-full border border-blue-200 dark:border-blue-800">
+                  <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
                     {t.badge}
                   </span>
                 </div>
@@ -154,7 +154,7 @@ export const Tools: React.FC = () => {
             <Link
               key={p.title}
               to={p.path}
-              className="bg-white dark:bg-[#111827] border border-slate-200/90 dark:border-slate-800 rounded-2xl p-5 shadow-xs hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-sm transition-all flex flex-col justify-between"
+              className="pro-card rounded-2xl p-4 sm:p-5 hover:border-blue-500 dark:hover:border-blue-500 transition-all flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center gap-2.5 mb-2">
@@ -176,6 +176,10 @@ export const Tools: React.FC = () => {
           ))}
         </div>
       </section>
+
+      {/* AdSense Multiplex / Recommendations */}
+      <MultiplexAd slotLabel="Sponsored & Recommended" />
+
       {/* Educational Guides Section */}
       <section className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">
         <div className="flex items-center justify-between mb-4">
