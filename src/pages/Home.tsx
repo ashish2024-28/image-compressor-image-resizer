@@ -11,6 +11,7 @@ import {
   ArrowRight,
   CheckCircle2,
   Lock,
+  ExternalLink,
 } from 'lucide-react';
 import { PageContainer } from '../components/layout/PageContainer';
 import { Button } from '../components/common/Button';
@@ -443,19 +444,268 @@ export const Home: React.FC = () => {
       {/* AdSense Multiplex / Autorelaxed Recommendations */}
       <MultiplexAd slotLabel="Sponsored & Recommended" />
 
+      {/* Popular Searches & Hinglish/English Intent Hub */}
+      <section className="py-10 border-t border-slate-200 dark:border-slate-800 max-w-4xl mx-auto space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <span className="text-[11px] font-extrabold text-amber-500 uppercase tracking-wider block">
+              Quick Solutions &bull; All Languages &bull; Hinglish &amp; English
+            </span>
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-0.5">
+              Photo Ka Size Kam Kaise Kare? (Quick Help Hub)
+            </h2>
+          </div>
+          <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">
+            100% Free &bull; No Uploads
+          </span>
+        </div>
+
+        {/* 1-Tap Solution Cards for Common Searches */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          <Link
+            to="/compress-image-to-100kb"
+            className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-amber-500 dark:hover:border-amber-500 transition-all shadow-xs group"
+          >
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+              Govt Form 100KB
+            </span>
+            <h3 className="font-bold text-slate-900 dark:text-white text-sm mt-2 group-hover:text-amber-500 transition-colors">
+              Photo ko 100KB me kaise convert kare?
+            </h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              UPSC, SSC, Admit Card aur Exam portals ke liye photo ko 100KB ke andar laane ka direct tool.
+            </p>
+          </Link>
+
+          <Link
+            to="/compress-image-to-200kb"
+            className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-emerald-500 dark:hover:border-emerald-500 transition-all shadow-xs group"
+          >
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+              Portal Limit 200KB
+            </span>
+            <h3 className="font-bold text-slate-900 dark:text-white text-sm mt-2 group-hover:text-emerald-500 transition-colors">
+              Photo ka size 200KB me kaise banaye?
+            </h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              Visa, Passport Portal aur Job applications ke liye bina quality kharab kiye 200KB limit fix kare.
+            </p>
+          </Link>
+
+          <Link
+            to="/passport-photo-creator"
+            className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-blue-500 dark:hover:border-blue-500 transition-all shadow-xs group"
+          >
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+              Passport Maker
+            </span>
+            <h3 className="font-bold text-slate-900 dark:text-white text-sm mt-2 group-hover:text-blue-500 transition-colors">
+              Mobile se Passport photo kaise banaye?
+            </h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              Biometric 2x2 inch ya 3.5x4.5 cm crop kare, white background dale aur printable 6-pack sheet paye.
+            </p>
+          </Link>
+
+          <Link
+            to="/reduce-image-size"
+            className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-purple-500 dark:hover:border-purple-500 transition-all shadow-xs group"
+          >
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20">
+              MB to KB Reducer
+            </span>
+            <h3 className="font-bold text-slate-900 dark:text-white text-sm mt-2 group-hover:text-purple-500 transition-colors">
+              Photo ka MB kaise kam kare?
+            </h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              10MB ya 5MB ki heavy camera photo ko 80% shrink kare WhatsApp aur Email sharing ke liye.
+            </p>
+          </Link>
+
+          <Link
+            to="/resize-image"
+            className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-teal-500 dark:hover:border-teal-500 transition-all shadow-xs group"
+          >
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-teal-500/10 text-teal-600 dark:text-teal-400 border border-teal-500/20">
+              Signature &amp; Dimensions
+            </span>
+            <h3 className="font-bold text-slate-900 dark:text-white text-sm mt-2 group-hover:text-teal-500 transition-colors">
+              Signature ka size kaise chhota kare?
+            </h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              Online forms ke required pixels (e.g. 200x230 px) me signature aur photo resize kare.
+            </p>
+          </Link>
+
+          <Link
+            to="/image-to-pdf"
+            className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-rose-500 dark:hover:border-rose-500 transition-all shadow-xs group"
+          >
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20">
+              Photo to PDF Maker
+            </span>
+            <h3 className="font-bold text-slate-900 dark:text-white text-sm mt-2 group-hover:text-rose-500 transition-colors">
+              Photo se PDF kaise banaye?
+            </h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              JPG aur PNG photos ko A4 size high-quality PDF me convert kare bina watermark.
+            </p>
+          </Link>
+
+          <Link
+            to="/merge-images-to-pdf"
+            className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-indigo-500 dark:hover:border-indigo-500 transition-all shadow-xs group"
+          >
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
+              Multiple Photos Merge
+            </span>
+            <h3 className="font-bold text-slate-900 dark:text-white text-sm mt-2 group-hover:text-indigo-500 transition-colors">
+              Multiple photos ko 1 PDF me kaise jode?
+            </h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              Marksheet, certificates aur IDs ko ek hi multi-page PDF me combine &amp; merge kare.
+            </p>
+          </Link>
+
+          <Link
+            to="/jpg-to-webp"
+            className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-sky-500 dark:hover:border-sky-500 transition-all shadow-xs group"
+          >
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20">
+              JPG &rarr; WebP
+            </span>
+            <h3 className="font-bold text-slate-900 dark:text-white text-sm mt-2 group-hover:text-sky-500 transition-colors">
+              JPG se WebP me kaise badle?
+            </h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              Website speed badhane ke liye Google WebP format me convert kare, 30% chhota file size.
+            </p>
+          </Link>
+        </div>
+
+        {/* DocuLite Advanced PDF Suite Direct Connect Card */}
+        <div className="p-5 sm:p-6 rounded-2xl border-2 border-indigo-500/30 bg-gradient-to-r from-indigo-950/20 via-blue-950/10 to-indigo-900/20 dark:from-[#0d1527] dark:to-[#0f172a] shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-start gap-3.5">
+            <div className="p-3 rounded-xl bg-indigo-600 text-white shrink-0 shadow-xs">
+              <Sparkles className="w-5 h-5 sm:w-6 sm:h-6" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="font-extrabold text-slate-900 dark:text-white text-sm sm:text-base">
+                  Need Advanced PDF Operations?
+                </h3>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 border border-indigo-500/30">
+                  DocuLite Suite
+                </span>
+              </div>
+              <p className="text-xs text-slate-600 dark:text-slate-300 mt-1 max-w-xl leading-relaxed">
+                Merge multiple PDFs, compress below 100KB/200KB, split documents, and extract high-res images in our dedicated sister platform with zero server uploads.
+              </p>
+            </div>
+          </div>
+          <a
+            href="https://pdf-tools-ten-eta.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs sm:text-sm shadow-md transition-all cursor-pointer group"
+          >
+            <span>Open DocuLite PDF Tools</span>
+            <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+          </a>
+        </div>
+
+        {/* Global, Spanish, Hindi & Hinglish Search Keyword Pills */}
+        <div className="pt-2">
+          <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
+            Trending Searches &bull; Global Keywords (English &bull; Español &bull; हिंदी &bull; Hinglish)
+          </div>
+          <div className="flex flex-wrap gap-1.5 text-[11px]">
+            {[
+              'PDF a imagen',
+              'combinar PDF',
+              'comprimir imagen online',
+              'reducir tamaño de foto',
+              'foto a PDF',
+              'unir imágenes en PDF',
+              'फोटो से पीडीएफ कैसे बनाएं',
+              'फोटो का साइज कैसे कम करें',
+              'पीडीएफ टू फोटो कैसे बनाएं',
+              'फोटो मर्ज करें',
+              'PDF to photo kaise banaye',
+              'photo se pdf kaise banaye',
+              'photo ka size kaise kam kare',
+              'image to pdf converter online',
+              'multiple photos merge into one pdf',
+              'photo combine karke pdf banaye',
+              'image compress kaise kare',
+              'photo size kam karne wala app',
+              'compress image to 100kb',
+              'compress photo to 200kb',
+              'reduce image size in kb',
+              'photo resize online free',
+              'photo ko pdf me kaise convert kare',
+              'jpg to pdf converter without watermark',
+              'sarkari form photo resizer',
+              'passport size photo mobile se kaise banaye',
+              'signature resize for admit card',
+              'photo ka mb kaise kam kare',
+              'pdf merge photo combine',
+              'jpg se webp converter online',
+              'bina quality kharab kiye photo compress kare',
+              'bulk image compressor zip download',
+              'pan card photo signature size maker',
+              'juntar fotos em PDF',
+              'Bilder in PDF umwandeln',
+            ].map((keyword, i) => (
+              <span
+                key={i}
+                className="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700/60"
+              >
+                #{keyword}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Frequently Asked Questions */}
       <section className="py-12 border-t border-slate-200 dark:border-slate-800 max-w-4xl mx-auto space-y-6">
         <div>
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-            Frequently Asked Questions
+            Frequently Asked Questions (English &amp; Hinglish)
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">
-            Common questions regarding privacy, image processing limits, and format compatibility.
+            Common questions regarding privacy, image processing limits, format compatibility, and government portal guidelines.
           </p>
         </div>
 
         <div className="space-y-3">
-          {HOME_FAQS.map((faq, idx) => (
+          {[
+            {
+              question: 'Photo ka size MB se KB me kaise kam kare (How to reduce photo size)?',
+              answer: 'Apni photo upload kare, slider se quality 70% ya 80% select kare, ya \'Target Size\' me 100KB / 200KB enter kare. Hamara tool seconds me photo ka file size 80% tak kam kar deta hai bina photo dhundhli (blur) kiye. Phir 1-click me download kare.',
+            },
+            {
+              question: 'Sarkari exams / online forms (UPSC, SSC, Railway) ke liye photo kaise banaye?',
+              answer: 'Sarkari portal hamesha 50KB–100KB photo aur 10KB–20KB signature mangte hain. Aap hamare "/compress-image-to-100kb" tool se photo aur "/resize-image" se signature ki exact pixel dimensions aur file size set kar sakte hain.',
+            },
+            {
+              question: 'How does Image Optimizer protect my privacy?',
+              answer: 'Every operation—compression, resizing, biometric passport cropping, and format conversion—is executed 100% inside your web browser via HTML5 Canvas. Your image files never leave your device and are never transmitted to external cloud servers.',
+            },
+            {
+              question: 'How much file size reduction can I expect?',
+              answer: 'Typical photo compression achieves 60% to 80% reduction without noticeable loss of visual sharpness. Converting uncompressed camera photos or PNGs to modern WebP format often saves an additional 25% to 35%.',
+            },
+            {
+              question: 'Can I set an exact target file size (e.g., under 100 KB or 200 KB)?',
+              answer: 'Yes! Image Optimizer features a dedicated Target File Size constraint. When enabled, our algorithm automatically iterates the quality curve to guarantee the exported file strictly meets government portal or email upload limits.',
+            },
+            {
+              question: 'Kya photo ko combine / merge karke ek sath download kar sakte hain?',
+              answer: 'Haan! Multiple photos ko ek sath drag & drop kare. Batch mode sabhi photos ko locally process karke 1-click me ek compact ZIP file me download karne ki suvidha deta hai.',
+            },
+          ].map((faq, idx) => (
             <div
               key={idx}
               className="p-5 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-xs space-y-1.5"

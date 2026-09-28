@@ -295,4 +295,73 @@ export const GUIDES: GuideArticle[] = [
       },
     ],
   },
+  {
+    slug: 'photo-se-pdf-kaise-banaye-pdf-compress-merge-guide',
+    title: 'Photo Se PDF Kaise Banaye & PDF Size Kaise Kam Kare (Complete Hindi & English Guide)',
+    metaTitle: 'Photo Se PDF Kaise Banaye & PDF Size Kaise Kam Kare (Hindi & English Guide)',
+    metaDescription: 'Mobile aur computer se photo ko PDF kaise banaye, multiple photos ko ek sath merge kaise kare, aur PDF size 100KB/200KB kaise kare bina watermark.',
+    category: 'Formats',
+    readingTime: '5 min read',
+    publishedDate: '2026-09-28',
+    modifiedDate: '2026-09-28',
+    author: 'Ashish Systems Document Engineering Team',
+    summary: 'Sarkari forms (UPSC, SSC, Railway, State PSC), college admissions aur job portals ke liye photo ko clean A4 PDF me convert karna, multiple certificates ko ek single PDF me merge karna, aur file size 100KB/200KB ke andar rakhne ka saral tareeka.',
+    relatedTool: {
+      name: 'Launch Image to PDF & Photo Merge Tool',
+      path: '/image-to-pdf',
+      description: 'Convert JPG/PNG to PDF or merge multiple photos into a single PDF without watermark.',
+    },
+    sections: [
+      {
+        id: 'photo-se-pdf-step-by-step',
+        title: '1. Photo Se PDF Banane Ka Step-by-Step Tarika (How to Convert Photo to PDF)',
+        content: [
+          'Agar aapke phone me gallery me documents, marksheets ya Aadhaar card ki photos hain aur aap unhe official PDF document me badalna chahte hain:',
+          'Step 1: Humari website ke Image to PDF tool (/image-to-pdf) par jayein.',
+          'Step 2: "+ Select Photos" par tap karein aur apni ek ya kai saari photos chunein.',
+          'Step 3: Page size me "A4" select karein aur Orientation me "Auto" ya "Portrait" chunein.',
+          'Step 4: Arrow buttons se photos ka sequence (Page 1, Page 2, Page 3) arrange karein.',
+          'Step 5: "Merge & Download PDF" par click karein. Aapka high-resolution PDF bina kisi watermark ke turant download ho jayega.',
+        ],
+        callout: {
+          type: 'tip',
+          title: '100% Privacy & Zero Upload',
+          text: 'Yeh tool aapke mobile browser ke andar hi chalta hai. Aapke confidential identity cards aur documents kisi bhi server par upload nahi hote.',
+        },
+      },
+      {
+        id: 'multiple-photo-merge-pdf',
+        title: '2. Do Ya Jyada Photos Ko Ek Hi PDF Me Kaise Jode (Multiple Photos Merge)',
+        content: [
+          'Aksar government portals par multiple certificates ko ek single PDF document me upload karna zaroori hota hai.',
+          '• Multiple Selection: File picker me ek se jyada photos (Ctrl + Click on PC, or Long Press in Mobile) ek sath select karein.',
+          '• Reordering: Agar page ka order galat ho jaye, to Up (↑) aur Down (↓) arrow se sequence theek karein.',
+          '• Custom Name: PDF File Name box me apna naam ya document ka naam (jaise marksheet.pdf ya aadhaar.pdf) likhein.',
+        ],
+      },
+      {
+        id: 'pdf-size-kam-kare',
+        title: '3. PDF Ka Size 100KB Ya 200KB Kaise Kare (Compress & Reduce Size)',
+        content: [
+          'Sarkari form portals (SSC, UPSC, State PSC) aksar 100KB ya 200KB ki maximum file size limit enforce karte hain:',
+          'Tarika 1: PDF banane se pehle photos ko humare dedicated "/compress-image-to-100kb" ya "/compress-image-to-200kb" tool se compress kar lein.',
+          'Tarika 2: Jab lightweight photos se PDF banega, to complete multi-page PDF document ka size automatically 100KB-200KB ke andar aayega aur upload kabhi fail nahi hoga.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Photo se PDF banane ke liye kya kisi app ko install karna padega?',
+        answer: 'Nahi! Yeh online browser-based tool hai. Aap Chrome, Safari, ya Firefox me direct open karke bina app download kiye photo se PDF bana sakte hain.',
+      },
+      {
+        question: 'Do PDF files ko ek sath merge kaise kare?',
+        answer: 'Multiple photos ko ek sath select karein aur hamara Image to PDF tool unhe auto-combine karke ek single multi-page PDF bana deta hai.',
+      },
+      {
+        question: 'Kya isme koi watermark ya subscription charge hai?',
+        answer: 'Bilkul nahi! Ashish Systems ka yeh tool 100% free hai aur PDF par koi watermark ya advertising add nahi karta.',
+      },
+    ],
+  },
 ];

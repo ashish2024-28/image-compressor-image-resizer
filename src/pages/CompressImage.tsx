@@ -18,6 +18,7 @@ import {
   FileType,
   BookOpen,
   Sparkles,
+  ExternalLink,
 } from 'lucide-react';
 
 const COMPRESS_FAQS = [
@@ -167,6 +168,37 @@ export const CompressImage: React.FC = () => {
             </div>
           </div>
         )}
+      </div>
+
+      {/* DocuLite Companion PDF Tool Banner */}
+      <div className="mb-10 p-5 sm:p-6 rounded-2xl border-2 border-indigo-500/30 bg-gradient-to-r from-indigo-950/20 via-blue-950/10 to-indigo-900/20 dark:from-[#0d1527] dark:to-[#0f172a] shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-start gap-3.5">
+          <div className="p-3 rounded-xl bg-indigo-600 text-white shrink-0 shadow-xs">
+            <Sparkles className="w-5 h-5 sm:w-6 sm:h-6" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <h3 className="font-extrabold text-slate-900 dark:text-white text-sm sm:text-base">
+                Need to convert photos into PDF or merge documents?
+              </h3>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 border border-indigo-500/30">
+                DocuLite Suite
+              </span>
+            </div>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1 max-w-xl leading-relaxed">
+              Need to convert your photos into a PDF, merge multiple PDFs, or compress PDF documents? Use our 100% private companion tool <strong>DocuLite</strong> (<a href="https://pdf-tools-ten-eta.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-indigo-600 dark:text-indigo-400 font-semibold underline">https://pdf-tools-ten-eta.vercel.app/</a>).
+            </p>
+          </div>
+        </div>
+        <a
+          href="https://pdf-tools-ten-eta.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="shrink-0 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs sm:text-sm shadow-md transition-all cursor-pointer group"
+        >
+          <span>Open DocuLite PDF Tool</span>
+          <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+        </a>
       </div>
 
       {/* AdSense Slot */}
