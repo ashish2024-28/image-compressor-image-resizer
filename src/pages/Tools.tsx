@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { PageContainer } from '../components/layout/PageContainer';
 import { AdBanner, InFeedAd, MultiplexAd } from '../components/ads';
+import { AdvancePdfCallout } from '../components/pdf/AdvancePdfCallout';
 import {
   Sliders,
   Maximize2,
@@ -15,6 +16,11 @@ import {
   ArrowRight,
   ShieldCheck,
   UserSquare2,
+  Scissors,
+  RotateCw,
+  FileImage,
+  Layers,
+  Zap,
 } from 'lucide-react';
 
 export const Tools: React.FC = () => {
@@ -47,9 +53,90 @@ export const Tools: React.FC = () => {
       desc: 'Convert seamlessly between modern web formats: JPG, PNG, WebP, and AVIF.',
       badge: 'Format Matrix',
     },
+    {
+      title: 'Image to PDF & Photo Merge',
+      path: '/image-to-pdf',
+      icon: <FileText className="w-6 h-6 text-rose-500" />,
+      desc: 'Convert JPG, PNG, and WebP photos into high-resolution single or multi-page PDF documents. Photo se PDF banaye.',
+      badge: 'PDF Maker',
+    },
+  ];
+
+  const pdfTools = [
+    {
+      title: 'Merge PDF Documents',
+      path: '/merge-pdf',
+      icon: <Layers className="w-5 h-5 text-indigo-500" />,
+      desc: 'Combine multiple PDF files into a single unified document with custom ordering. Do PDF ek sath jode.',
+      badge: 'PDF Joiner',
+    },
+    {
+      title: 'Compress PDF (100KB / 200KB)',
+      path: '/compress-pdf',
+      icon: <Zap className="w-5 h-5 text-emerald-500" />,
+      desc: 'Reduce PDF file size specifically for SSC, UPSC, government exam forms, and portals.',
+      badge: 'Govt Form Ready',
+    },
+    {
+      title: 'PDF to Images (JPG / PNG)',
+      path: '/pdf-to-images',
+      icon: <FileImage className="w-5 h-5 text-amber-500" />,
+      desc: 'Extract every page of any PDF document into crisp JPG or PNG images with ZIP download.',
+      badge: 'Page Extractor',
+    },
+    {
+      title: 'Split & Extract PDF Pages',
+      path: '/split-pdf',
+      icon: <Scissors className="w-5 h-5 text-purple-500" />,
+      desc: 'Separate specific page numbers or ranges (e.g. 1, 3-5) into a standalone PDF file.',
+      badge: 'Page Selector',
+    },
+    {
+      title: 'Rotate & Watermark PDF',
+      path: '/pdf-rotate-watermark',
+      icon: <RotateCw className="w-5 h-5 text-teal-500" />,
+      desc: 'Rotate scanned PDF pages (90°, 180°) and add custom text watermarks for security.',
+      badge: 'Security',
+    },
   ];
 
   const presets = [
+    {
+      title: 'Compress Image to 100KB',
+      path: '/compress-image-to-100kb',
+      icon: <FileText className="w-5 h-5 text-amber-500" />,
+      desc: 'Target strict 100KB limits for government job applications, exam forms, and college portals.',
+    },
+    {
+      title: 'Compress Image to 200KB',
+      path: '/compress-image-to-200kb',
+      icon: <FileText className="w-5 h-5 text-emerald-500" />,
+      desc: 'Reduce photos and scanned documents strictly under 200KB without blurring facial details.',
+    },
+    {
+      title: 'Reduce Image File Size',
+      path: '/reduce-image-size',
+      icon: <Sliders className="w-5 h-5 text-blue-500" />,
+      desc: 'Smart multi-parameter size reducer. Combine dimension scaling and next-gen quantization.',
+    },
+    {
+      title: 'Compress JPG Online',
+      path: '/compress-jpg',
+      icon: <FileType className="w-5 h-5 text-rose-500" />,
+      desc: 'Lossy & lossless JPEG quantization with instant side-by-side visual fidelity preview.',
+    },
+    {
+      title: 'Compress PNG Online',
+      path: '/compress-png',
+      icon: <FileType className="w-5 h-5 text-purple-500" />,
+      desc: 'Preserve 100% transparent alpha channels while dramatically shrinking PNG graphics weight.',
+    },
+    {
+      title: 'Compress WebP Online',
+      path: '/compress-webp',
+      icon: <FileType className="w-5 h-5 text-teal-500" />,
+      desc: 'Google next-gen WebP compression for ultra-fast page speeds and Google Core Web Vitals.',
+    },
     {
       title: 'Compress for Website',
       path: '/compress-image-for-website',
@@ -142,6 +229,58 @@ export const Tools: React.FC = () => {
         </div>
       </section>
 
+      {/* Advanced PDF Suite Section */}
+      <section className="mb-12">
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+              Advanced PDF Suite (Zero Server Uploads)
+            </h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              100% Client-side in-browser PDF manipulation: Merge, Compress, Extract, Split &amp; Watermark.
+            </p>
+          </div>
+          <Link
+            to="/pdf-studio"
+            className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1"
+          >
+            <span>PDF Studio Hub</span>
+            <ArrowRight className="w-3 h-3" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {pdfTools.map((t) => (
+            <Link
+              key={t.title}
+              to={t.path}
+              className="pro-card rounded-2xl p-4 sm:p-5 hover:border-indigo-500 dark:hover:border-indigo-500 hover:shadow-md transition-all group flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="p-2 bg-slate-50 dark:bg-slate-800/80 border border-slate-200/60 dark:border-slate-700 rounded-xl group-hover:scale-105 transition-transform">
+                    {t.icon}
+                  </div>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+                    {t.badge}
+                  </span>
+                </div>
+                <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                  {t.title}
+                </h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                  {t.desc}
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center text-xs font-semibold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-0.5 transition-transform">
+                Open Tool <ArrowRight className="w-3.5 h-3.5 ml-1" />
+              </div>
+            </Link>
+          ))}
+          <AdvancePdfCallout variant="card" />
+        </div>
+      </section>
+
       <AdBanner format="horizontal" />
 
       {/* Popular Presets Grid */}
@@ -179,6 +318,28 @@ export const Tools: React.FC = () => {
 
       {/* AdSense Multiplex / Recommendations */}
       <MultiplexAd slotLabel="Sponsored & Recommended" />
+
+      {/* Support & Feature Request Desk Banner */}
+      <div className="mt-8 p-5 sm:p-6 rounded-2xl border border-amber-500/30 bg-gradient-to-r from-[#121a2c] via-[#0d1424] to-[#090f1d] text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0">
+            <Mail className="w-5 h-5" />
+          </div>
+          <div>
+            <h3 className="text-sm font-bold text-white">Need Help or Want to Request a Feature?</h3>
+            <p className="text-xs text-slate-400">
+              Submit bug reports, memory limit issues, or new format requests with 1-tap live device diagnostics.
+            </p>
+          </div>
+        </div>
+        <Link
+          to="/support"
+          className="shrink-0 px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-md"
+        >
+          <span>Open Support Desk</span>
+          <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
+      </div>
 
       {/* Educational Guides Section */}
       <section className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">

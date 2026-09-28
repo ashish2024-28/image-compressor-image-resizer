@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Layers, ShieldCheck, Heart, Globe } from 'lucide-react';
+import { Layers, ShieldCheck, Heart, Globe, ExternalLink, Sparkles } from 'lucide-react';
+import { ADVANCE_PDF_URL } from '../pdf/AdvancePdfCallout';
 
 export const Footer: React.FC = () => {
   return (
@@ -34,6 +35,19 @@ export const Footer: React.FC = () => {
               <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
               <span>100% Local HTML5 Processing · Zero Server Telemetry</span>
             </div>
+
+            <a
+              href={ADVANCE_PDF_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 p-2.5 rounded-xl border border-indigo-200/80 dark:border-indigo-800/80 bg-indigo-50/50 dark:bg-indigo-950/30 text-xs text-indigo-700 dark:text-indigo-300 hover:border-indigo-400 transition-colors group"
+            >
+              <Sparkles className="w-4 h-4 text-indigo-500 shrink-0" />
+              <div className="min-w-0">
+                <span className="font-bold block text-[11px] leading-tight">Need Advance PDF Operations?</span>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 truncate block">Visit our companion portal PDF Tools Pro ↗</span>
+              </div>
+            </a>
           </div>
 
           {/* Image Tools */}
@@ -63,8 +77,45 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/image-to-pdf" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium text-rose-600 dark:text-rose-400">
+                  Image to PDF (Merge)
+                </Link>
+              </li>
+              <li>
+                <Link to="/merge-pdf" className="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">
+                  Merge PDF Files
+                </Link>
+              </li>
+              <li>
+                <Link to="/compress-pdf" className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-medium">
+                  Compress PDF (100KB)
+                </Link>
+              </li>
+              <li>
+                <Link to="/pdf-to-images" className="text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
+                  PDF to Images
+                </Link>
+              </li>
+              <li>
+                <Link to="/pdf-studio" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-bold text-blue-600 dark:text-blue-400">
+                  PDF Studio Hub &rarr;
+                </Link>
+              </li>
+              <li>
+                <a
+                  href={ADVANCE_PDF_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-bold inline-flex items-center gap-1 transition-colors"
+                  title="Need Advance PDF Operations? Open PDF Tools Pro"
+                >
+                  <span>Advance PDF Tools</span>
+                  <ExternalLink className="w-3 h-3 opacity-80" />
+                </a>
+              </li>
+              <li>
                 <Link to="/tools" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                  All Image Tools
+                  All Utilities
                 </Link>
               </li>
             </ul>
@@ -133,6 +184,12 @@ export const Footer: React.FC = () => {
               <li>
                 <Link to="/contact" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                   Contact
+                </Link>
+              </li>
+              <li>
+                <Link to="/support" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium text-amber-600 dark:text-amber-400 flex items-center gap-1">
+                  <span>Help &amp; Support</span>
+                  <span className="text-[10px] px-1 py-0.2 rounded bg-amber-500/10 border border-amber-500/30">Desk</span>
                 </Link>
               </li>
               <li>
