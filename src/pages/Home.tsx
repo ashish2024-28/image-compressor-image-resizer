@@ -614,57 +614,62 @@ export const Home: React.FC = () => {
           </a>
         </div>
 
-        {/* Global, Spanish, Hindi & Hinglish Search Keyword Pills */}
+        {/* Crawlable Popular Searches & Keyword Directory */}
         <div className="pt-2">
-          <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
-            Trending Searches &bull; Global Keywords (English &bull; Español &bull; हिंदी &bull; Hinglish)
+          <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2.5 flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-blue-500" />
+            <span>Popular Searches &amp; Keyword Directory (English &bull; Español &bull; हिंदी &bull; Hinglish)</span>
           </div>
-          <div className="flex flex-wrap gap-1.5 text-[11px]">
+          <nav aria-label="Popular searches" className="flex flex-wrap gap-1.5 text-[11px]">
             {[
-              'PDF a imagen',
-              'combinar PDF',
-              'comprimir imagen online',
-              'reducir tamaño de foto',
-              'foto a PDF',
-              'unir imágenes en PDF',
-              'फोटो से पीडीएफ कैसे बनाएं',
-              'फोटो का साइज कैसे कम करें',
-              'पीडीएफ टू फोटो कैसे बनाएं',
-              'फोटो मर्ज करें',
-              'PDF to photo kaise banaye',
-              'photo se pdf kaise banaye',
-              'photo ka size kaise kam kare',
-              'image to pdf converter online',
-              'multiple photos merge into one pdf',
-              'photo combine karke pdf banaye',
-              'image compress kaise kare',
-              'photo size kam karne wala app',
-              'compress image to 100kb',
-              'compress photo to 200kb',
-              'reduce image size in kb',
-              'photo resize online free',
-              'photo ko pdf me kaise convert kare',
-              'jpg to pdf converter without watermark',
-              'sarkari form photo resizer',
-              'passport size photo mobile se kaise banaye',
-              'signature resize for admit card',
-              'photo ka mb kaise kam kare',
-              'pdf merge photo combine',
-              'jpg se webp converter online',
-              'bina quality kharab kiye photo compress kare',
-              'bulk image compressor zip download',
-              'pan card photo signature size maker',
-              'juntar fotos em PDF',
-              'Bilder in PDF umwandeln',
-            ].map((keyword, i) => (
-              <span
+              { term: 'PDF a imagen', path: '/pdf-to-images' },
+              { term: 'combinar PDF', path: '/merge-pdf' },
+              { term: 'comprimir imagen online', path: '/compress' },
+              { term: 'reducir tamaño de foto', path: '/reduce-image-size' },
+              { term: 'foto a PDF', path: '/photo-to-pdf' },
+              { term: 'unir imágenes en PDF', path: '/merge-images-to-pdf' },
+              { term: 'फोटो से पीडीएफ कैसे बनाएं', path: '/guides/photo-se-pdf-kaise-banaye-pdf-compress-merge-guide' },
+              { term: 'फोटो का साइज कैसे कम करें', path: '/compress-image-to-100kb' },
+              { term: 'पीडीएफ टू फोटो कैसे बनाएं', path: '/pdf-to-images' },
+              { term: 'फोटो मर्ज करें', path: '/merge-images-to-pdf' },
+              { term: 'PDF to photo kaise banaye', path: '/pdf-to-images' },
+              { term: 'photo se pdf kaise banaye', path: '/image-to-pdf' },
+              { term: 'photo ka size kaise kam kare', path: '/compress' },
+              { term: 'image to pdf converter online', path: '/image-to-pdf' },
+              { term: 'multiple photos merge into one pdf', path: '/merge-images-to-pdf' },
+              { term: 'photo combine karke pdf banaye', path: '/image-to-pdf' },
+              { term: 'image compress kaise kare', path: '/compress' },
+              { term: 'photo size kam karne wala app', path: '/compress-image-to-100kb' },
+              { term: 'compress image to 100kb', path: '/compress-image-to-100kb' },
+              { term: 'compress photo to 200kb', path: '/compress-image-to-200kb' },
+              { term: 'reduce image size in kb', path: '/reduce-image-size' },
+              { term: 'photo resize online free', path: '/resize' },
+              { term: 'photo ko pdf me kaise convert kare', path: '/image-to-pdf' },
+              { term: 'jpg to pdf converter without watermark', path: '/image-to-pdf' },
+              { term: 'sarkari form photo resizer', path: '/passport-photo-creator' },
+              { term: 'passport size photo mobile se kaise banaye', path: '/passport-photo-creator' },
+              { term: 'signature resize for admit card', path: '/resize' },
+              { term: 'photo ka mb kaise kam kare', path: '/compress' },
+              { term: 'pdf merge photo combine', path: '/merge-pdf' },
+              { term: 'jpg se webp converter online', path: '/jpg-to-webp' },
+              { term: 'bina quality kharab kiye photo compress kare', path: '/guides/how-to-compress-image-without-losing-quality' },
+              { term: 'bulk image compressor zip download', path: '/compress' },
+              { term: 'pan card photo signature size maker', path: '/passport-photo-creator' },
+              { term: 'how to convert pdf to jpg in high resolution', path: '/pdf-to-images' },
+              { term: 'combine multiple pdf files into one document', path: '/merge-pdf' },
+              { term: 'reduce pdf file size below 100kb', path: '/compress-pdf' },
+              { term: 'split and extract pdf pages online', path: '/split-pdf' },
+              { term: 'rotate and watermark pdf', path: '/pdf-rotate-watermark' },
+            ].map((item, i) => (
+              <Link
                 key={i}
-                className="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700/60"
+                to={item.path}
+                className="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/60 hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-blue-950/40 dark:hover:text-blue-400 hover:border-blue-300 dark:hover:border-blue-700 transition-colors"
               >
-                #{keyword}
-              </span>
+                #{item.term}
+              </Link>
             ))}
-          </div>
+          </nav>
         </div>
       </section>
 
