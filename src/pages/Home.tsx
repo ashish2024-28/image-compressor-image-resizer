@@ -63,6 +63,37 @@ const HOME_HOW_TO = [
   },
 ];
 
+const QUICK_ACTIONS = [
+  {
+    title: 'Compress',
+    description: 'Shrink JPG, PNG, WebP and AVIF files to meet size limits quickly.',
+    href: '/compress',
+    icon: Sliders,
+    tone: 'blue',
+  },
+  {
+    title: 'Resize',
+    description: 'Set exact dimensions while preserving aspect ratio for web or print.',
+    href: '/resize',
+    icon: Maximize2,
+    tone: 'emerald',
+  },
+  {
+    title: 'Convert',
+    description: 'Switch between JPG, PNG, WebP and AVIF formats without leaving the browser.',
+    href: '/convert',
+    icon: FileType,
+    tone: 'purple',
+  },
+  {
+    title: 'PDF Studio',
+    description: 'Merge, split, compress, rotate and watermark PDFs in one place.',
+    href: '/pdf-studio',
+    icon: Layers,
+    tone: 'amber',
+  },
+];
+
 export const Home: React.FC = () => {
   const {
     images,
@@ -163,6 +194,35 @@ export const Home: React.FC = () => {
             </Button>
           </div>
         )}
+      </section>
+
+      <section className="mb-8 sm:mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+          {QUICK_ACTIONS.map(({ title, description, href, icon: Icon, tone }) => (
+            <Link
+              key={title}
+              to={href}
+              className="group rounded-2xl border border-slate-200/90 bg-white/80 p-4 shadow-xs transition-all hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md dark:border-slate-800 dark:bg-[#111827]/90 dark:hover:border-slate-700"
+            >
+              <div className={`mb-3 flex h-11 w-11 items-center justify-center rounded-xl border ${
+                tone === 'blue'
+                  ? 'bg-blue-50 text-blue-600 border-blue-200 dark:bg-blue-950/80 dark:text-blue-400 dark:border-blue-900'
+                  : tone === 'emerald'
+                    ? 'bg-emerald-50 text-emerald-600 border-emerald-200 dark:bg-emerald-950/80 dark:text-emerald-400 dark:border-emerald-900'
+                    : tone === 'purple'
+                      ? 'bg-purple-50 text-purple-600 border-purple-200 dark:bg-purple-950/80 dark:text-purple-400 dark:border-purple-900'
+                      : 'bg-amber-50 text-amber-600 border-amber-200 dark:bg-amber-950/80 dark:text-amber-400 dark:border-amber-900'
+              }`}>
+                <Icon className="h-5 w-5" />
+              </div>
+              <div className="flex items-center justify-between gap-2">
+                <h3 className="text-base font-bold text-slate-900 dark:text-white">{title}</h3>
+                <ArrowRight className="h-4 w-4 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-blue-500" />
+              </div>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{description}</p>
+            </Link>
+          ))}
+        </div>
       </section>
 
       {/* Interactive Optimization Workspace */}
