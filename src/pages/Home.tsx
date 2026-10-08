@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   Sliders,
   Maximize2,
+  Minimize2,
   FileType,
   Layers,
   SplitSquareVertical,
@@ -12,6 +13,11 @@ import {
   CheckCircle2,
   Lock,
   ExternalLink,
+  Image as ImageIcon,
+  UserSquare2,
+  Scan,
+  Download,
+  RefreshCw,
 } from 'lucide-react';
 import { PageContainer } from '../components/layout/PageContainer';
 import { Button } from '../components/common/Button';
@@ -19,10 +25,11 @@ import { ImageDropzone } from '../components/upload/ImageDropzone';
 import { ImageList } from '../components/upload/ImageList';
 import { CompressionTool } from '../features/compression/CompressionTool';
 import { ImagePreviewModal } from '../components/image/ImagePreviewModal';
-import { AdBanner, MultiplexAd } from '../components/ads';
+import { SplitCompareViewer } from '../components/image/SplitCompareViewer';
+import { downloadBlob, getOutputFilename } from '../utils/fileUtils';
+import { formatFileSize } from '../utils/formatFileSize';
 import { useImageProcessor } from '../hooks/useImageProcessor';
 import { useImageSettings } from '../hooks/useImageSettings';
-import { createSampleImage } from '../utils/sampleImages';
 import type { ImageItem } from '../types';
 
 const HOME_FAQS = [
@@ -46,8 +53,8 @@ const HOME_FAQS = [
 
 const HOME_HOW_TO = [
   {
-    name: 'Add Images or Try Sample',
-    text: 'Drag and drop your images into the dropzone or click Try Sample Photo to preview the workflow instantly.',
+    name: 'Upload Your Images',
+    text: 'Drag and drop your images into the dropzone or click Select Images to start optimizing immediately.',
   },
   {
     name: 'Choose Optimization Mode',
@@ -63,41 +70,11 @@ const HOME_HOW_TO = [
   },
 ];
 
-const QUICK_ACTIONS = [
-  {
-    title: 'Compress',
-    description: 'Shrink JPG, PNG, WebP and AVIF files to meet size limits quickly.',
-    href: '/compress',
-    icon: Sliders,
-    tone: 'blue',
-  },
-  {
-    title: 'Resize',
-    description: 'Set exact dimensions while preserving aspect ratio for web or print.',
-    href: '/resize',
-    icon: Maximize2,
-    tone: 'emerald',
-  },
-  {
-    title: 'Convert',
-    description: 'Switch between JPG, PNG, WebP and AVIF formats without leaving the browser.',
-    href: '/convert',
-    icon: FileType,
-    tone: 'purple',
-  },
-  {
-    title: 'PDF Studio',
-    description: 'Merge, split, compress, rotate and watermark PDFs in one place.',
-    href: '/pdf-studio',
-    icon: Layers,
-    tone: 'amber',
-  },
-];
-
 export const Home: React.FC = () => {
   const {
     images,
     activeImageId,
+    setActiveImageId,
     validationWarnings,
     batchWarning,
     progress,
@@ -119,20 +96,9 @@ export const Home: React.FC = () => {
   } = useImageSettings();
 
   const [previewItem, setPreviewItem] = useState<ImageItem | null>(null);
-  const [isSampleLoading, setIsSampleLoading] = useState(false);
 
   const handleFiles = (files: File[]) => {
     addFiles(files);
-  };
-
-  const handleTrySample = async () => {
-    setIsSampleLoading(true);
-    try {
-      const sample = await createSampleImage('landscape');
-      await addFiles([sample]);
-    } finally {
-      setIsSampleLoading(false);
-    }
   };
 
   const activeImage = images.find((i) => i.id === activeImageId);
@@ -161,19 +127,149 @@ export const Home: React.FC = () => {
         </div>
 
         <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.12]">
-          Image Compressor &amp; Image Resizer
+          Simple Image Tools
         </h1>
 
         <p className="text-sm sm:text-lg lg:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
           Compress, resize, and convert JPG, PNG, WebP, and AVIF images directly in your browser. Fast, 100% private, and losslessly optimized with zero server uploads.
         </p>
 
+        {/* IMAGE TOOLS FEATURE CARDS (All features related to IMAGE TOOLS below title) */}
+        <div className="pt-4 pb-2 w-full max-w-5xl mx-auto">
+          <div className="flex items-center justify-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-3">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>IMAGE TOOLS</span>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 text-left">
+            <Link
+              to="/compress"
+              className="group p-3.5 rounded-2xl bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 hover:shadow-md transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div className="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                  <Minimize2 className="w-4 h-4" />
+                </div>
+                <h3 className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400">
+                  Compress Image
+                </h3>
+                <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
+                  Reduce KB size with crystal-clear visual fidelity
+                </p>
+              </div>
+              <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 mt-2 flex items-center gap-0.5">
+                Open <ArrowRight className="w-2.5 h-2.5" />
+              </span>
+            </Link>
+
+            <Link
+              to="/resize"
+              className="group p-3.5 rounded-2xl bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 hover:border-blue-500/50 hover:shadow-md transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div className="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                  <Maximize2 className="w-4 h-4" />
+                </div>
+                <h3 className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                  Resize Image
+                </h3>
+                <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
+                  Change width, height &amp; aspect ratios
+                </p>
+              </div>
+              <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 mt-2 flex items-center gap-0.5">
+                Open <ArrowRight className="w-2.5 h-2.5" />
+              </span>
+            </Link>
+
+            <Link
+              to="/jpg-to-png"
+              className="group p-3.5 rounded-2xl bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 hover:border-purple-500/50 hover:shadow-md transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div className="w-8 h-8 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                  <ImageIcon className="w-4 h-4" />
+                </div>
+                <h3 className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400">
+                  JPG to PNG
+                </h3>
+                <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
+                  Convert JPEG to lossless PNG format
+                </p>
+              </div>
+              <span className="text-[10px] font-bold text-purple-600 dark:text-purple-400 mt-2 flex items-center gap-0.5">
+                Open <ArrowRight className="w-2.5 h-2.5" />
+              </span>
+            </Link>
+
+            <Link
+              to="/png-to-jpg"
+              className="group p-3.5 rounded-2xl bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 hover:border-orange-500/50 hover:shadow-md transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div className="w-8 h-8 rounded-xl bg-orange-500/10 text-orange-600 dark:text-orange-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                  <ImageIcon className="w-4 h-4" />
+                </div>
+                <h3 className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400">
+                  PNG to JPG
+                </h3>
+                <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
+                  Convert PNG to lightweight standard JPG
+                </p>
+              </div>
+              <span className="text-[10px] font-bold text-orange-600 dark:text-orange-400 mt-2 flex items-center gap-0.5">
+                Open <ArrowRight className="w-2.5 h-2.5" />
+              </span>
+            </Link>
+
+            <Link
+              to="/passport-photo-creator"
+              className="group p-3.5 rounded-2xl bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 hover:border-rose-500/50 hover:shadow-md transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div className="w-8 h-8 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                  <UserSquare2 className="w-4 h-4" />
+                </div>
+                <h3 className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400">
+                  Passport Photo
+                </h3>
+                <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
+                  Biometric 2x2" &amp; 35x45mm official visa crop
+                </p>
+              </div>
+              <span className="text-[10px] font-bold text-rose-600 dark:text-rose-400 mt-2 flex items-center gap-0.5">
+                Open <ArrowRight className="w-2.5 h-2.5" />
+              </span>
+            </Link>
+
+            <Link
+              to="/convert"
+              className="group p-3.5 rounded-2xl bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 hover:border-indigo-500/50 hover:shadow-md transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div className="w-8 h-8 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                  <FileType className="w-4 h-4" />
+                </div>
+                <h3 className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
+                  Convert Image
+                </h3>
+                <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
+                  Transform JPG, PNG, WebP &amp; AVIF
+                </p>
+              </div>
+              <span className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 mt-2 flex items-center gap-0.5">
+                Open <ArrowRight className="w-2.5 h-2.5" />
+              </span>
+            </Link>
+          </div>
+        </div>
+
         {images.length === 0 && (
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 pt-2 w-full max-w-xs sm:max-w-none mx-auto">
+          <div className="flex items-center justify-center pt-2 w-full max-w-xs sm:max-w-none mx-auto">
             <Button
               variant="primary"
               size="lg"
-              className="w-full sm:w-auto"
+              className="w-full sm:w-auto px-8"
               onClick={() => {
                 const el = document.getElementById('uploader-area');
                 el?.scrollIntoView({ behavior: 'smooth' });
@@ -182,47 +278,8 @@ export const Home: React.FC = () => {
             >
               Upload Images
             </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="w-full sm:w-auto"
-              isLoading={isSampleLoading}
-              onClick={handleTrySample}
-              leftIcon={<Sparkles className="w-5 h-5 text-amber-500" />}
-            >
-              Try Sample
-            </Button>
           </div>
         )}
-      </section>
-
-      <section className="mb-8 sm:mb-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-          {QUICK_ACTIONS.map(({ title, description, href, icon: Icon, tone }) => (
-            <Link
-              key={title}
-              to={href}
-              className="group rounded-2xl border border-slate-200/90 bg-white/80 p-4 shadow-xs transition-all hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md dark:border-slate-800 dark:bg-[#111827]/90 dark:hover:border-slate-700"
-            >
-              <div className={`mb-3 flex h-11 w-11 items-center justify-center rounded-xl border ${
-                tone === 'blue'
-                  ? 'bg-blue-50 text-blue-600 border-blue-200 dark:bg-blue-950/80 dark:text-blue-400 dark:border-blue-900'
-                  : tone === 'emerald'
-                    ? 'bg-emerald-50 text-emerald-600 border-emerald-200 dark:bg-emerald-950/80 dark:text-emerald-400 dark:border-emerald-900'
-                    : tone === 'purple'
-                      ? 'bg-purple-50 text-purple-600 border-purple-200 dark:bg-purple-950/80 dark:text-purple-400 dark:border-purple-900'
-                      : 'bg-amber-50 text-amber-600 border-amber-200 dark:bg-amber-950/80 dark:text-amber-400 dark:border-amber-900'
-              }`}>
-                <Icon className="h-5 w-5" />
-              </div>
-              <div className="flex items-center justify-between gap-2">
-                <h3 className="text-base font-bold text-slate-900 dark:text-white">{title}</h3>
-                <ArrowRight className="h-4 w-4 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-blue-500" />
-              </div>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{description}</p>
-            </Link>
-          ))}
-        </div>
       </section>
 
       {/* Interactive Optimization Workspace */}
@@ -248,52 +305,156 @@ export const Home: React.FC = () => {
         {images.length === 0 ? (
           <ImageDropzone onFilesSelected={handleFiles} />
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-            {/* Settings panel in sidebar */}
-            <div className="lg:col-span-1 lg:sticky lg:top-20 space-y-4">
-              <CompressionTool
-                settings={settings}
-                onUpdateSetting={updateSetting}
-                onQualityPresetChange={setQualityPreset}
-                onQualityChange={setQuality}
-                onFormatChange={setFormat}
-                onResetSettings={resetSettings}
-                sampleAspectRatio={activeImage?.aspectRatio}
-              />
+          <div className="space-y-6">
+            {/* Top Interactive Live Image Display (Divided into 2 parts: Part 1 Original, Part 2 Current Change) */}
+            {activeImage && (
+              <div className="pro-card rounded-2xl p-4 sm:p-6 space-y-4 border border-slate-200 dark:border-slate-800 shadow-xs">
+                {/* Image Selection Tabs if multiple images uploaded */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
+                  <div className="flex items-center gap-2 overflow-x-auto py-1 max-w-full">
+                    <span className="text-xs font-semibold text-slate-500 shrink-0">
+                      Viewing Image:
+                    </span>
+                    {images.map((img, idx) => (
+                      <button
+                        key={img.id}
+                        type="button"
+                        onClick={() => setActiveImageId(img.id)}
+                        className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all shrink-0 cursor-pointer flex items-center gap-1.5 ${
+                          img.id === activeImage.id
+                            ? 'bg-blue-600 text-white shadow-xs font-semibold'
+                            : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                        }`}
+                      >
+                        <span className="w-4 h-4 rounded-full bg-black/20 flex items-center justify-center text-[10px]">
+                          {idx + 1}
+                        </span>
+                        <span className="max-w-[120px] truncate">{img.name}</span>
+                      </button>
+                    ))}
+                  </div>
 
-              <div className="p-4 rounded-xl bg-slate-100/70 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
-                <span className="font-semibold text-slate-700 dark:text-slate-200 block mb-1">
-                  Batch Tip
-                </span>
-                Clicking &quot;Optimize All&quot; applies these settings to all uploaded images sequentially without clogging memory.
+                  {/* Primary Save & Download Action for this image */}
+                  <div className="flex items-center gap-2 shrink-0">
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      isLoading={activeImage.status === 'processing'}
+                      leftIcon={<RefreshCw className="w-3.5 h-3.5" />}
+                      onClick={() => processImage(activeImage.id, undefined, settings)}
+                    >
+                      Save Changes
+                    </Button>
+
+                    {activeImage.outputBlob && (
+                      <Button
+                        variant="success"
+                        size="sm"
+                        leftIcon={<Download className="w-3.5 h-3.5" />}
+                        onClick={() => {
+                          const targetMime =
+                            activeImage.outputType ||
+                            (settings.format === 'original'
+                              ? activeImage.originalType
+                              : settings.format);
+                          const filename = getOutputFilename(activeImage.name, targetMime);
+                          downloadBlob(activeImage.outputBlob!, filename);
+                        }}
+                      >
+                        Download Image
+                      </Button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Top Split Viewer: Left Original (Part 1), Right Current Change (Part 2) */}
+                <SplitCompareViewer
+                  originalUrl={activeImage.originalUrl}
+                  changedUrl={activeImage.outputUrl || activeImage.originalUrl}
+                  originalSize={activeImage.originalSize}
+                  changedSize={activeImage.outputSize}
+                  originalWidth={activeImage.originalWidth}
+                  originalHeight={activeImage.originalHeight}
+                  changedWidth={activeImage.outputWidth}
+                  changedHeight={activeImage.outputHeight}
+                  originalFormat={activeImage.originalType}
+                  changedFormat={
+                    activeImage.outputType ||
+                    (settings.format === 'original'
+                      ? activeImage.originalType
+                      : settings.format)
+                  }
+                  isProcessing={activeImage.status === 'processing'}
+                  isFallbackToOriginal={activeImage.isFallbackToOriginal}
+                />
+
+                {/* Quick Info bar */}
+                <div className="flex flex-wrap items-center justify-between text-xs text-slate-500 dark:text-slate-400 pt-1">
+                  <span>
+                    Resolution: {activeImage.originalWidth} × {activeImage.originalHeight} px · Original: {formatFileSize(activeImage.originalSize)}
+                  </span>
+                  {activeImage.outputSize !== undefined && (
+                    <span className="font-semibold text-blue-600 dark:text-blue-400">
+                      New Size: {formatFileSize(activeImage.outputSize)}
+                      {activeImage.reductionPercentage !== undefined && activeImage.reductionPercentage > 0 && (
+                        <span className="text-emerald-600 dark:text-emerald-400 ml-1">
+                          (-{activeImage.reductionPercentage}% smaller)
+                        </span>
+                      )}
+                    </span>
+                  )}
+                </div>
               </div>
-            </div>
+            )}
 
-            {/* Image list & processing */}
-            <div className="lg:col-span-2 space-y-6">
-              <ImageList
-                images={images}
-                globalSettings={settings}
-                progress={progress}
-                batchWarning={batchWarning}
-                onPreview={(item) => setPreviewItem(item)}
-                onRemove={removeImage}
-                onProcess={(id) => processImage(id, undefined, settings)}
-                onProcessAll={() => processAll(settings)}
-                onClearAll={clearAll}
-              />
+            {/* Below Image: All Operations & Settings */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+              {/* Operations Panel */}
+              <div className="lg:col-span-1 lg:sticky lg:top-20 space-y-4">
+                <CompressionTool
+                  settings={settings}
+                  onUpdateSetting={updateSetting}
+                  onQualityPresetChange={setQualityPreset}
+                  onQualityChange={setQuality}
+                  onFormatChange={setFormat}
+                  onResetSettings={resetSettings}
+                  defaultAspectRatio={activeImage?.aspectRatio}
+                />
 
-              {/* Quick Add More Zone */}
-              <div className="pt-2">
-                <ImageDropzone onFilesSelected={handleFiles} />
+                <div className="p-4 rounded-xl bg-slate-100/70 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
+                  <span className="font-semibold text-slate-700 dark:text-slate-200 block mb-1">
+                    Helpful Tip
+                  </span>
+                  Adjust the tools above, then click &quot;Save Changes&quot; to update the live preview on top. You can also click &quot;Save All Changes&quot; to apply to every photo.
+                </div>
+              </div>
+
+              {/* All uploaded images list & batch actions */}
+              <div className="lg:col-span-2 space-y-6">
+                <ImageList
+                  images={images}
+                  globalSettings={settings}
+                  progress={progress}
+                  batchWarning={batchWarning}
+                  onPreview={(item) => {
+                    setActiveImageId(item.id);
+                    setPreviewItem(item);
+                  }}
+                  onRemove={removeImage}
+                  onProcess={(id) => processImage(id, undefined, settings)}
+                  onProcessAll={() => processAll(settings)}
+                  onClearAll={clearAll}
+                />
+
+                {/* Quick Add More Images */}
+                <div className="pt-2">
+                  <ImageDropzone onFilesSelected={handleFiles} />
+                </div>
               </div>
             </div>
           </div>
         )}
       </section>
-
-      {/* Non-obtrusive Google AdSense Placeholder Slot */}
-      <AdBanner format="horizontal" />
 
       {/* Feature Cards Grid (Requested by prompt) */}
       <section className="py-12 border-t border-slate-200 dark:border-slate-800">
@@ -501,9 +662,6 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* AdSense Multiplex / Autorelaxed Recommendations */}
-      <MultiplexAd slotLabel="Sponsored & Recommended" />
-
       {/* Popular Searches & Hinglish/English Intent Hub */}
       <section className="py-10 border-t border-slate-200 dark:border-slate-800 max-w-4xl mx-auto space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -674,62 +832,57 @@ export const Home: React.FC = () => {
           </a>
         </div>
 
-        {/* Crawlable Popular Searches & Keyword Directory */}
+        {/* Global, Spanish, Hindi & Hinglish Search Keyword Pills */}
         <div className="pt-2">
-          <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2.5 flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-blue-500" />
-            <span>Popular Searches &amp; Keyword Directory (English &bull; Español &bull; हिंदी &bull; Hinglish)</span>
+          <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
+            Trending Searches &bull; Global Keywords (English &bull; Español &bull; हिंदी &bull; Hinglish)
           </div>
-          <nav aria-label="Popular searches" className="flex flex-wrap gap-1.5 text-[11px]">
+          <div className="flex flex-wrap gap-1.5 text-[11px]">
             {[
-              { term: 'PDF a imagen', path: '/pdf-to-images' },
-              { term: 'combinar PDF', path: '/merge-pdf' },
-              { term: 'comprimir imagen online', path: '/compress' },
-              { term: 'reducir tamaño de foto', path: '/reduce-image-size' },
-              { term: 'foto a PDF', path: '/photo-to-pdf' },
-              { term: 'unir imágenes en PDF', path: '/merge-images-to-pdf' },
-              { term: 'फोटो से पीडीएफ कैसे बनाएं', path: '/guides/photo-se-pdf-kaise-banaye-pdf-compress-merge-guide' },
-              { term: 'फोटो का साइज कैसे कम करें', path: '/compress-image-to-100kb' },
-              { term: 'पीडीएफ टू फोटो कैसे बनाएं', path: '/pdf-to-images' },
-              { term: 'फोटो मर्ज करें', path: '/merge-images-to-pdf' },
-              { term: 'PDF to photo kaise banaye', path: '/pdf-to-images' },
-              { term: 'photo se pdf kaise banaye', path: '/image-to-pdf' },
-              { term: 'photo ka size kaise kam kare', path: '/compress' },
-              { term: 'image to pdf converter online', path: '/image-to-pdf' },
-              { term: 'multiple photos merge into one pdf', path: '/merge-images-to-pdf' },
-              { term: 'photo combine karke pdf banaye', path: '/image-to-pdf' },
-              { term: 'image compress kaise kare', path: '/compress' },
-              { term: 'photo size kam karne wala app', path: '/compress-image-to-100kb' },
-              { term: 'compress image to 100kb', path: '/compress-image-to-100kb' },
-              { term: 'compress photo to 200kb', path: '/compress-image-to-200kb' },
-              { term: 'reduce image size in kb', path: '/reduce-image-size' },
-              { term: 'photo resize online free', path: '/resize' },
-              { term: 'photo ko pdf me kaise convert kare', path: '/image-to-pdf' },
-              { term: 'jpg to pdf converter without watermark', path: '/image-to-pdf' },
-              { term: 'sarkari form photo resizer', path: '/passport-photo-creator' },
-              { term: 'passport size photo mobile se kaise banaye', path: '/passport-photo-creator' },
-              { term: 'signature resize for admit card', path: '/resize' },
-              { term: 'photo ka mb kaise kam kare', path: '/compress' },
-              { term: 'pdf merge photo combine', path: '/merge-pdf' },
-              { term: 'jpg se webp converter online', path: '/jpg-to-webp' },
-              { term: 'bina quality kharab kiye photo compress kare', path: '/guides/how-to-compress-image-without-losing-quality' },
-              { term: 'bulk image compressor zip download', path: '/compress' },
-              { term: 'pan card photo signature size maker', path: '/passport-photo-creator' },
-              { term: 'how to convert pdf to jpg in high resolution', path: '/pdf-to-images' },
-              { term: 'combine multiple pdf files into one document', path: '/merge-pdf' },
-              { term: 'reduce pdf file size below 100kb', path: '/compress-pdf' },
-              { term: 'split and extract pdf pages online', path: '/split-pdf' },
-              { term: 'rotate and watermark pdf', path: '/pdf-rotate-watermark' },
-            ].map((item, i) => (
-              <Link
+              'PDF a imagen',
+              'combinar PDF',
+              'comprimir imagen online',
+              'reducir tamaño de foto',
+              'foto a PDF',
+              'unir imágenes en PDF',
+              'फोटो से पीडीएफ कैसे बनाएं',
+              'फोटो का साइज कैसे कम करें',
+              'पीडीएफ टू फोटो कैसे बनाएं',
+              'फोटो मर्ज करें',
+              'PDF to photo kaise banaye',
+              'photo se pdf kaise banaye',
+              'photo ka size kaise kam kare',
+              'image to pdf converter online',
+              'multiple photos merge into one pdf',
+              'photo combine karke pdf banaye',
+              'image compress kaise kare',
+              'photo size kam karne wala app',
+              'compress image to 100kb',
+              'compress photo to 200kb',
+              'reduce image size in kb',
+              'photo resize online free',
+              'photo ko pdf me kaise convert kare',
+              'jpg to pdf converter without watermark',
+              'sarkari form photo resizer',
+              'passport size photo mobile se kaise banaye',
+              'signature resize for admit card',
+              'photo ka mb kaise kam kare',
+              'pdf merge photo combine',
+              'jpg se webp converter online',
+              'bina quality kharab kiye photo compress kare',
+              'bulk image compressor zip download',
+              'pan card photo signature size maker',
+              'juntar fotos em PDF',
+              'Bilder in PDF umwandeln',
+            ].map((keyword, i) => (
+              <span
                 key={i}
-                to={item.path}
-                className="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/60 hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-blue-950/40 dark:hover:text-blue-400 hover:border-blue-300 dark:hover:border-blue-700 transition-colors"
+                className="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700/60"
               >
-                #{item.term}
-              </Link>
+                #{keyword}
+              </span>
             ))}
-          </nav>
+          </div>
         </div>
       </section>
 

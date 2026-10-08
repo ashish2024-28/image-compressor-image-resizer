@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Core Homepage -->
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -10,97 +10,97 @@
 
   <!-- Core Tools & SEO Aliases -->
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/compress</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/compress</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/image-compressor</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/image-compressor</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/resize</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/resize</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/image-resizer</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/image-resizer</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/convert</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/convert</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/passport-photo-creator</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/passport-photo-creator</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/image-to-pdf</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/image-to-pdf</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/photo-to-pdf</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/photo-to-pdf</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/merge-images-to-pdf</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/merge-images-to-pdf</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/pdf-studio</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/pdf-studio</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/merge-pdf</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/merge-pdf</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/compress-pdf</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/compress-pdf</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/pdf-to-images</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/pdf-to-images</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/split-pdf</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/split-pdf</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/pdf-rotate-watermark</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/pdf-rotate-watermark</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/tools</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/tools</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
@@ -108,67 +108,67 @@
 
   <!-- Problem-Based & Format-Specific SEO Tools -->
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/compress-jpg</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/compress-jpg</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/compress-png</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/compress-png</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/compress-webp</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/compress-webp</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/compress-image-to-100kb</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/compress-image-to-100kb</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/compress-image-to-200kb</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/compress-image-to-200kb</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/reduce-image-size</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/reduce-image-size</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/resize-jpg</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/resize-jpg</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/resize-png</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/resize-png</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/resize-webp</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/resize-webp</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/jpg-to-webp</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/jpg-to-webp</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/png-to-webp</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/png-to-webp</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
@@ -176,37 +176,37 @@
 
   <!-- Specialized Workflow Presets -->
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/compress-image-for-website</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/compress-image-for-website</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/compress-image-for-email</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/compress-image-for-email</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/compress-image-for-whatsapp</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/compress-image-for-whatsapp</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/compress-image-for-resume</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/compress-image-for-resume</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/compress-image-for-instagram</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/compress-image-for-instagram</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/social-media-image-resizer</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/social-media-image-resizer</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
@@ -214,43 +214,43 @@
 
   <!-- Educational Guides & Knowledge Base -->
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/guides</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/guides</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/guides/how-to-compress-image-without-losing-quality</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/guides/how-to-compress-image-without-losing-quality</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/guides/webp-vs-jpeg-vs-png-format-guide</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/guides/webp-vs-jpeg-vs-png-format-guide</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/guides/image-optimization-for-web-performance</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/guides/image-optimization-for-web-performance</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/guides/passport-and-visa-photo-size-requirements</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/guides/passport-and-visa-photo-size-requirements</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/guides/photo-se-pdf-kaise-banaye-pdf-compress-merge-guide</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/guides/photo-se-pdf-kaise-banaye-pdf-compress-merge-guide</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/blog/photo-se-pdf-kaise-banaye-pdf-compress-merge-guide</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/blog/photo-se-pdf-kaise-banaye-pdf-compress-merge-guide</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
@@ -258,37 +258,37 @@
 
   <!-- Support & Trust Pages -->
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/support</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/support</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/faq</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/faq</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/about</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/about</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/privacy</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/privacy</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/terms</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/terms</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://image-compressor-image-resizer.vercel.app/contact</loc>
+    <loc>https://image-compressor-image-resizer-4tm2vvhrf.vercel.app/contact</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

@@ -7,7 +7,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className="border-t border-slate-200/90 dark:border-slate-800/90 bg-white dark:bg-[#090d16] transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8">
           {/* Brand info */}
           <div className="space-y-4 sm:col-span-2 lg:col-span-2">
             <Link to="/" className="flex items-center gap-2.5">
@@ -77,18 +77,37 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/image-to-pdf" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium text-rose-600 dark:text-rose-400">
-                  Image to PDF (Merge)
+                <Link to="/tools" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  All Image Tools
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* PDF Tools */}
+          <div>
+            <h3 className="text-xs font-semibold text-slate-900 dark:text-white uppercase tracking-wider mb-3">
+              PDF Tools
+            </h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link to="/compress-pdf" className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+                  Compress PDF
                 </Link>
               </li>
               <li>
-                <Link to="/merge-pdf" className="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">
-                  Merge PDF Files
+                <Link to="/merge-pdf" className="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                  Merge PDF
                 </Link>
               </li>
               <li>
-                <Link to="/compress-pdf" className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-medium">
-                  Compress PDF (100KB)
+                <Link to="/split-pdf" className="text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                  Split PDF
+                </Link>
+              </li>
+              <li>
+                <Link to="/image-to-pdf" className="text-slate-600 dark:text-slate-400 hover:text-rose-600 dark:text-rose-400 transition-colors">
+                  Image to PDF
                 </Link>
               </li>
               <li>
@@ -97,8 +116,18 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/pdf-studio" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-bold text-blue-600 dark:text-blue-400">
-                  PDF Studio Hub &rarr;
+                <Link to="/pdf-rotate-watermark" className="text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
+                  Rotate &amp; Watermark
+                </Link>
+              </li>
+              <li>
+                <Link to="/encrypt-pdf" className="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                  Encrypt PDF
+                </Link>
+              </li>
+              <li>
+                <Link to="/scan-ocr" className="text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
+                  Scan &amp; OCR Text
                 </Link>
               </li>
               <li>
@@ -109,14 +138,9 @@ export const Footer: React.FC = () => {
                   className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-bold inline-flex items-center gap-1 transition-colors"
                   title="Need Advance PDF Operations? Open PDF Tools Pro"
                 >
-                  <span>Advance PDF Tools</span>
+                  <span>Advance PDF Studio</span>
                   <ExternalLink className="w-3 h-3 opacity-80" />
                 </a>
-              </li>
-              <li>
-                <Link to="/tools" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                  All Utilities
-                </Link>
               </li>
             </ul>
           </div>

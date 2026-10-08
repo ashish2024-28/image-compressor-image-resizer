@@ -38,33 +38,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  font-size: 16px;
-}
-
-img,
-svg,
-canvas,
-video {
-  max-width: 100%;
-  display: block;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-#root {
-  min-height: 100vh;
-}
-
-@media (max-width: 640px) {
-  html {
-    font-size: 15px;
-  }
-
-  body {
-    line-height: 1.5;
-  }
 }
 
 /* Professional Card Surfaces */

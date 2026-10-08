@@ -20,7 +20,7 @@ export interface CompressionToolProps {
   onQualityChange: (quality: number) => void;
   onFormatChange: (format: OutputFormat) => void;
   onResetSettings: () => void;
-  sampleAspectRatio?: number;
+  defaultAspectRatio?: number;
 }
 
 export const CompressionTool: React.FC<CompressionToolProps> = ({
@@ -29,21 +29,21 @@ export const CompressionTool: React.FC<CompressionToolProps> = ({
   onQualityPresetChange,
   onQualityChange,
   onFormatChange,
-  sampleAspectRatio = 16 / 9,
+  defaultAspectRatio = 16 / 9,
 }) => {
   const avifSupported = isAvifSupported();
 
   const handleWidthChange = (w: number | null) => {
     onUpdateSetting('width', w);
-    if (settings.maintainAspectRatio && w !== null && sampleAspectRatio) {
-      onUpdateSetting('height', Math.round(w / sampleAspectRatio));
+    if (settings.maintainAspectRatio && w !== null && defaultAspectRatio) {
+      onUpdateSetting('height', Math.round(w / defaultAspectRatio));
     }
   };
 
   const handleHeightChange = (h: number | null) => {
     onUpdateSetting('height', h);
-    if (settings.maintainAspectRatio && h !== null && sampleAspectRatio) {
-      onUpdateSetting('width', Math.round(h * sampleAspectRatio));
+    if (settings.maintainAspectRatio && h !== null && defaultAspectRatio) {
+      onUpdateSetting('width', Math.round(h * defaultAspectRatio));
     }
   };
 
@@ -58,10 +58,10 @@ export const CompressionTool: React.FC<CompressionToolProps> = ({
         <div>
           <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
             <Sliders className="w-4 h-4 text-blue-600" />
-            Optimization Settings
+            Image Settings & Tools
           </h3>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-            Quality, target file size, format conversion, and geometry
+            Adjust image quality, file size limit, format, and size
           </p>
         </div>
 
@@ -77,9 +77,9 @@ export const CompressionTool: React.FC<CompressionToolProps> = ({
             onUpdateSetting('resizeEnabled', false);
             onUpdateSetting('maxDimensionsEnabled', false);
           }}
-          className="text-xs text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
+          className="text-xs text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors font-medium cursor-pointer"
         >
-          Reset Defaults
+          Reset to Default
         </button>
       </div>
 
@@ -87,7 +87,7 @@ export const CompressionTool: React.FC<CompressionToolProps> = ({
       <div>
         <div className="flex items-center justify-between mb-2">
           <label className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-1.5">
-            Compression Quality
+            Image Quality
           </label>
           <span className="text-xs font-bold text-blue-600 dark:text-blue-400 px-2 py-0.5 bg-blue-50 dark:bg-blue-950/60 rounded">
             {settings.quality}%
@@ -99,9 +99,9 @@ export const CompressionTool: React.FC<CompressionToolProps> = ({
           {(['low', 'medium', 'high', 'custom'] as QualityPreset[]).map((preset) => {
             const isSelected = settings.qualityPreset === preset;
             const labels: Record<QualityPreset, { name: string; pct: string }> = {
-              low: { name: 'Low', pct: '50%' },
-              medium: { name: 'Medium', pct: '75%' },
-              high: { name: 'High', pct: '85%' },
+              low: { name: 'Small File', pct: '50%' },
+              medium: { name: 'Balanced', pct: '75%' },
+              high: { name: 'High Quality', pct: '85%' },
               custom: { name: 'Custom', pct: 'Slider' },
             };
 
@@ -137,18 +137,21 @@ export const CompressionTool: React.FC<CompressionToolProps> = ({
           <div className="flex justify-between text-[11px] text-slate-400">
             <span>Smaller file (10%)</span>
             <span>Balanced (75%)</span>
-            <span>Highest fidelity (100%)</span>
+            <span>Best look (100%)</span>
           </div>
         </div>
 
         {settings.format === 'image/png' && (
-          <p className="text-[11px] text-amber-700 dark:text-amber-300 mt-2 bg-amber-50 dark:bg-amber-950/50 p-2 rounded">
-            Note: Standard PNG is a lossless format. Canvas encoders ignore lossy quality sliders for PNG. For smaller file sizes, consider choosing <strong>WebP</strong> format.
-          </p>
+          <div className="text-[11px] text-amber-700 dark:text-amber-300 mt-2 bg-amber-50 dark:bg-amber-950/50 p-2.5 rounded-lg space-y-1">
+            <p className="font-semibold">💡 Helpful Tip for PNG:</p>
+            <p>
+              PNG keeps all image details crisp. If you need a strict file size under a specific limit (like 50 KB or 100 KB), check <strong>Limit File Size (Max KB)</strong> below. Or choose <strong>WebP</strong> format for much smaller photos.
+            </p>
+          </div>
         )}
       </div>
 
-      {/* 2. Target File Size (KB) Mode - High utility feature for visa/passport/job portal users */}
+      {/* 2. Target File Size (KB) Mode */}
       <div className="border-t border-slate-100 dark:border-slate-800 pt-4">
         <label className="flex items-center gap-2 cursor-pointer mb-2">
           <input
@@ -159,7 +162,7 @@ export const CompressionTool: React.FC<CompressionToolProps> = ({
           />
           <span className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-1.5">
             <Target className="w-4 h-4 text-emerald-600" />
-            Compress to Target File Size (Max KB)
+            Limit File Size (Max KB)
           </span>
         </label>
 
@@ -175,7 +178,7 @@ export const CompressionTool: React.FC<CompressionToolProps> = ({
                 onChange={(e) => onUpdateSetting('targetSizeKB', Number(e.target.value))}
                 className="w-28 text-xs px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-mono font-bold focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
-              <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">KB Maximum Cap</span>
+              <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">KB Maximum Size</span>
             </div>
 
             <div className="flex flex-wrap gap-1.5 pt-1">
@@ -195,7 +198,7 @@ export const CompressionTool: React.FC<CompressionToolProps> = ({
               ))}
             </div>
             <p className="text-[11px] text-emerald-800 dark:text-emerald-300">
-              Binary search convergence calculates the exact highest quality setting that keeps your photo under this limit.
+              Guarantees your photo stays strictly under this limit (ideal for exam, passport, and job portals).
             </p>
           </div>
         )}
@@ -206,16 +209,16 @@ export const CompressionTool: React.FC<CompressionToolProps> = ({
         <div className="flex items-center justify-between mb-2">
           <label className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-1.5">
             <FileType className="w-4 h-4 text-blue-600" />
-            Output Format
+            Save As Format
           </label>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {[
-            { id: 'original', name: 'Original', desc: 'Keep original format' },
-            { id: 'image/webp', name: 'WebP', desc: 'Best web balance' },
-            { id: 'image/jpeg', name: 'JPG', desc: 'Best for photos' },
-            { id: 'image/png', name: 'PNG', desc: 'Lossless & transparent' },
+            { id: 'original', name: 'Original', desc: 'Keep same type' },
+            { id: 'image/webp', name: 'WebP', desc: 'Smallest file size' },
+            { id: 'image/jpeg', name: 'JPG', desc: 'Best for standard photos' },
+            { id: 'image/png', name: 'PNG', desc: 'Clear & transparent' },
           ].map((fmt) => {
             const isSelected = settings.format === fmt.id;
             return (
@@ -266,7 +269,7 @@ export const CompressionTool: React.FC<CompressionToolProps> = ({
       <div className="border-t border-slate-100 dark:border-slate-800 pt-4">
         <label className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-1.5 mb-2.5">
           <RotateCw className="w-4 h-4 text-blue-600" />
-          Orientation & Geometry
+          Rotate & Flip Image
         </label>
         <div className="flex flex-wrap items-center gap-2">
           <button
@@ -288,7 +291,7 @@ export const CompressionTool: React.FC<CompressionToolProps> = ({
             }`}
           >
             <FlipHorizontal className="w-3.5 h-3.5" />
-            <span>Flip Horizontal</span>
+            <span>Flip Left / Right</span>
           </button>
 
           <button
@@ -301,7 +304,7 @@ export const CompressionTool: React.FC<CompressionToolProps> = ({
             }`}
           >
             <FlipVertical className="w-3.5 h-3.5" />
-            <span>Flip Vertical</span>
+            <span>Flip Up / Down</span>
           </button>
         </div>
       </div>
@@ -318,7 +321,7 @@ export const CompressionTool: React.FC<CompressionToolProps> = ({
             />
             <span className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-1.5">
               <Maximize2 className="w-4 h-4 text-blue-600" />
-              Resize Dimensions
+              Change Dimensions (Width / Height)
             </span>
           </label>
         </div>
@@ -404,7 +407,7 @@ export const CompressionTool: React.FC<CompressionToolProps> = ({
             className="rounded text-blue-600 focus:ring-blue-500 h-4 w-4"
           />
           <span className="text-sm font-semibold text-slate-900 dark:text-white">
-            Set Maximum Dimensions Limit
+            Set Maximum Size Cap
           </span>
         </label>
 
@@ -443,19 +446,19 @@ export const CompressionTool: React.FC<CompressionToolProps> = ({
                 onChange={(e) => onUpdateSetting('doNotEnlarge', e.target.checked)}
                 className="rounded text-blue-600 focus:ring-blue-500 h-3.5 w-3.5"
               />
-              <span>Do not enlarge smaller images (Recommended)</span>
+              <span>Do not stretch smaller images (Recommended)</span>
             </label>
           </div>
         )}
       </div>
 
-      {/* Privacy & Metadata Notice */}
+      {/* Privacy Notice */}
       <div className="border-t border-slate-100 dark:border-slate-800 pt-3 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
         <span className="flex items-center gap-1">
           <Shield className="w-3.5 h-3.5 text-emerald-500" />
-          Camera EXIF metadata stripped during re-encoding
+          Location & camera details safely removed
         </span>
-        <span>100% In-Browser</span>
+        <span>100% In-Browser & Private</span>
       </div>
     </div>
   );

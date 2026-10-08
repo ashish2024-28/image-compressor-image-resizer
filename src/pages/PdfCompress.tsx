@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import { PageContainer } from '../components/layout/PageContainer';
-import { AdBanner, MultiplexAd } from '../components/ads';
 import { AdvancePdfCallout } from '../components/pdf/AdvancePdfCallout';
+import { PdfPreviewModal } from '../components/pdf/PdfPreviewModal';
 import { compressPdfDocument } from '../utils/pdfUtils';
 import { formatFileSize } from '../utils/formatFileSize';
 import {
@@ -15,6 +15,7 @@ import {
   Sparkles,
   HelpCircle,
   ShieldCheck,
+  Eye,
 } from 'lucide-react';
 
 export const PdfCompress: React.FC = () => {
@@ -23,6 +24,7 @@ export const PdfCompress: React.FC = () => {
   const [compressedBlob, setCompressedBlob] = useState<Blob | null>(null);
   const [compressedSize, setCompressedSize] = useState<number | null>(null);
   const [isCompressing, setIsCompressing] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -99,8 +101,6 @@ export const PdfCompress: React.FC = () => {
             Reduce PDF file weight for government exam portals, college applications, and email attachments. 100% in-browser processing with zero server uploads.
           </p>
         </div>
-
-        <AdBanner slotLabel="Header Banner" />
 
         {/* Dropzone */}
         <div className="rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0f172a] p-8 text-center hover:border-emerald-500 transition-colors shadow-sm">
@@ -194,7 +194,17 @@ export const PdfCompress: React.FC = () => {
                 )}
               </div>
 
-              <div>
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setShowPreview(true)}
+                  disabled={!compressedBlob || isCompressing}
+                  className="px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-750 text-slate-800 dark:text-slate-100 font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-xs"
+                >
+                  <Eye className="w-3.5 h-3.5 text-emerald-500" />
+                  <span>Preview PDF</span>
+                </button>
+
                 <button
                   type="button"
                   onClick={handleDownload}
@@ -215,14 +225,22 @@ export const PdfCompress: React.FC = () => {
           </div>
         )}
 
+        {/* PDF Preview Modal */}
+        <PdfPreviewModal
+          isOpen={showPreview}
+          onClose={() => setShowPreview(false)}
+          pdfBlob={compressedBlob}
+          fileName={selectedFile ? `compressed-${selectedFile.name}` : 'compressed-document.pdf'}
+          title="Compressed PDF Preview"
+          onDownload={handleDownload}
+        />
+
         {/* Advance PDF Operations Companion Callout */}
         <AdvancePdfCallout
           variant="compact"
           title="Need Extreme or Server-Grade PDF Compression?"
           description="If you have large scanned textbooks, embedded vector graphics, or want OCR + extreme raster optimization, try our full PDF Tools Pro platform."
         />
-
-        <MultiplexAd slotLabel="Sponsored & Recommended" />
 
         {/* FAQs */}
         <section className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-sm space-y-4">

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { PageContainer } from '../components/layout/PageContainer';
 import { Button } from '../components/common/Button';
-import { AdBanner } from '../components/ads/AdBanner';
+import { SingleImagePreviewModal } from '../components/image/SingleImagePreviewModal';
 import { downloadBlob, getOutputFilename } from '../utils/fileUtils';
 import { formatFileSize } from '../utils/formatFileSize';
 import {
@@ -21,8 +21,8 @@ import {
   Sliders,
   BookOpen,
   HelpCircle,
+  Eye,
 } from 'lucide-react';
-import { createSampleImage } from '../utils/sampleImages';
 
 const PASSPORT_FAQS = [
   {
@@ -167,6 +167,7 @@ export const PassportPhotoCreator: React.FC = () => {
   const [processedBlob, setProcessedBlob] = useState<Blob | null>(null);
   const [processedUrl, setProcessedUrl] = useState<string | null>(null);
   const [processedSize, setProcessedSize] = useState<number>(0);
+  const [showPreview, setShowPreview] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [activeGuide, setActiveGuide] = useState(true);
 
@@ -201,16 +202,6 @@ export const PassportPhotoCreator: React.FC = () => {
       renderCrop(img, 1, 0, 0, 0, selectedStandard);
     };
     img.src = url;
-  };
-
-  const handleSampleLoad = async () => {
-    setIsProcessing(true);
-    try {
-      const sample = await createSampleImage('landscape');
-      handleSelectFile(sample);
-    } finally {
-      setIsProcessing(false);
-    }
   };
 
   const renderCrop = useCallback(
@@ -483,21 +474,9 @@ export const PassportPhotoCreator: React.FC = () => {
               <p className="text-xs text-slate-600 dark:text-slate-400 max-w-sm mx-auto mb-5">
                 Take a selfie against a light plain wall or choose an existing portrait photo.
               </p>
-              <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-                <Button variant="primary" size="sm" leftIcon={<UploadCloud className="w-4 h-4" />}>
+              <div className="flex justify-center">
+                <Button variant="primary" size="sm" className="px-6" leftIcon={<UploadCloud className="w-4 h-4" />}>
                   Select Photo
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  isLoading={isProcessing}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleSampleLoad();
-                  }}
-                  leftIcon={<Sparkles className="w-4 h-4 text-amber-500" />}
-                >
-                  Try Sample Photo
                 </Button>
               </div>
             </div>
@@ -623,15 +602,25 @@ export const PassportPhotoCreator: React.FC = () => {
                     </p>
                   </div>
 
-                  <Button
-                    variant="success"
-                    size="md"
-                    className="w-full sm:w-auto"
-                    onClick={handleDownload}
-                    leftIcon={<Download className="w-4 h-4" />}
-                  >
-                    Download Official Photo
-                  </Button>
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                    <Button
+                      variant="outline"
+                      size="md"
+                      onClick={() => setShowPreview(true)}
+                      leftIcon={<Eye className="w-4 h-4 text-emerald-500" />}
+                    >
+                      Preview Photo
+                    </Button>
+                    <Button
+                      variant="success"
+                      size="md"
+                      className="w-full sm:w-auto"
+                      onClick={handleDownload}
+                      leftIcon={<Download className="w-4 h-4" />}
+                    >
+                      Download Official Photo
+                    </Button>
+                  </div>
                 </div>
               )}
             </div>
@@ -639,7 +628,18 @@ export const PassportPhotoCreator: React.FC = () => {
         </div>
       </div>
 
-      <AdBanner format="horizontal" />
+      {/* Passport Photo Preview Modal */}
+      <SingleImagePreviewModal
+        isOpen={showPreview}
+        onClose={() => setShowPreview(false)}
+        imageBlob={processedBlob}
+        width={selectedStandard.widthPx}
+        height={selectedStandard.heightPx}
+        fileSize={processedSize}
+        fileName={getOutputFilename(imageFile?.name || 'passport-photo.jpg', 'image/jpeg', '-official')}
+        title={`${selectedStandard.name} Photo Preview`}
+        onDownload={handleDownload}
+      />
 
       {/* SEO & Instructional Sections */}
       <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 space-y-12 max-w-4xl mx-auto">

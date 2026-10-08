@@ -5,7 +5,6 @@ import { ImageDropzone } from '../components/upload/ImageDropzone';
 import { ImageList } from '../components/upload/ImageList';
 import { CompressionTool } from '../features/compression/CompressionTool';
 import { ImagePreviewModal } from '../components/image/ImagePreviewModal';
-import { AdBanner, MultiplexAd } from '../components/ads';
 import { useImageProcessor } from '../hooks/useImageProcessor';
 import { useImageSettings } from '../hooks/useImageSettings';
 import type { ImageItem } from '../types';
@@ -84,7 +83,7 @@ export const CompressImage: React.FC = () => {
   } = useImageSettings({
     qualityPreset: 'medium',
     quality: 80,
-    format: 'image/webp',
+    format: 'original',
   });
 
   const [previewItem, setPreviewItem] = useState<ImageItem | null>(null);
@@ -145,7 +144,7 @@ export const CompressImage: React.FC = () => {
                 onQualityChange={setQuality}
                 onFormatChange={setFormat}
                 onResetSettings={resetSettings}
-                sampleAspectRatio={activeImage?.aspectRatio}
+                defaultAspectRatio={activeImage?.aspectRatio}
               />
             </div>
 
@@ -200,9 +199,6 @@ export const CompressImage: React.FC = () => {
           <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
         </a>
       </div>
-
-      {/* AdSense Slot */}
-      <AdBanner format="horizontal" />
 
       {/* Step-by-Step Instructions */}
       <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 space-y-12 max-w-4xl mx-auto">
@@ -281,9 +277,6 @@ export const CompressImage: React.FC = () => {
             ))}
           </div>
         </section>
-
-        {/* AdSense Multiplex / Recommendations Slot */}
-        <MultiplexAd slotLabel="Sponsored & Recommended" />
 
         {/* Related Tools Internal Linking */}
         <section className="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">

@@ -2,8 +2,8 @@ import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import confetti from 'canvas-confetti';
 import { PageContainer } from '../components/layout/PageContainer';
-import { AdBanner, MultiplexAd } from '../components/ads';
 import { AdvancePdfCallout } from '../components/pdf/AdvancePdfCallout';
+import { PdfPreviewModal } from '../components/pdf/PdfPreviewModal';
 import { mergePdfFiles } from '../utils/pdfUtils';
 import { formatFileSize } from '../utils/formatFileSize';
 import {
@@ -18,6 +18,7 @@ import {
   HelpCircle,
   Sparkles,
   ShieldCheck,
+  Eye,
 } from 'lucide-react';
 
 interface PdfFileItem {
@@ -32,6 +33,8 @@ export const PdfMerge: React.FC = () => {
   const [outputFileName, setOutputFileName] = useState('merged-document.pdf');
   const [isProcessing, setIsProcessing] = useState(false);
   const [completed, setCompleted] = useState(false);
+  const [mergedBlob, setMergedBlob] = useState<Blob | null>(null);
+  const [showPreview, setShowPreview] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -97,6 +100,7 @@ export const PdfMerge: React.FC = () => {
       const rawFiles = files.map((f) => f.file);
       const mergedBytes = await mergePdfFiles(rawFiles);
       const blob = new Blob([mergedBytes as unknown as BlobPart], { type: 'application/pdf' });
+      setMergedBlob(blob);
       const url = URL.createObjectURL(blob);
 
       const a = document.createElement('a');
@@ -109,6 +113,27 @@ export const PdfMerge: React.FC = () => {
 
       setCompleted(true);
       confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'Failed to merge PDF files.');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handlePreview = async () => {
+    if (files.length < 2) return;
+    if (mergedBlob) {
+      setShowPreview(true);
+      return;
+    }
+    setIsProcessing(true);
+    setErrorMsg(null);
+    try {
+      const rawFiles = files.map((f) => f.file);
+      const mergedBytes = await mergePdfFiles(rawFiles);
+      const blob = new Blob([mergedBytes as unknown as BlobPart], { type: 'application/pdf' });
+      setMergedBlob(blob);
+      setShowPreview(true);
     } catch (err: any) {
       setErrorMsg(err?.message || 'Failed to merge PDF files.');
     } finally {
@@ -141,8 +166,6 @@ export const PdfMerge: React.FC = () => {
             Combine separate PDF contracts, marksheets, receipts, and invoices into one unified PDF document. Fast, in-browser processing with zero server uploads.
           </p>
         </div>
-
-        <AdBanner slotLabel="Header Banner" />
 
         {/* Dropzone */}
         <div className="rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0f172a] p-8 text-center hover:border-indigo-500 transition-colors shadow-sm">
@@ -195,6 +218,16 @@ export const PdfMerge: React.FC = () => {
                   className="px-3 py-1.5 text-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white w-48"
                   placeholder="merged-document.pdf"
                 />
+                <button
+                  type="button"
+                  onClick={handlePreview}
+                  disabled={isProcessing}
+                  className="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-750 text-slate-800 dark:text-slate-100 font-bold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer transition-all"
+                >
+                  <Eye className="w-3.5 h-3.5 text-indigo-500" />
+                  <span>Preview PDF</span>
+                </button>
+
                 <button
                   type="button"
                   onClick={handleMerge}
@@ -272,14 +305,22 @@ export const PdfMerge: React.FC = () => {
           </div>
         )}
 
+        {/* PDF Preview Modal */}
+        <PdfPreviewModal
+          isOpen={showPreview}
+          onClose={() => setShowPreview(false)}
+          pdfBlob={mergedBlob}
+          fileName={outputFileName.endsWith('.pdf') ? outputFileName : `${outputFileName}.pdf`}
+          title="Merged PDF Document Preview"
+          onDownload={handleMerge}
+        />
+
         {/* Advance PDF Operations Companion Callout */}
         <AdvancePdfCallout
           variant="compact"
           title="Need Advance PDF Merging or Page Operations?"
           description="Need to reorder complex page ranges, merge encrypted/password-protected PDFs, or apply OCR? Visit our companion PDF Tools Pro platform."
         />
-
-        <MultiplexAd slotLabel="Sponsored & Recommended" />
 
         {/* FAQs */}
         <section className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-sm space-y-4">

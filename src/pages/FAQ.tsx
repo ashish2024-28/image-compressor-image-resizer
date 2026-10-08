@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { PageContainer } from '../components/layout/PageContainer';
 import { ChevronDown, HelpCircle } from 'lucide-react';
-import { AdBanner } from '../components/ads/AdBanner';
 
 export const FAQ: React.FC = () => {
   const faqs = [
@@ -103,8 +102,6 @@ export const FAQ: React.FC = () => {
             );
           })}
         </div>
-
-        <AdBanner format="horizontal" />
       </div>
     </PageContainer>
   );

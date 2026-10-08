@@ -28,6 +28,13 @@ export interface ImageSettings {
   maxHeight: number | null;
   doNotEnlarge: boolean;
   stripMetadata: boolean;
+  filters?: {
+    grayscale: number;
+    sepia: number;
+    invert: number;
+    brightness: number;
+    contrast: number;
+  };
 }
 
 export interface ImageItem {
@@ -52,6 +59,7 @@ export interface ImageItem {
   savingsBytes?: number;
   reductionPercentage?: number;
   processingTimeMs?: number;
+  isFallbackToOriginal?: boolean;
 }
 
 export interface BatchProgress {

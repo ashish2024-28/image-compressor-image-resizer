@@ -1,2 +1,1 @@
-# Google AdSense authorized digital sellers file
 google.com, pub-6284694302866330, DIRECT, f08c47fec0942fa0

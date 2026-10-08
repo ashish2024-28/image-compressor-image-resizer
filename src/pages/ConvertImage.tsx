@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { PageContainer } from '../components/layout/PageContainer';
 import { ImageDropzone } from '../components/upload/ImageDropzone';
 import { ImageList } from '../components/upload/ImageList';
 import { ImagePreviewModal } from '../components/image/ImagePreviewModal';
-import { AdBanner, MultiplexAd } from '../components/ads';
 import { useImageProcessor } from '../hooks/useImageProcessor';
 import { useImageSettings } from '../hooks/useImageSettings';
 import type { ImageItem, OutputFormat } from '../types';
@@ -60,6 +59,16 @@ const CONVERT_HOW_TO = [
 ];
 
 export const ConvertImage: React.FC = () => {
+  const location = useLocation();
+  const isJpgToPng = location.pathname.includes('jpg-to-png');
+  const isPngToJpg = location.pathname.includes('png-to-jpg');
+
+  const initialFormat: OutputFormat = isJpgToPng
+    ? 'image/png'
+    : isPngToJpg
+    ? 'image/jpeg'
+    : 'image/webp';
+
   const {
     images,
     validationWarnings,
@@ -79,12 +88,38 @@ export const ConvertImage: React.FC = () => {
     updateSetting,
     resetSettings,
   } = useImageSettings({
-    format: 'image/webp',
+    format: initialFormat,
     quality: 85,
   });
 
+  useEffect(() => {
+    if (isJpgToPng) {
+      setFormat('image/png');
+    } else if (isPngToJpg) {
+      setFormat('image/jpeg');
+    }
+  }, [isJpgToPng, isPngToJpg, setFormat]);
+
   const [previewItem, setPreviewItem] = useState<ImageItem | null>(null);
   const avifSupported = isAvifSupported();
+
+  const pageTitle = isJpgToPng
+    ? 'JPG to PNG Converter – Convert JPG to PNG Online Free'
+    : isPngToJpg
+    ? 'PNG to JPG Converter – Convert PNG to JPG Online Free'
+    : 'Convert Image Format Online – WebP, JPG, PNG & AVIF';
+
+  const pageHeading = isJpgToPng
+    ? 'JPG to PNG Converter'
+    : isPngToJpg
+    ? 'PNG to JPG Converter'
+    : 'Convert Image Formats';
+
+  const pageSubtitle = isJpgToPng
+    ? 'Convert JPG to transparent, high-definition PNG format directly in your browser with zero server uploads.'
+    : isPngToJpg
+    ? 'Convert PNG graphics to lightweight JPG photos for fast web loading and email attachments.'
+    : 'Convert between WebP, JPG, PNG, and AVIF instantly with complete control over compression quality.';
 
   const formats: { id: OutputFormat; name: string; tag: string; desc: string; bestFor: string }[] = [
     {
@@ -123,9 +158,9 @@ export const ConvertImage: React.FC = () => {
 
   return (
     <PageContainer
-      title="Convert Image Format Online – WebP, JPG, PNG & AVIF"
-      description="Convert images between WebP, PNG, JPG, and AVIF directly in your browser. Fast, private batch image conversion with zero server uploads."
-      breadcrumbs={[{ name: 'Convert Image', url: '/convert' }]}
+      title={pageTitle}
+      description={pageSubtitle}
+      breadcrumbs={[{ name: pageHeading, url: location.pathname }]}
       faqs={CONVERT_FAQS}
       howToSteps={CONVERT_HOW_TO}
       schemaType="WebApplication"
@@ -136,10 +171,10 @@ export const ConvertImage: React.FC = () => {
           <span>Local Browser Conversion · Zero Server Uploads</span>
         </div>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-          Convert Image Formats
+          {pageHeading}
         </h1>
         <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-          Convert between WebP, JPG, PNG, and AVIF instantly with complete control over compression quality.
+          {pageSubtitle}
         </p>
       </div>
 
@@ -270,8 +305,6 @@ export const ConvertImage: React.FC = () => {
         )}
       </div>
 
-      <AdBanner format="horizontal" />
-
       {/* Instructional & FAQ Sections */}
       <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 space-y-12 max-w-4xl mx-auto">
         <section className="space-y-4">
@@ -324,9 +357,6 @@ export const ConvertImage: React.FC = () => {
             ))}
           </div>
         </section>
-
-        {/* AdSense Multiplex Recommendations Slot */}
-        <MultiplexAd slotLabel="Sponsored & Recommended" />
 
         {/* Related Tools Internal Linking */}
         <section className="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">

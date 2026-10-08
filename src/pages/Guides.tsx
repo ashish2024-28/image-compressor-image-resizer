@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageContainer } from '../components/layout/PageContainer';
 import { GUIDES } from '../data/guidesData';
-import { InFeedAd, MultiplexAd } from '../components/ads';
 import { BookOpen, Clock, Calendar, ArrowRight, Search, Sparkles } from 'lucide-react';
 
 export const Guides: React.FC = () => {
@@ -114,13 +113,6 @@ export const Guides: React.FC = () => {
                 </Link>
               </div>
             </article>
-
-            {/* In-Feed Google Ad seamlessly integrated after first row */}
-            {idx === 1 && (
-              <div className="col-span-1 md:col-span-2">
-                <InFeedAd slotLabel="Sponsored Recommendation" />
-              </div>
-            )}
           </React.Fragment>
         ))}
       </div>
@@ -131,11 +123,6 @@ export const Guides: React.FC = () => {
           <p className="text-xs">Try clearing your search term or picking another category.</p>
         </div>
       )}
-
-      {/* AdSense Multiplex / Related Recommendations */}
-      <div className="max-w-4xl mx-auto">
-        <MultiplexAd slotLabel="Sponsored & Recommended" />
-      </div>
 
       {/* Bottom Tool Promo Banner */}
       <div className="max-w-4xl mx-auto mt-16 p-8 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6">

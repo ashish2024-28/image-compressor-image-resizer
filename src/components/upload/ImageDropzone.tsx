@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { UploadCloud, Image as ImageIcon, Sparkles } from 'lucide-react';
+import { UploadCloud, Image as ImageIcon } from 'lucide-react';
 import { Button } from '../common/Button';
 import { isAvifSupported } from '../../utils/fileUtils';
-import { createSampleImage } from '../../utils/sampleImages';
 
 export interface ImageDropzoneProps {
   onFilesSelected: (files: File[]) => void;
@@ -15,7 +14,6 @@ export const ImageDropzone: React.FC<ImageDropzoneProps> = ({
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDragOver, setIsDragOver] = useState(false);
-  const [isGeneratingSample, setIsGeneratingSample] = useState(false);
   const avifSupported = isAvifSupported();
 
   const handleDragEnter = (e: React.DragEvent) => {
@@ -51,19 +49,6 @@ export const ImageDropzone: React.FC<ImageDropzoneProps> = ({
       onFilesSelected(Array.from(e.target.files));
       // reset so the same file can be picked again if removed
       e.target.value = '';
-    }
-  };
-
-  const handleTrySample = async (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsGeneratingSample(true);
-    try {
-      const sample = await createSampleImage('landscape');
-      onFilesSelected([sample]);
-    } catch {
-      // ignore
-    } finally {
-      setIsGeneratingSample(false);
     }
   };
 
@@ -108,12 +93,12 @@ export const ImageDropzone: React.FC<ImageDropzoneProps> = ({
           or click anywhere to browse from your device. All processing stays local in your browser.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 mb-6 w-full max-w-xs sm:max-w-none">
+        <div className="flex items-center justify-center mb-6 w-full max-w-xs sm:max-w-none">
           <Button
             type="button"
             variant="primary"
             size="md"
-            className="w-full sm:w-auto"
+            className="w-full sm:w-auto px-8"
             isLoading={isLoading}
             leftIcon={<ImageIcon className="w-4 h-4" />}
             onClick={(e) => {
@@ -122,18 +107,6 @@ export const ImageDropzone: React.FC<ImageDropzoneProps> = ({
             }}
           >
             Select Images
-          </Button>
-
-          <Button
-            type="button"
-            variant="outline"
-            size="md"
-            className="w-full sm:w-auto"
-            isLoading={isGeneratingSample}
-            leftIcon={<Sparkles className="w-4 h-4 text-amber-500" />}
-            onClick={handleTrySample}
-          >
-            Try Sample
           </Button>
         </div>
 

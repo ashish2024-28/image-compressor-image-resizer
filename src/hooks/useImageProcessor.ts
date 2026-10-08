@@ -190,6 +190,7 @@ export function useImageProcessor() {
               reductionPercentage: savings.reductionPercentage,
               processingTimeMs: duration,
               customSettings: effectiveSettings,
+              isFallbackToOriginal: result.isFallbackToOriginal,
             };
           })
         );

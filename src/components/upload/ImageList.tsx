@@ -87,7 +87,7 @@ export const ImageList: React.FC<ImageListProps> = ({
             </h3>
             {completedCount > 0 && (
               <span className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
-                · {completedCount} optimized
+                · {completedCount} ready
               </span>
             )}
           </div>
@@ -123,8 +123,8 @@ export const ImageList: React.FC<ImageListProps> = ({
             leftIcon={<Play className="w-4 h-4" />}
           >
             {progress.isProcessing
-              ? `Optimizing ${progress.completed + 1} of ${images.length}...`
-              : 'Optimize All'}
+              ? `Saving ${progress.completed + 1} of ${images.length}...`
+              : 'Save All Changes'}
           </Button>
 
           {completedCount > 0 && (
