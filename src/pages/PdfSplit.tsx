@@ -2,8 +2,8 @@ import React, { useState, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import { PDFDocument } from 'pdf-lib';
 import { PageContainer } from '../components/layout/PageContainer';
-import { AdBanner, MultiplexAd } from '../components/ads';
 import { AdvancePdfCallout } from '../components/pdf/AdvancePdfCallout';
+import { PdfPreviewModal } from '../components/pdf/PdfPreviewModal';
 import { extractPdfPages, parsePageRangeString } from '../utils/pdfUtils';
 import { formatFileSize } from '../utils/formatFileSize';
 import {
@@ -14,6 +14,7 @@ import {
   HelpCircle,
   Sparkles,
   Layers,
+  Eye,
 } from 'lucide-react';
 
 export const PdfSplit: React.FC = () => {
@@ -23,6 +24,8 @@ export const PdfSplit: React.FC = () => {
   const [selectedPages, setSelectedPages] = useState<number[]>([0]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [completed, setCompleted] = useState(false);
+  const [extractedBlob, setExtractedBlob] = useState<Blob | null>(null);
+  const [showPreview, setShowPreview] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -83,6 +86,7 @@ export const PdfSplit: React.FC = () => {
     try {
       const extractedBytes = await extractPdfPages(selectedFile, selectedPages);
       const blob = new Blob([extractedBytes as unknown as BlobPart], { type: 'application/pdf' });
+      setExtractedBlob(blob);
       const url = URL.createObjectURL(blob);
 
       const a = document.createElement('a');
@@ -95,6 +99,26 @@ export const PdfSplit: React.FC = () => {
 
       setCompleted(true);
       confetti({ particleCount: 75, spread: 60, origin: { y: 0.6 } });
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'Failed to extract PDF pages.');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handlePreview = async () => {
+    if (!selectedFile || selectedPages.length === 0) return;
+    if (extractedBlob) {
+      setShowPreview(true);
+      return;
+    }
+    setIsProcessing(true);
+    setErrorMsg(null);
+    try {
+      const extractedBytes = await extractPdfPages(selectedFile, selectedPages);
+      const blob = new Blob([extractedBytes as unknown as BlobPart], { type: 'application/pdf' });
+      setExtractedBlob(blob);
+      setShowPreview(true);
     } catch (err: any) {
       setErrorMsg(err?.message || 'Failed to extract PDF pages.');
     } finally {
@@ -124,8 +148,6 @@ export const PdfSplit: React.FC = () => {
             Extract selected pages or separate sheets into a new compact PDF document. Fast client-side extraction with zero cloud storage.
           </p>
         </div>
-
-        <AdBanner slotLabel="Header Banner" />
 
         {/* Dropzone */}
         <div className="rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0f172a] p-8 text-center hover:border-purple-500 transition-colors shadow-sm">
@@ -175,26 +197,38 @@ export const PdfSplit: React.FC = () => {
                 </span>
               </div>
 
-              <button
-                type="button"
-                onClick={handleExtract}
-                disabled={isProcessing || selectedPages.length === 0}
-                className="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 disabled:bg-slate-600 text-white font-bold text-xs flex items-center gap-1.5 shadow-md cursor-pointer transition-all"
-              >
-                {isProcessing ? (
-                  <span>Extracting...</span>
-                ) : completed ? (
-                  <>
-                    <Check className="w-3.5 h-3.5" />
-                    <span>Extracted &amp; Saved!</span>
-                  </>
-                ) : (
-                  <>
-                    <Download className="w-3.5 h-3.5" />
-                    <span>Extract {selectedPages.length} Pages</span>
-                  </>
-                )}
-              </button>
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handlePreview}
+                  disabled={isProcessing || selectedPages.length === 0}
+                  className="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-750 text-slate-800 dark:text-slate-100 font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs cursor-pointer transition-all"
+                >
+                  <Eye className="w-3.5 h-3.5 text-purple-500" />
+                  <span>Preview PDF</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleExtract}
+                  disabled={isProcessing || selectedPages.length === 0}
+                  className="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 disabled:bg-slate-600 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-md cursor-pointer transition-all"
+                >
+                  {isProcessing ? (
+                    <span>Extracting...</span>
+                  ) : completed ? (
+                    <>
+                      <Check className="w-3.5 h-3.5" />
+                      <span>Extracted &amp; Saved!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Download className="w-3.5 h-3.5" />
+                      <span>Extract {selectedPages.length} Pages</span>
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
 
             {/* Page Range input */}
@@ -240,14 +274,22 @@ export const PdfSplit: React.FC = () => {
           </div>
         )}
 
+        {/* PDF Preview Modal */}
+        <PdfPreviewModal
+          isOpen={showPreview}
+          onClose={() => setShowPreview(false)}
+          pdfBlob={extractedBlob}
+          fileName={selectedFile ? `extracted-${selectedFile.name}` : 'extracted-pages.pdf'}
+          title="Extracted PDF Document Preview"
+          onDownload={handleExtract}
+        />
+
         {/* Advance PDF Operations Companion Callout */}
         <AdvancePdfCallout
           variant="compact"
           title="Need Advanced PDF Page Splitting or Deletion?"
           description="Looking to delete specific pages, split into equal chunks, or separate PDF by bookmarks? Visit our dedicated companion PDF Tools Pro platform."
         />
-
-        <MultiplexAd slotLabel="Sponsored & Recommended" />
 
         {/* FAQs */}
         <section className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-sm space-y-4">

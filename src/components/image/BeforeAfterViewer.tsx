@@ -156,22 +156,22 @@ export const BeforeAfterViewer: React.FC<BeforeAfterViewerProps> = ({
           </div>
 
           {/* Badges on images */}
-          <div className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-slate-900/80 backdrop-blur-xs text-white px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md text-[10px] sm:text-xs font-medium z-20 pointer-events-none border border-white/20 max-w-[45%] truncate">
-            <span className="hidden xs:inline">ORIG: </span>{formatFileSize(originalSize)}
+          <div className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-slate-900/85 backdrop-blur-xs text-white px-2.5 sm:px-3 py-1 rounded-lg text-[11px] sm:text-xs font-semibold z-20 pointer-events-none border border-white/20 max-w-[48%] truncate shadow-md">
+            <span>Part 1: Original</span> ({formatFileSize(originalSize)})
           </div>
-          <div className="absolute top-2 sm:top-3 right-2 sm:right-3 bg-blue-600/90 backdrop-blur-xs text-white px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md text-[10px] sm:text-xs font-medium z-20 pointer-events-none border border-white/20 max-w-[50%] truncate text-right">
-            <span className="hidden xs:inline">OPT: </span>{optimizedSize ? formatFileSize(optimizedSize) : 'N/A'}
+          <div className="absolute top-2 sm:top-3 right-2 sm:right-3 bg-blue-600/90 backdrop-blur-xs text-white px-2.5 sm:px-3 py-1 rounded-lg text-[11px] sm:text-xs font-semibold z-20 pointer-events-none border border-white/20 max-w-[50%] truncate text-right shadow-md">
+            <span>Part 2: Current Change</span> ({optimizedSize ? formatFileSize(optimizedSize) : 'Preview'})
             {reductionPercentage !== undefined && reductionPercentage > 0 && ` (-${reductionPercentage}%)`}
           </div>
         </div>
       ) : (
         /* Side by Side Mode or Single view */
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white dark:bg-slate-900 rounded-xl p-3 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white flex flex-col">
-            <div className="flex items-center justify-between text-xs mb-2">
-              <span className="font-semibold text-slate-700 dark:text-slate-300">BEFORE (Original)</span>
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-3.5 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white flex flex-col">
+            <div className="flex items-center justify-between text-xs mb-2 pb-1 border-b border-slate-100 dark:border-slate-800">
+              <span className="font-bold text-slate-700 dark:text-slate-300">Part 1: Original Image</span>
               <span className="text-slate-500 dark:text-slate-400">
-                {originalWidth}×{originalHeight} • {formatFileSize(originalSize)}
+                {originalWidth}×{originalHeight} px • {formatFileSize(originalSize)}
               </span>
             </div>
             <div className="relative flex-1 min-h-[220px] sm:min-h-[300px] flex items-center justify-center bg-transparency-pattern rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800">
@@ -183,12 +183,12 @@ export const BeforeAfterViewer: React.FC<BeforeAfterViewerProps> = ({
             </div>
           </div>
 
-          <div className="bg-white dark:bg-slate-900 rounded-xl p-3 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white flex flex-col">
-            <div className="flex items-center justify-between text-xs mb-2">
-              <span className="font-semibold text-blue-600 dark:text-blue-400">AFTER (Optimized)</span>
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-3.5 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white flex flex-col">
+            <div className="flex items-center justify-between text-xs mb-2 pb-1 border-b border-slate-100 dark:border-slate-800">
+              <span className="font-bold text-blue-600 dark:text-blue-400">Part 2: Current Change</span>
               <span className="text-slate-500 dark:text-slate-400">
-                {optimizedWidth || originalWidth}×{optimizedHeight || originalHeight} •{' '}
-                {optimizedSize ? formatFileSize(optimizedSize) : 'N/A'}
+                {optimizedWidth || originalWidth}×{optimizedHeight || originalHeight} px •{' '}
+                {optimizedSize ? formatFileSize(optimizedSize) : 'Pending'}
                 {reductionPercentage !== undefined && reductionPercentage > 0 && (
                   <span className="text-emerald-600 dark:text-emerald-400 font-semibold ml-1">(-{reductionPercentage}%)</span>
                 )}
@@ -197,7 +197,7 @@ export const BeforeAfterViewer: React.FC<BeforeAfterViewerProps> = ({
             <div className="relative flex-1 min-h-[220px] sm:min-h-[300px] flex items-center justify-center bg-transparency-pattern rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800">
               <img
                 src={optimizedUrl || originalUrl}
-                alt="Optimized"
+                alt="Current change"
                 className={`select-none ${zoomFit ? 'max-w-full max-h-[300px] object-contain' : 'max-w-none'}`}
               />
             </div>

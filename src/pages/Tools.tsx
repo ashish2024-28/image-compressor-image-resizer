@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { PageContainer } from '../components/layout/PageContainer';
-import { AdBanner, InFeedAd, MultiplexAd } from '../components/ads';
 import { AdvancePdfCallout } from '../components/pdf/AdvancePdfCallout';
 import {
   Sliders,
@@ -21,6 +20,8 @@ import {
   FileImage,
   Layers,
   Zap,
+  Lock,
+  Scan,
 } from 'lucide-react';
 
 export const Tools: React.FC = () => {
@@ -28,9 +29,30 @@ export const Tools: React.FC = () => {
     {
       title: 'Compress Image',
       path: '/compress',
-      icon: <Sliders className="w-6 h-6 text-blue-600" />,
+      icon: <Sliders className="w-6 h-6 text-emerald-600" />,
       desc: 'Reduce image file size with lossy or lossless quality controls. Supports batch processing and comparison.',
       badge: 'Most Popular',
+    },
+    {
+      title: 'Resize Image',
+      path: '/resize',
+      icon: <Maximize2 className="w-6 h-6 text-blue-600" />,
+      desc: 'Change image dimensions (width & height), lock aspect ratio, and apply fit, fill, or stretch scaling.',
+      badge: 'Dimension Fit',
+    },
+    {
+      title: 'JPG to PNG',
+      path: '/jpg-to-png',
+      icon: <FileType className="w-6 h-6 text-purple-600" />,
+      desc: 'Convert JPG images into lossless PNG format with transparent pixel support.',
+      badge: 'Lossless',
+    },
+    {
+      title: 'PNG to JPG',
+      path: '/png-to-jpg',
+      icon: <FileType className="w-6 h-6 text-orange-600" />,
+      desc: 'Convert transparent or heavy PNG graphics to lightweight standard JPG images.',
+      badge: 'Lightweight',
     },
     {
       title: 'Passport & Visa Photo Creator',
@@ -40,29 +62,22 @@ export const Tools: React.FC = () => {
       badge: 'Biometric Ready',
     },
     {
-      title: 'Resize Image',
-      path: '/resize',
-      icon: <Maximize2 className="w-6 h-6 text-emerald-600" />,
-      desc: 'Change image dimensions (width & height), lock aspect ratio, and apply fit, fill, or stretch scaling.',
-      badge: 'Core Utility',
-    },
-    {
       title: 'Convert Image',
       path: '/convert',
-      icon: <FileType className="w-6 h-6 text-purple-600" />,
+      icon: <FileType className="w-6 h-6 text-indigo-600" />,
       desc: 'Convert seamlessly between modern web formats: JPG, PNG, WebP, and AVIF.',
       badge: 'Format Matrix',
-    },
-    {
-      title: 'Image to PDF & Photo Merge',
-      path: '/image-to-pdf',
-      icon: <FileText className="w-6 h-6 text-rose-500" />,
-      desc: 'Convert JPG, PNG, and WebP photos into high-resolution single or multi-page PDF documents. Photo se PDF banaye.',
-      badge: 'PDF Maker',
     },
   ];
 
   const pdfTools = [
+    {
+      title: 'Image to PDF & Photo Merge',
+      path: '/image-to-pdf',
+      icon: <FileText className="w-5 h-5 text-sky-500" />,
+      desc: 'Convert JPG, PNG, and WebP photos into high-resolution single or multi-page PDF documents. Photo se PDF banaye.',
+      badge: 'Photo to PDF',
+    },
     {
       title: 'Merge PDF Documents',
       path: '/merge-pdf',
@@ -97,6 +112,20 @@ export const Tools: React.FC = () => {
       icon: <RotateCw className="w-5 h-5 text-teal-500" />,
       desc: 'Rotate scanned PDF pages (90°, 180°) and add custom text watermarks for security.',
       badge: 'Security',
+    },
+    {
+      title: 'Password Protect & Encrypt PDF',
+      path: '/encrypt-pdf',
+      icon: <Lock className="w-5 h-5 text-indigo-500" />,
+      desc: 'Lock documents or sensitive photos into password-protected PDFs client-side with 128-bit encryption.',
+      badge: 'Privacy Lock',
+    },
+    {
+      title: 'Scan & Extract Text (OCR)',
+      path: '/scan-ocr',
+      icon: <Scan className="w-5 h-5 text-amber-500" />,
+      desc: 'Extract editable text from scanned documents, paper invoices, or photos using in-browser Tesseract.js neural OCR.',
+      badge: 'Neural OCR',
     },
   ];
 
@@ -281,8 +310,6 @@ export const Tools: React.FC = () => {
         </div>
       </section>
 
-      <AdBanner format="horizontal" />
-
       {/* Popular Presets Grid */}
       <section className="mt-12">
         <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
@@ -315,9 +342,6 @@ export const Tools: React.FC = () => {
           ))}
         </div>
       </section>
-
-      {/* AdSense Multiplex / Recommendations */}
-      <MultiplexAd slotLabel="Sponsored & Recommended" />
 
       {/* Support & Feature Request Desk Banner */}
       <div className="mt-8 p-5 sm:p-6 rounded-2xl border border-amber-500/30 bg-gradient-to-r from-[#121a2c] via-[#0d1424] to-[#090f1d] text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg">

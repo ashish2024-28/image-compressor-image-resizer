@@ -4,7 +4,6 @@ import { ImageDropzone } from '../components/upload/ImageDropzone';
 import { ImageList } from '../components/upload/ImageList';
 import { CompressionTool } from '../features/compression/CompressionTool';
 import { ImagePreviewModal } from '../components/image/ImagePreviewModal';
-import { AdBanner } from '../components/ads/AdBanner';
 import { useImageProcessor } from '../hooks/useImageProcessor';
 import { useImageSettings } from '../hooks/useImageSettings';
 import type { ImageItem, ImageSettings } from '../types';
@@ -444,7 +443,7 @@ export const PresetPage: React.FC<PresetPageProps> = ({ presetKey }) => {
                 onQualityChange={setQuality}
                 onFormatChange={setFormat}
                 onResetSettings={resetSettings}
-                sampleAspectRatio={activeImage?.aspectRatio}
+                defaultAspectRatio={activeImage?.aspectRatio}
               />
             </div>
 
@@ -468,8 +467,6 @@ export const PresetPage: React.FC<PresetPageProps> = ({ presetKey }) => {
           </div>
         )}
       </div>
-
-      <AdBanner format="horizontal" />
 
       {/* Tips section */}
       <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 max-w-4xl mx-auto space-y-4">

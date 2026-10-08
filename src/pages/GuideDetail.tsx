@@ -2,7 +2,6 @@ import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { PageContainer } from '../components/layout/PageContainer';
 import { GUIDES } from '../data/guidesData';
-import { InArticleAd, MultiplexAd } from '../components/ads';
 import {
   Clock,
   Calendar,
@@ -181,9 +180,6 @@ export const GuideDetail: React.FC = () => {
                   </div>
                 )}
               </section>
-
-              {/* In-Article Ad placed seamlessly after the 1st section */}
-              {idx === 0 && <InArticleAd />}
             </React.Fragment>
           ))}
 
@@ -232,9 +228,6 @@ export const GuideDetail: React.FC = () => {
             {guide.relatedTool.name}
           </Link>
         </div>
-
-        {/* Multiplex / Autorelaxed Content Recommendations Ad */}
-        <MultiplexAd slotLabel="Sponsored & Recommended" />
 
         {/* Related Articles */}
         {relatedGuides.length > 0 && (

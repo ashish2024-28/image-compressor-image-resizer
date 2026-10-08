@@ -1,7 +1,6 @@
 import React from 'react';
 import { PageContainer } from '../components/layout/PageContainer';
 import { FileCheck, Shield } from 'lucide-react';
-import { AdBanner } from '../components/ads/AdBanner';
 
 export const Terms: React.FC = () => {
   return (
@@ -70,8 +69,6 @@ export const Terms: React.FC = () => {
             </p>
           </section>
         </div>
-
-        <AdBanner format="horizontal" />
       </div>
     </PageContainer>
   );

@@ -1,7 +1,6 @@
 import React from 'react';
 import { PageContainer } from '../components/layout/PageContainer';
 import { ShieldCheck, Lock, EyeOff, ServerOff } from 'lucide-react';
-import { AdBanner } from '../components/ads/AdBanner';
 
 export const PrivacyPolicy: React.FC = () => {
   return (
@@ -91,40 +90,11 @@ export const PrivacyPolicy: React.FC = () => {
 
           <section>
             <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-2">
-              5. Advertisements, Third-Party Vendors & Cookies
+              5. Zero Ad Tracking & Local Processing
             </h2>
             <p>
-              This website displays third-party advertisements served by Google AdSense to fund free operational access and continuous engineering development.
+              This website runs ad-free without third-party advertising networks, analytics profiling, or behavioral tracking cookies. All image compression and document formatting tools run 100% locally on your device with complete privacy.
             </p>
-            <ul className="list-disc pl-5 mt-2 space-y-1">
-              <li>
-                <strong>Third-party vendors, including Google</strong>, use cookies to serve ads based on a user&apos;s prior visits to this website or other websites on the Internet.
-              </li>
-              <li>
-                Google&apos;s use of advertising cookies enables it and its partners to serve ads to users based on their visits to our sites and/or other sites on the Internet.
-              </li>
-              <li>
-                Users may opt out of personalized advertising by visiting{' '}
-                <a
-                  href="https://www.google.com/settings/ads"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 dark:text-blue-400 hover:underline"
-                >
-                  Google Ads Settings
-                </a>
-                . Alternatively, users can opt out of a third-party vendor&apos;s use of cookies for personalized advertising by visiting{' '}
-                <a
-                  href="https://www.aboutads.info/choices/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 dark:text-blue-400 hover:underline"
-                >
-                  www.aboutads.info
-                </a>
-                .
-              </li>
-            </ul>
           </section>
 
           <section>
@@ -136,8 +106,6 @@ export const PrivacyPolicy: React.FC = () => {
             </p>
           </section>
         </div>
-
-        <AdBanner format="horizontal" />
       </div>
     </PageContainer>
   );

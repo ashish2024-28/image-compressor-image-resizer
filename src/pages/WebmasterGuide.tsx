@@ -1,6 +1,5 @@
 import React from 'react';
 import { PageContainer } from '../components/layout/PageContainer';
-import { InArticleAd, MultiplexAd } from '../components/ads';
 import {
   Search,
   FileCode,
@@ -134,9 +133,6 @@ export const WebmasterGuide: React.FC = () => {
           </div>
         </section>
 
-        {/* AdSense In-Article Ad Unit */}
-        <InArticleAd />
-
         {/* Section 3: Bing Webmaster Tools */}
         <section className="space-y-4">
           <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
@@ -196,9 +192,6 @@ export const WebmasterGuide: React.FC = () => {
             </div>
           </div>
         </section>
-
-        {/* AdSense Multiplex / Autorelaxed Recommendations Slot */}
-        <MultiplexAd slotLabel="Sponsored & Recommended" />
       </div>
     </PageContainer>
   );

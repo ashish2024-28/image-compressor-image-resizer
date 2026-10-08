@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { Download, Sliders, Plus, Minus, Info, RotateCw } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Download, Sliders, Plus, Minus, Info, RotateCw, Wand2 } from 'lucide-react';
 import type { ImageItem, ImageSettings } from '../../types';
 import { Modal } from '../common/Modal';
 import { Button } from '../common/Button';
 import { BeforeAfterViewer } from './BeforeAfterViewer';
 import { ImageInfo } from './ImageInfo';
+import { ImageFilterControls } from './ImageFilterControls';
+import { DEFAULT_FILTERS, ImageFilterOptions } from '../../utils/filterUtils';
 import { downloadBlob, getOutputFilename } from '../../utils/fileUtils';
 
 export interface ImagePreviewModalProps {
@@ -26,7 +28,19 @@ export const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
 
   const currentSettings = item.customSettings || globalSettings;
   const [localQuality, setLocalQuality] = useState(currentSettings.quality);
+  const [localFilters, setLocalFilters] = useState<ImageFilterOptions>(
+    currentSettings.filters || { ...DEFAULT_FILTERS }
+  );
+  const [showFilters, setShowFilters] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+
+  useEffect(() => {
+    if (item) {
+      const active = item.customSettings || globalSettings;
+      setLocalQuality(active.quality);
+      setLocalFilters(active.filters || { ...DEFAULT_FILTERS });
+    }
+  }, [item?.id, item?.customSettings, globalSettings]);
 
   const handleRotate = async () => {
     const nextRot = ((currentSettings.rotation || 0) + 90) % 360;
@@ -35,6 +49,21 @@ export const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
       await onReoptimize(item.id, {
         ...currentSettings,
         rotation: nextRot,
+        filters: localFilters,
+      });
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleApplyFilters = async (newFilters: ImageFilterOptions) => {
+    setLocalFilters(newFilters);
+    setIsProcessing(true);
+    try {
+      await onReoptimize(item.id, {
+        ...currentSettings,
+        quality: localQuality,
+        filters: newFilters,
       });
     } finally {
       setIsProcessing(false);
@@ -50,6 +79,7 @@ export const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
         ...currentSettings,
         quality: newQ,
         qualityPreset: 'custom',
+        filters: localFilters,
       });
     } finally {
       setIsProcessing(false);
@@ -64,6 +94,7 @@ export const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
         ...currentSettings,
         quality: q,
         qualityPreset: 'custom',
+        filters: localFilters,
       });
     } finally {
       setIsProcessing(false);
@@ -84,7 +115,7 @@ export const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
         <div className="flex flex-col">
           <span className="truncate max-w-md">{item.name}</span>
           <span className="text-xs font-normal text-slate-500 dark:text-slate-400">
-            Compare original with optimized result
+            Compare original with changes
           </span>
         </div>
       }
@@ -134,6 +165,15 @@ export const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
 
           <div className="flex items-center gap-2 shrink-0">
             <Button
+              variant={showFilters ? 'primary' : 'outline'}
+              size="sm"
+              disabled={isProcessing}
+              onClick={() => setShowFilters(!showFilters)}
+              leftIcon={<Wand2 className="w-3.5 h-3.5" />}
+            >
+              {showFilters ? 'Hide Filters' : 'Edit & Filters'}
+            </Button>
+            <Button
               variant="outline"
               size="sm"
               disabled={isProcessing}
@@ -163,11 +203,22 @@ export const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
           </div>
         </div>
 
-        {/* Technical Notice */}
+        {/* Basic Image Editing Suite (Grayscale, Sepia, Invert, Brightness, Contrast) */}
+        {showFilters && (
+          <div className="transition-all animate-in fade-in duration-200">
+            <ImageFilterControls
+              filters={localFilters}
+              onChange={handleApplyFilters}
+              disabled={isProcessing}
+            />
+          </div>
+        )}
+
+        {/* Helpful Tip */}
         <div className="flex items-start gap-2 text-[11px] text-slate-500 dark:text-slate-400 bg-slate-100/60 dark:bg-slate-800/40 p-3 rounded-lg">
           <Info className="w-4 h-4 shrink-0 text-slate-400 mt-0.5" />
           <span>
-            Compression balances visual fidelity and file size. PNG output uses lossless encoding where quality percentage is intentionally bypassed by the browser standard. WebP and JPEG yield significant reduction with minimal perceptible difference.
+            Changes are saved directly in your browser. Move the split slider sideways anytime to compare the original photo with your current change.
           </span>
         </div>
 
@@ -183,7 +234,7 @@ export const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
               leftIcon={<Download className="w-4 h-4" />}
               onClick={handleDownload}
             >
-              Download Optimized Image
+              Download Saved Image
             </Button>
           )}
         </div>

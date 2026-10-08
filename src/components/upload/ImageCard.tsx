@@ -90,15 +90,21 @@ export const ImageCard: React.FC<ImageCardProps> = ({
                 </span>
               </div>
               <div>
-                <span className="text-slate-400 block text-[10px] uppercase font-medium">Optimized</span>
+                <span className="text-slate-400 block text-[10px] uppercase font-medium">New Size</span>
                 {item.status === 'done' && item.outputSize !== undefined ? (
-                  <span className="font-medium text-blue-600 dark:text-blue-400">
+                  <span
+                    className={`font-medium ${
+                      item.outputSize > item.originalSize
+                        ? 'text-amber-600 dark:text-amber-400 font-semibold'
+                        : 'text-blue-600 dark:text-blue-400 font-semibold'
+                    }`}
+                  >
                     {formatFileSize(item.outputSize)}
                   </span>
                 ) : item.status === 'processing' ? (
-                  <span className="text-slate-400 italic">Processing...</span>
+                  <span className="text-slate-400 italic">Working...</span>
                 ) : (
-                  <span className="text-slate-400 italic">Pending</span>
+                  <span className="text-slate-400 italic">Ready to save</span>
                 )}
               </div>
             </div>
@@ -107,20 +113,48 @@ export const ImageCard: React.FC<ImageCardProps> = ({
 
         {/* Results row if processed */}
         {item.status === 'done' && (
-          <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-            <div className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-              <span className="text-slate-600 dark:text-slate-400">Reduced:</span>
-              <span className="font-bold text-emerald-600 dark:text-emerald-400">
-                {item.reductionPercentage && item.reductionPercentage > 0
-                  ? `-${item.reductionPercentage}%`
-                  : '0% (Lossless)'}
-              </span>
+          <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 space-y-1.5">
+            <div className="flex items-center justify-between text-xs">
+              <div className="flex items-center gap-1.5">
+                {item.outputSize !== undefined && item.outputSize > item.originalSize ? (
+                  <>
+                    <AlertTriangle className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                    <span className="text-slate-600 dark:text-slate-400">Size:</span>
+                    <span className="font-bold text-amber-600 dark:text-amber-400">
+                      +{Math.abs(item.reductionPercentage || 0)}% (Larger)
+                    </span>
+                  </>
+                ) : item.isFallbackToOriginal ? (
+                  <>
+                    <CheckCircle2 className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                    <span className="text-slate-600 dark:text-slate-400">Status:</span>
+                    <span className="font-bold text-blue-600 dark:text-blue-400">
+                      Preserved (Already optimal)
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                    <span className="text-slate-600 dark:text-slate-400">Reduced:</span>
+                    <span className="font-bold text-emerald-600 dark:text-emerald-400">
+                      {item.reductionPercentage && item.reductionPercentage > 0
+                        ? `-${item.reductionPercentage}%`
+                        : '0% (Lossless)'}
+                    </span>
+                  </>
+                )}
+              </div>
+              {item.processingTimeMs !== undefined && (
+                <span className="text-[11px] text-slate-400 flex items-center gap-1 font-mono">
+                  <Clock className="w-3 h-3" /> {item.processingTimeMs}ms
+                </span>
+              )}
             </div>
-            {item.processingTimeMs !== undefined && (
-              <span className="text-[11px] text-slate-400 flex items-center gap-1 font-mono">
-                <Clock className="w-3 h-3" /> {item.processingTimeMs}ms
-              </span>
+
+            {item.outputSize !== undefined && item.outputSize > item.originalSize && targetExt === 'PNG' && (
+              <p className="text-[10px] text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 p-1.5 rounded-md leading-tight">
+                PNG is an uncompressed lossless format. To reduce size below {formatFileSize(item.originalSize)}, choose <strong>WebP</strong> or enable <strong>Target File Size (KB)</strong>.
+              </p>
             )}
           </div>
         )}
@@ -165,7 +199,7 @@ export const ImageCard: React.FC<ImageCardProps> = ({
             leftIcon={<RefreshCw className="w-3.5 h-3.5" />}
             onClick={() => onProcess(item.id)}
           >
-            Optimize
+            Save Changes
           </Button>
         )}
       </div>

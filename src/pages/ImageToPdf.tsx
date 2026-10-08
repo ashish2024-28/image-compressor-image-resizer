@@ -2,7 +2,8 @@ import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import { PageContainer } from '../components/layout/PageContainer';
-import { AdBanner, MultiplexAd } from '../components/ads';
+import { AdvancePdfCallout } from '../components/pdf/AdvancePdfCallout';
+import { PdfPreviewModal } from '../components/pdf/PdfPreviewModal';
 import { 
   FileText, 
   Upload, 
@@ -19,6 +20,7 @@ import {
   Zap,
   Printer,
   ExternalLink,
+  Eye,
 } from 'lucide-react';
 import { formatFileSize } from '../utils/formatFileSize';
 
@@ -32,6 +34,17 @@ interface PdfImageItem {
   height: number;
 }
 
+const PDF_PAGE_SIZES: Record<string, { width: number; height: number }> = {
+  a4: { width: 210, height: 297 },
+  letter: { width: 215.9, height: 279.4 },
+};
+
+const PDF_MARGIN_SIZES: Record<string, number> = {
+  none: 0,
+  small: 5,
+  normal: 12,
+};
+
 export const ImageToPdf: React.FC = () => {
   const [images, setImages] = useState<PdfImageItem[]>([]);
   const [pageSize, setPageSize] = useState<'a4' | 'letter' | 'fit'>('a4');
@@ -40,6 +53,8 @@ export const ImageToPdf: React.FC = () => {
   const [pdfFileName, setPdfFileName] = useState('merged-document.pdf');
   const [isGenerating, setIsGenerating] = useState(false);
   const [completed, setCompleted] = useState(false);
+  const [generatedBlob, setGeneratedBlob] = useState<Blob | null>(null);
+  const [showPreview, setShowPreview] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -195,10 +210,90 @@ export const ImageToPdf: React.FC = () => {
       }
 
       const saveName = pdfFileName.endsWith('.pdf') ? pdfFileName : `${pdfFileName}.pdf`;
+      const blob = doc.output('blob');
+      setGeneratedBlob(blob);
       doc.save(saveName);
       setCompleted(true);
     } catch (err) {
       console.error('Failed to generate PDF:', err);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  const generateBlobOnly = async (): Promise<Blob | null> => {
+    if (images.length === 0) return null;
+    const doc = new jsPDF({
+      orientation: orientation === 'landscape' ? 'landscape' : 'portrait',
+      unit: 'mm',
+      format: pageSize === 'fit' ? 'a4' : (PDF_PAGE_SIZES[pageSize] ? [PDF_PAGE_SIZES[pageSize].width, PDF_PAGE_SIZES[pageSize].height] : 'a4'),
+    });
+
+    const baseMargin = PDF_MARGIN_SIZES[margin];
+
+    for (let i = 0; i < images.length; i++) {
+      const item = images[i];
+      if (i > 0) doc.addPage();
+
+      let isLandscape = false;
+      if (orientation === 'landscape') isLandscape = true;
+      else if (orientation === 'auto') isLandscape = item.width > item.height;
+
+      let pWidth = 210;
+      let pHeight = 297;
+
+      if (pageSize === 'fit') {
+        pWidth = (item.width * 25.4) / 96;
+        pHeight = (item.height * 25.4) / 96;
+        doc.setPage(i + 1);
+      } else {
+        const dims = PDF_PAGE_SIZES[pageSize] || PDF_PAGE_SIZES.a4;
+        pWidth = isLandscape ? dims.height : dims.width;
+        pHeight = isLandscape ? dims.width : dims.height;
+      }
+
+      const availWidth = Math.max(10, pWidth - baseMargin * 2);
+      const availHeight = Math.max(10, pHeight - baseMargin * 2);
+      const imgRatio = item.width / item.height;
+      const availRatio = availWidth / availHeight;
+
+      let renderWidth = availWidth;
+      let renderHeight = availHeight;
+      if (imgRatio > availRatio) {
+        renderWidth = availWidth;
+        renderHeight = availWidth / imgRatio;
+      } else {
+        renderHeight = availHeight;
+        renderWidth = availHeight * imgRatio;
+      }
+
+      const posX = (pWidth - renderWidth) / 2;
+      const posY = (pHeight - renderHeight) / 2;
+
+      let format = 'JPEG';
+      if (item.file.type === 'image/png') format = 'PNG';
+      if (item.file.type === 'image/webp') format = 'WEBP';
+
+      doc.addImage(item.dataUrl, format, posX, posY, renderWidth, renderHeight, undefined, 'FAST');
+    }
+
+    const b = doc.output('blob');
+    setGeneratedBlob(b);
+    return b;
+  };
+
+  const handlePreview = async () => {
+    if (images.length === 0) return;
+    if (generatedBlob) {
+      setShowPreview(true);
+      return;
+    }
+    setIsGenerating(true);
+    try {
+      await generateBlobOnly();
+      setShowPreview(true);
+    } catch (err) {
+      console.error('Failed to preview PDF:', err);
     } finally {
       setIsGenerating(false);
     }
@@ -227,9 +322,6 @@ export const ImageToPdf: React.FC = () => {
             Combine JPG, PNG, and WebP pictures into one clean, high-resolution PDF file. Perfect for college assignments, exam portals, job resumes, and government document verification.
           </p>
         </div>
-
-        {/* Top Banner Ad */}
-        <AdBanner slotLabel="Header Banner" />
 
         {/* Upload Dropzone */}
         <div className="rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0f172a] p-8 text-center hover:border-rose-500 transition-colors shadow-sm">
@@ -347,13 +439,23 @@ export const ImageToPdf: React.FC = () => {
                 </div>
               </div>
 
-              {/* Action Button */}
-              <div className="pt-2">
+              {/* Action Buttons */}
+              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handlePreview}
+                  disabled={isGenerating}
+                  className="px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-750 text-slate-800 dark:text-slate-100 font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs cursor-pointer transition-all"
+                >
+                  <Eye className="w-3.5 h-3.5 text-rose-500" />
+                  <span>Preview PDF</span>
+                </button>
+
                 <button
                   type="button"
                   onClick={handleGeneratePdf}
                   disabled={isGenerating}
-                  className="w-full py-3 px-4 rounded-xl bg-rose-600 hover:bg-rose-500 disabled:bg-slate-600 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-rose-600/20 cursor-pointer transition-all"
+                  className="flex-1 py-3 px-4 rounded-xl bg-rose-600 hover:bg-rose-500 disabled:bg-slate-600 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-rose-600/20 cursor-pointer transition-all"
                 >
                   {isGenerating ? (
                     <span>Generating PDF Document...</span>
@@ -440,8 +542,22 @@ export const ImageToPdf: React.FC = () => {
           </div>
         )}
 
-        {/* Multiplex Recommendations Ad */}
-        <MultiplexAd slotLabel="Sponsored & Recommended" />
+        {/* PDF Preview Modal */}
+        <PdfPreviewModal
+          isOpen={showPreview}
+          onClose={() => setShowPreview(false)}
+          pdfBlob={generatedBlob}
+          fileName={pdfFileName.endsWith('.pdf') ? pdfFileName : `${pdfFileName}.pdf`}
+          title={`Images to PDF Preview (${images.length} Pages)`}
+          onDownload={handleGeneratePdf}
+        />
+
+        {/* Advance PDF Operations Companion Callout */}
+        <AdvancePdfCallout
+          variant="compact"
+          title="Need Advanced Multi-Format PDF Conversion or Editing?"
+          description="Convert complex documents, office files, apply OCR, or encrypt your newly generated PDF with our companion PDF Tools Pro platform."
+        />
 
         {/* Hinglish & English Guide / Solution Section */}
         <section className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-sm space-y-4">

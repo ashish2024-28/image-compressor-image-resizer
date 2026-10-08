@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import { PageContainer } from '../components/layout/PageContainer';
-import { AdBanner, MultiplexAd } from '../components/ads';
 import { AdvancePdfCallout } from '../components/pdf/AdvancePdfCallout';
+import { PdfPreviewModal } from '../components/pdf/PdfPreviewModal';
 import { rotatePdf, addWatermarkToPdf } from '../utils/pdfUtils';
 import { formatFileSize } from '../utils/formatFileSize';
 import {
@@ -13,6 +13,7 @@ import {
   Check,
   HelpCircle,
   Sparkles,
+  Eye,
 } from 'lucide-react';
 
 export const PdfRotateWatermark: React.FC = () => {
@@ -30,6 +31,8 @@ export const PdfRotateWatermark: React.FC = () => {
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [completed, setCompleted] = useState(false);
+  const [processedBlob, setProcessedBlob] = useState<Blob | null>(null);
+  const [showPreview, setShowPreview] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -73,6 +76,7 @@ export const PdfRotateWatermark: React.FC = () => {
       }
 
       const blob = new Blob([outputBytes as unknown as BlobPart], { type: 'application/pdf' });
+      setProcessedBlob(blob);
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -84,6 +88,37 @@ export const PdfRotateWatermark: React.FC = () => {
 
       setCompleted(true);
       confetti({ particleCount: 75, spread: 60, origin: { y: 0.6 } });
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'Operation failed.');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handlePreview = async () => {
+    if (!selectedFile) return;
+    if (processedBlob) {
+      setShowPreview(true);
+      return;
+    }
+    setIsProcessing(true);
+    setErrorMsg(null);
+    try {
+      let outputBytes: Uint8Array;
+      if (activeTab === 'rotate') {
+        outputBytes = await rotatePdf(selectedFile, rotateAngle);
+      } else {
+        if (!watermarkText.trim()) throw new Error('Please enter watermark text.');
+        outputBytes = await addWatermarkToPdf(selectedFile, watermarkText, {
+          opacity: watermarkOpacity,
+          colorHex: watermarkColor,
+          angle: watermarkAngle,
+          fontSize: 44,
+        });
+      }
+      const blob = new Blob([outputBytes as unknown as BlobPart], { type: 'application/pdf' });
+      setProcessedBlob(blob);
+      setShowPreview(true);
     } catch (err: any) {
       setErrorMsg(err?.message || 'Operation failed.');
     } finally {
@@ -113,8 +148,6 @@ export const PdfRotateWatermark: React.FC = () => {
             Fix upside-down scanned PDF pages and brand documents with customizable text watermarks. Zero cloud uploads.
           </p>
         </div>
-
-        <AdBanner slotLabel="Header Banner" />
 
         {/* Dropzone */}
         <div className="rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0f172a] p-8 text-center hover:border-teal-500 transition-colors shadow-sm">
@@ -281,13 +314,23 @@ export const PdfRotateWatermark: React.FC = () => {
               </div>
             )}
 
-            {/* Action button */}
-            <div className="pt-2">
+            {/* Action buttons */}
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+              <button
+                type="button"
+                onClick={handlePreview}
+                disabled={isProcessing}
+                className="px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-750 text-slate-800 dark:text-slate-100 font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs cursor-pointer transition-all"
+              >
+                <Eye className="w-3.5 h-3.5 text-teal-500" />
+                <span>Preview PDF</span>
+              </button>
+
               <button
                 type="button"
                 onClick={handleApply}
                 disabled={isProcessing}
-                className="w-full py-3 px-4 rounded-xl bg-teal-600 hover:bg-teal-500 disabled:bg-slate-600 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-md cursor-pointer transition-all"
+                className="flex-1 py-3 px-4 rounded-xl bg-teal-600 hover:bg-teal-500 disabled:bg-slate-600 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-md cursor-pointer transition-all"
               >
                 {isProcessing ? (
                   <span>Processing Document...</span>
@@ -307,7 +350,22 @@ export const PdfRotateWatermark: React.FC = () => {
           </div>
         )}
 
-        <MultiplexAd slotLabel="Sponsored & Recommended" />
+        {/* PDF Preview Modal */}
+        <PdfPreviewModal
+          isOpen={showPreview}
+          onClose={() => setShowPreview(false)}
+          pdfBlob={processedBlob}
+          fileName={selectedFile ? `${activeTab === 'rotate' ? `rotated-${rotateAngle}deg` : 'watermarked'}-${selectedFile.name}` : 'document.pdf'}
+          title={`Modified PDF Preview (${activeTab === 'rotate' ? 'Rotated' : 'Watermarked'})`}
+          onDownload={handleApply}
+        />
+
+        {/* Advance PDF Operations Companion Callout */}
+        <AdvancePdfCallout
+          variant="compact"
+          title="Need Advanced PDF Security or Digital Signatures?"
+          description="Looking to digitally sign PDFs, encrypt with military-grade passwords, or manage form permissions? Visit our dedicated companion PDF Tools Pro platform."
+        />
       </div>
     </PageContainer>
   );

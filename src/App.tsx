@@ -21,6 +21,8 @@ import { PdfToImages } from './pages/PdfToImages';
 import { PdfCompress } from './pages/PdfCompress';
 import { PdfSplit } from './pages/PdfSplit';
 import { PdfRotateWatermark } from './pages/PdfRotateWatermark';
+import { EncryptPdf } from './pages/EncryptPdf';
+import { ScanOcr } from './pages/ScanOcr';
 import { PdfStudio } from './pages/PdfStudio';
 import { Tools } from './pages/Tools';
 import { PresetPage } from './pages/PresetPage';
@@ -57,6 +59,8 @@ export default function App() {
             <Route path="/image-resizer" element={<ResizeImage />} />
             <Route path="/resize-image" element={<ResizeImage />} />
             <Route path="/convert" element={<ConvertImage />} />
+            <Route path="/jpg-to-png" element={<ConvertImage />} />
+            <Route path="/png-to-jpg" element={<ConvertImage />} />
             <Route path="/passport-photo-creator" element={<PassportPhotoCreator />} />
             <Route path="/image-to-pdf" element={<ImageToPdf />} />
             <Route path="/photo-to-pdf" element={<ImageToPdf />} />
@@ -80,6 +84,12 @@ export default function App() {
             <Route path="/pdf-rotate-watermark" element={<PdfRotateWatermark />} />
             <Route path="/rotate-pdf" element={<PdfRotateWatermark />} />
             <Route path="/watermark-pdf" element={<PdfRotateWatermark />} />
+            <Route path="/encrypt-pdf" element={<EncryptPdf />} />
+            <Route path="/protect-pdf" element={<EncryptPdf />} />
+            <Route path="/encrypt" element={<EncryptPdf />} />
+            <Route path="/scan-ocr" element={<ScanOcr />} />
+            <Route path="/ocr" element={<ScanOcr />} />
+            <Route path="/extract-text" element={<ScanOcr />} />
 
             <Route path="/tools" element={<Tools />} />
 

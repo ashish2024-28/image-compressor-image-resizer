@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { PageContainer } from '../components/layout/PageContainer';
-import { AdBanner, MultiplexAd } from '../components/ads';
 import { AdvancePdfCallout } from '../components/pdf/AdvancePdfCallout';
 import {
   FileText,
@@ -89,8 +88,6 @@ export const PdfStudio: React.FC = () => {
           </p>
         </div>
 
-        <AdBanner slotLabel="Header Banner" />
-
         {/* Advance PDF Platform Callout Banner */}
         <AdvancePdfCallout variant="banner" />
 
@@ -152,8 +149,6 @@ export const PdfStudio: React.FC = () => {
             Learn About Security
           </Link>
         </div>
-
-        <MultiplexAd slotLabel="Sponsored & Recommended" />
       </div>
     </PageContainer>
   );

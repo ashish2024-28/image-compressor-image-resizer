@@ -1,7 +1,6 @@
 import React from 'react';
 import { PageContainer } from '../components/layout/PageContainer';
 import { Cpu, Zap, Lock, Heart } from 'lucide-react';
-import { AdBanner } from '../components/ads/AdBanner';
 
 export const About: React.FC = () => {
   return (
@@ -68,9 +67,6 @@ export const About: React.FC = () => {
             </p>
           </div>
         </div>
-
-        {/* AdSense Slot */}
-        <AdBanner format="horizontal" />
 
         {/* Ashish Systems Engineering Section */}
         <section className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950 text-white shadow-lg space-y-6">

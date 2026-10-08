@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import { PageContainer } from '../components/layout/PageContainer';
-import { AdBanner, MultiplexAd } from '../components/ads';
+import { AdvancePdfCallout } from '../components/pdf/AdvancePdfCallout';
+import { SingleImagePreviewModal } from '../components/image/SingleImagePreviewModal';
 import { renderPdfToImages, createPdfImagesZip } from '../utils/pdfRenderUtils';
 import { formatFileSize } from '../utils/formatFileSize';
 import {
@@ -13,6 +14,7 @@ import {
   HelpCircle,
   Sparkles,
   Layers,
+  Eye,
 } from 'lucide-react';
 
 interface ExtractedPage {
@@ -27,6 +29,7 @@ export const PdfToImages: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [format, setFormat] = useState<'jpeg' | 'png'>('jpeg');
   const [pages, setPages] = useState<ExtractedPage[]>([]);
+  const [previewPage, setPreviewPage] = useState<ExtractedPage | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progressText, setProgressText] = useState('');
   const [isZipping, setIsZipping] = useState(false);
@@ -122,8 +125,6 @@ export const PdfToImages: React.FC = () => {
           </p>
         </div>
 
-        <AdBanner slotLabel="Header Banner" />
-
         {/* Dropzone */}
         <div className="rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0f172a] p-8 text-center hover:border-amber-500 transition-colors shadow-sm">
           <input
@@ -212,7 +213,11 @@ export const PdfToImages: React.FC = () => {
                     </span>
                   </div>
 
-                  <div className="h-44 rounded-lg bg-slate-100 dark:bg-slate-900 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-slate-800">
+                  <div
+                    onClick={() => setPreviewPage(p)}
+                    className="h-44 rounded-lg bg-slate-100 dark:bg-slate-900 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-slate-800 cursor-pointer hover:opacity-90 transition-opacity"
+                    title="Click to preview page in full size"
+                  >
                     <img
                       src={p.dataUrl}
                       alt={`Page ${p.pageNum}`}
@@ -220,21 +225,50 @@ export const PdfToImages: React.FC = () => {
                     />
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() => handleDownloadSingle(p)}
-                    className="w-full py-1.5 px-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-amber-500 hover:bg-amber-500/10 text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center justify-center gap-1.5 cursor-pointer transition-all"
-                  >
-                    <Download className="w-3 h-3 text-amber-500" />
-                    <span>Download Page {p.pageNum}</span>
-                  </button>
+                  <div className="flex items-center gap-1.5 pt-1">
+                    <button
+                      type="button"
+                      onClick={() => setPreviewPage(p)}
+                      className="flex-1 py-1.5 px-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center justify-center gap-1 cursor-pointer transition-all"
+                    >
+                      <Eye className="w-3 h-3 text-blue-500" />
+                      <span>Preview</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleDownloadSingle(p)}
+                      className="flex-1 py-1.5 px-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold flex items-center justify-center gap-1 cursor-pointer transition-all shadow-xs"
+                    >
+                      <Download className="w-3 h-3" />
+                      <span>Download</span>
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         )}
 
-        <MultiplexAd slotLabel="Sponsored & Recommended" />
+        {/* Page Image Preview Modal */}
+        <SingleImagePreviewModal
+          isOpen={!!previewPage}
+          onClose={() => setPreviewPage(null)}
+          imageUrl={previewPage?.dataUrl || null}
+          imageBlob={previewPage?.blob || null}
+          fileName={selectedFile ? `${selectedFile.name.replace(/\.pdf$/i, '')}-page-${previewPage?.pageNum}.${format === 'jpeg' ? 'jpg' : 'png'}` : 'page.jpg'}
+          width={previewPage?.width}
+          height={previewPage?.height}
+          fileSize={previewPage?.blob.size}
+          title={`Page ${previewPage?.pageNum} Image Preview`}
+          onDownload={() => previewPage && handleDownloadSingle(previewPage)}
+        />
+
+        {/* Advance PDF Operations Companion Callout */}
+        <AdvancePdfCallout
+          variant="compact"
+          title="Need Advanced PDF Extraction or OCR?"
+          description="Looking to extract vector shapes, convert PDF to editable Office documents, or perform OCR on scanned pages? Visit our dedicated companion PDF Tools Pro platform."
+        />
 
         {/* FAQs */}
         <section className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-sm space-y-4">

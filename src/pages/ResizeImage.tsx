@@ -4,7 +4,6 @@ import { PageContainer } from '../components/layout/PageContainer';
 import { ImageDropzone } from '../components/upload/ImageDropzone';
 import { ImageList } from '../components/upload/ImageList';
 import { ImagePreviewModal } from '../components/image/ImagePreviewModal';
-import { AdBanner, MultiplexAd } from '../components/ads';
 import { useImageProcessor } from '../hooks/useImageProcessor';
 import { useImageSettings } from '../hooks/useImageSettings';
 import type { ImageItem, ResizeMode } from '../types';
@@ -342,8 +341,6 @@ export const ResizeImage: React.FC = () => {
         </a>
       </div>
 
-      <AdBanner format="horizontal" />
-
       {/* SEO & Instructional Sections */}
       <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 space-y-12 max-w-4xl mx-auto">
         <section className="space-y-4">
@@ -396,9 +393,6 @@ export const ResizeImage: React.FC = () => {
             ))}
           </div>
         </section>
-
-        {/* AdSense Multiplex Recommendations Slot */}
-        <MultiplexAd slotLabel="Sponsored & Recommended" />
 
         {/* Related Tools Navigation */}
         <section className="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">

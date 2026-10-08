@@ -32,9 +32,9 @@ export const ImageInfo: React.FC<ImageInfoProps> = ({ item, className = '' }) =>
       </div>
 
       <div className="bg-slate-50 dark:bg-slate-900/60 p-3 rounded-xl border border-slate-200/90 dark:border-slate-800">
-        <span className="text-slate-500 dark:text-slate-400 block mb-0.5 font-medium">Optimized Size</span>
+        <span className="text-slate-500 dark:text-slate-400 block mb-0.5 font-medium">New Size</span>
         <span className="font-semibold text-blue-600 dark:text-blue-400">
-          {item.outputSize ? formatFileSize(item.outputSize) : 'Pending'}
+          {item.outputSize ? formatFileSize(item.outputSize) : 'Pending save'}
         </span>
         <span className="text-[11px] text-slate-500 dark:text-slate-400 block mt-0.5 font-mono uppercase">
           {item.outputType ? getExtensionFromMime(item.outputType) : 'Pending'}
@@ -42,7 +42,7 @@ export const ImageInfo: React.FC<ImageInfoProps> = ({ item, className = '' }) =>
       </div>
 
       <div className="bg-slate-50 dark:bg-slate-900/60 p-3 rounded-xl border border-slate-200/90 dark:border-slate-800">
-        <span className="text-slate-500 dark:text-slate-400 block mb-0.5 font-medium">File Reduction</span>
+        <span className="text-slate-500 dark:text-slate-400 block mb-0.5 font-medium">Space Saved</span>
         <span
           className={`font-semibold ${
             item.reductionPercentage && item.reductionPercentage > 0
@@ -55,7 +55,7 @@ export const ImageInfo: React.FC<ImageInfoProps> = ({ item, className = '' }) =>
         <span className="text-[11px] text-slate-500 dark:text-slate-400 block mt-0.5">
           {item.savingsBytes && item.savingsBytes > 0
             ? `Saved ${formatFileSize(item.savingsBytes)}`
-            : 'Balanced'}
+            : 'Same size'}
         </span>
       </div>
     </div>
